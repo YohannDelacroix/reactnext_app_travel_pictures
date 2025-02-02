@@ -10,7 +10,6 @@
 */
 import Image from 'next/image';
 import React, { useState } from 'react'
-import "@/styles/cardImage.css"
 import classNames from 'classnames';
 
 interface cardImageProps {
@@ -51,14 +50,14 @@ const CardImage = ({ index, price, src, title, resolution, description }: cardIm
                 className='w-full'
             ></Image>
 
-            <div className="flex flex-col gap-y-2">
-                <div className="flex flex-row justify-between max-w">
+            <div className="flex flex-col gap-y-2 text-[3vw]">
+                <div className="flex flex-row justify-between max-w ">
                     <div className="flex flex-row items-start justify-start gap-x-2 max-w-[65%]">
                         <button type="button" onClick={toggleDescription}>X</button>
                         <h2 className={titleClass}>#{index} {title && <span> - {title}</span>}</h2>
                     </div>
                     <div className="flex flex-row self-start items-center justify-end gap-x-2">
-                        <span>{price}€ - </span>{price}€
+                        <span><span>{price}€ - </span>{price}€</span>
                         <input
                             type="checkbox"
                             id={`check-photo-${index}`}
@@ -71,7 +70,7 @@ const CardImage = ({ index, price, src, title, resolution, description }: cardIm
                         <div className="flex flex-row justify-between"><b>Resolution :</b> <span>{resolution}</span></div>
                     }
                     {description &&
-                        <div><b>Description :</b> <span className="italic text-sm">{description}</span></div>
+                        <div><b>Description :</b> <span className="italic text-[2vw]">{description}</span></div>
                     }
                 </div>}
             </div>
