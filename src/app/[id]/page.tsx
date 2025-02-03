@@ -4,7 +4,7 @@ import { parentSrcForCardImageType } from "../types/parentSrcForCardImageType";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
 export default function PrivateGallery() {
-    const parentSrcForCardImage = parentSrcForCardImageType.CART; //Ensure CardImage will work for PrivateGallery uses
+    const parentSrcForCardImage = parentSrcForCardImageType.PRIVATE_GALLERY; //Ensure CardImage will work for PrivateGallery uses
 
     return (
         <div>
