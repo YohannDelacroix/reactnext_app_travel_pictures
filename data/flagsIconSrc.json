@@ -1,0 +1,7 @@
+[
+    {"src": "/icons/en.jpg", "alt": "EN", "title": "EN"},
+    {"src": "/icons/de.jpg", "alt": "DE", "title": "DE"},
+    {"src": "/icons/es.jpg", "alt": "ES", "title": "ES"},
+    {"src": "/icons/fr.jpg", "alt": "FR", "title": "FR"},
+    {"src": "/icons/it.jpg", "alt": "IT", "title": "IT"}
+]

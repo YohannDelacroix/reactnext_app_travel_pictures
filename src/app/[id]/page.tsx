@@ -1,8 +1,11 @@
 import CardImage from "@/app/components/CardImage"
 import imagesSrc from "@/imageList.json";
+import { parentSrcForCardImageType } from "../types/parentSrcForCardImageType";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
 export default function PrivateGallery() {
+    const parentSrcForCardImage = parentSrcForCardImageType.CART; //Ensure CardImage will work for PrivateGallery uses
+
     return (
         <div>
             {/* Welcome and language selection*/}
@@ -30,6 +33,7 @@ export default function PrivateGallery() {
                     imagesSrc.map((image, index) => {
                         return (
                             <CardImage
+                                parentSrc={parentSrcForCardImage}
                                 key={index}
                                 index={index}
                                 price={8.99}
