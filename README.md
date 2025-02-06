@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+app/
+│── layout.tsx                      # 🌍 Main layout (Header & Footer)
+│── page.tsx                        # Landing page
+│── gallery/                        # 📂 Private Gallery Shopping section
+│   ├── layout.tsx                  # ✅ Shared layout between Gallery & Cart, contains redux provider
+│   ├── [id]                        # Private gallery (With dynamic ID)
+│   │   ├── page.tsx     
+│   │── cart/                       # 📂 Page cart
+│   │   ├── page.tsx                # Use Cart component
+│   │   │── payment/                # 📂 Payment section
+│   │   │   ├── page.tsx            # Use Payment component
+│   │   │   ├── confirmation/       # 📂 Payment confirmation section
+│   │   │   │   ├── page.tsx        # Use PaymentConfirmation component  
+│   ├── redux                       # Redux store for private gallery shopping
+│   │   ├── store.ts    
+│   │   ├── slices/ 
+│   │   │   │   ├── gallerySlice.ts     
+│   │   │   │   ├── cartSlice.ts      
+│── api/                            # 📂 API
+│   ├── payment/
+│   │   ├── route.ts                # Payment route API
+│── components/                     # 📂 Reusable components
+│   ├── CardImage.tsx               # CardImage component
+│   ├── Cart.tsx                    # Reusable Cart component t
+│   ├── Payment.tsx                 # Reusable Payment component
+│   ├── PaymentConfirmation.tsx     # Reusable PaymentConfirmation component
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

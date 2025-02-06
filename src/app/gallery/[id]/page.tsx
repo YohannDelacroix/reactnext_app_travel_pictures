@@ -1,6 +1,6 @@
 import CardImage from "@/app/components/CardImage"
 import imagesSrc from "@/imageList.json";
-import { parentSrcForCardImageType } from "../types/parentSrcForCardImageType";
+import { parentSrcForCardImageType } from "../../types/parentSrcForCardImageType";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
 export default function PrivateGallery() {
