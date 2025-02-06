@@ -17,7 +17,7 @@
  * @author Yohann Delacroix
  */
 
-export enum parentSrcForCardImageType{
+export enum parentSrcType{
     PRIVATE_GALLERY = "private_gallery",
     CART = "cart"
 }

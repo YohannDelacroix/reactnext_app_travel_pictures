@@ -1,10 +1,11 @@
-import CardImage from "@/app/components/CardImage"
+import CardImage from "@/app/gallery/components/CardImage"
 import imagesSrc from "@/imageList.json";
-import { parentSrcForCardImageType } from "../../types/parentSrcForCardImageType";
+import { parentSrcType } from "../types/parentSrcType";
 import { FaLongArrowAltRight } from "react-icons/fa";
+import SideBar from "@/app/gallery/components/SideBar";
 
 export default function PrivateGallery() {
-    const parentSrcForCardImage = parentSrcForCardImageType.PRIVATE_GALLERY; //Ensure CardImage will work for PrivateGallery uses
+    const parentSrc = parentSrcType.PRIVATE_GALLERY; //Ensure CardImage will work for PrivateGallery uses
 
     return (
         <form className="flex flex-col gap-y-2 text-[3vw]">
@@ -16,7 +17,7 @@ export default function PrivateGallery() {
                 imagesSrc.map((image, index) => {
                     return (
                         <CardImage
-                            parentSrc={parentSrcForCardImage}
+                            parentSrc={parentSrc}
                             key={index}
                             index={index}
                             price={8.99}
@@ -28,19 +29,10 @@ export default function PrivateGallery() {
                 }
                 )
             }
-            <div className="flex flex-col gap-y-1 p-4 text-[3vw] sticky bottom-0 bg-black bg-opacity-50 text-[#f0e4d7]">
-                <p>Congratulations! You saved <span className="text-[#B4E1B9] text-[4vw] font-bold">3€</span> on your order!</p>
-                <div className="flex justify-between items-end">
-                    <span>Total before discount:</span>
-                    <span className="leading-[3vw] line-through text-red-500">18.99€</span>
-                </div>
-                <div className="flex justify-between items-center">
-                    <span>Total:</span>
-                    <span className="text-[#B4E1B9] text-[4vw] font-bold">15,99€</span>
-                </div>
-                <button className="flex justify-center items-center gap-x-2 bg-[#B4E1B9] py-2 text-black">
-                    <span>GO TO CART</span><FaLongArrowAltRight /></button>
-            </div>
+
+            <SideBar parentSrc={parentSrc} />
+
+            
 
         </form>
     );

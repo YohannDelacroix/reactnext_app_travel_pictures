@@ -14,14 +14,14 @@ import classNames from 'classnames';
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import { ImCross } from "react-icons/im";
-import { parentSrcForCardImageType } from '../types/parentSrcForCardImageType';
-import useCardImageForPrivateGallery from "@/app/hooks/useCardImageForPrivateGallery"
+import { parentSrcType } from '../types/parentSrcType';
+import useCardImageForPrivateGallery from "@/app/gallery/hooks/useCardImageForPrivateGallery"
 import useCardImageForCart from '../hooks/useCardImageForCart';
 
 
 interface cardImageProps {
     //Configuration props
-    parentSrc: parentSrcForCardImageType;       //Source component
+    parentSrc: parentSrcType;       //Source component
     // Main props
     index: number;                              //Index of the photo in the gallery
     price: number;                              //Price in euros
@@ -52,7 +52,7 @@ const CardImage = ({ index, price, src, title, resolution, description, parentSr
 
     return (
         <div className={classNames(
-            "flex flex-col gap-y-2 w-full p-4 shadow-[0px_4px_8px_rgba(0,0,0,0.25)]",
+            "flex flex-col gap-y-2 w-full p-global shadow-[0px_4px_8px_rgba(0,0,0,0.25)]",
             { "bg-[#B4E1B9]": checked }
         )}>
             <div className="relative">
@@ -94,7 +94,7 @@ const CardImage = ({ index, price, src, title, resolution, description, parentSr
                     <div className="flex flex-row self-start items-center justify-end gap-x-2">
                         <span><span className='text-[2vw] leading-[3vw] line-through text-red-500'>{price}€</span> - {price}€</span>
                         {
-                            parentSrc === parentSrcForCardImageType.PRIVATE_GALLERY ?
+                            parentSrc === parentSrcType.PRIVATE_GALLERY ?
                                 <input
                                     type="checkbox"
                                     id={`check-photo-${index}`}

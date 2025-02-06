@@ -9,9 +9,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        mygreen: "#B4E1B9",
+        myblue: "#A6C9E2"
       },
+      spacing: {
+        'global': '1rem',
+        'global2': '2rem'
+      }
     },
   },
   plugins: [],
