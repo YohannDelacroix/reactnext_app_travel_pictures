@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+
 
 export const metadata: Metadata = {
     title: "Get Your Travel Pictures",
@@ -21,8 +20,20 @@ export default function GalleryLayout({
 }>) {
     return (
         <div>
-            <div>
-                {/* TODO */}
+            {/* Welcome and language selection*/}
+            <div className="flex flex-col relative text-[3vw] border-b border-solid border-black py-4 mb-5">
+                <h1>Hello #User444</h1>
+                <p>Your pictures are ready to be downloaded</p>
+
+                <div className="absolute right-0 top-0">
+                    <select>
+                        <option>EN</option>
+                        <option>FR</option>
+                        <option>ES</option>
+                        <option>DE</option>
+                        <option>IT</option>
+                    </select>
+                </div>
             </div>
             {children}
         </div>
