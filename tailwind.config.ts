@@ -10,7 +10,8 @@ export default {
     extend: {
       colors: {
         mygreen: "#B4E1B9",
-        myblue: "#A6C9E2"
+        myblue: "#A6C9E2",
+        "black0.1": 'rgba(0, 0, 0, 0.1)'
       },
       spacing: {
         'global': '1rem',
