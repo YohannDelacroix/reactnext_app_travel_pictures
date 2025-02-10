@@ -8,7 +8,7 @@ const Payment = () => {
     const [selectedPayment, setSelectedPayment] = useState<paymentType | null>(null);
 
     return (
-        <ul className="flex flex-col gap-y-global text-[1rem]">
+        <ul className="flex flex-col gap-y-global text-[1.2rem]">
             {/* Card payment option */}
             <PaymentOption  type={paymentType.CC} 
                             selectedPayment={selectedPayment!} 

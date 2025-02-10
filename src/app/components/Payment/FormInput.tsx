@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { formInputType, inputMetadata, paymentCcFormDataType } from './types/formInputTypes';
 import usePaymentForm from './hooks/usePaymentForm';
 import classNames from 'classnames';
+import Image from 'next/image';
+import { imageAttributes } from '@/app/gallery/types/imageAttributes';
 
 interface formInputProps {
     type: formInputType;
@@ -23,6 +25,13 @@ const FormInput = ({ type, formData, setFormData }: formInputProps) => {
     const { label, placeholder, pattern, inputMode, maxLength } = inputMetadata[type];
     const { errors, cardType, handleCCNChange, detectCardType, handleExpDateChange, handleCVCChange } = usePaymentForm();
 
+    const ccSrcIcons: imageAttributes[] = [
+        { src: "/icons/payment_icons/svg/visa.svg", alt: "Visa" },
+        { src: "/icons/payment_icons/svg/diners-club.svg", alt: "Diners" },
+        { src: "/icons/payment_icons/svg/mastercard.svg", alt: "Mastercard" },
+        { src: "/icons/payment_icons/svg/american-express.svg", alt: "American Express" },
+    ]
+
     /**
     * handle change on this FormInput field
     * @param e changeEvent of the input element
@@ -37,7 +46,7 @@ const FormInput = ({ type, formData, setFormData }: formInputProps) => {
         else if (name === formInputType.CC_EXP) {
             setFormData({ ...formData, [name]: handleExpDateChange(value) });
         }
-        else if (name === formInputType.CC_CVC){
+        else if (name === formInputType.CC_CVC) {
             setFormData({ ...formData, [name]: handleCVCChange(value) });
         }
         else setFormData({ ...formData, [name]: value });
@@ -53,14 +62,14 @@ const FormInput = ({ type, formData, setFormData }: formInputProps) => {
     }, [cardType])
 
     return (
-        <div>
-            <label htmlFor={`${type}`}></label>
+        <div className="flex flex-col gap-y-2 tracking-wider">
+            <label className="font-[500]"
+                htmlFor={`${type}`}>
+                {label}
+            </label>
             {/* Field container */}
 
-            {/* div for displaying error message */}
-            <div id="payment-form-error-message"></div>
-
-            <div>
+            <div className='relative'>
                 <input type="text"
                     name={`${type}`}
                     value={formData[type]}
@@ -72,9 +81,23 @@ const FormInput = ({ type, formData, setFormData }: formInputProps) => {
                     placeholder={placeholder}
                     required
                     className={classNames(
-                        "",
+                        "w-full p-2 rounded-[0.5rem] border border-black border-opacity-30",
+                        { "w-[50%]": [formInputType.CC_CVC, formInputType.CC_EXP].includes(type) },
                         { "text-red-500": errors[type] }
                     )} />
+                {/* Card icon */}
+                {
+                    (cardType && type === formInputType.CC_NUMBER && ["visa", "mastercard", "american-express", "diners-club"].includes(cardType.type) && formData[type] !== "") &&
+                    <div className="absolute top-1/2 right-0 transform -translate-x-1/2 -translate-y-1/2 ">
+                        <Image
+                            className={"w-10"}
+                            src={`/icons/payment_icons/svg/${cardType.type}.svg`}
+                            alt={`${cardType.type}`}
+                            width={4}
+                            height={4}
+                            sizes="100vw"></Image>
+                    </div>
+                }
             </div>
         </div>
     )

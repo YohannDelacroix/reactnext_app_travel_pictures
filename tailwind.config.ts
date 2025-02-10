@@ -16,6 +16,9 @@ export default {
       spacing: {
         'global': '1rem',
         'global2': '2rem'
+      },
+      fontFamily: {
+        sans: ['Poppins', 'sans-serif'], 
       }
     },
   },

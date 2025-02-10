@@ -23,7 +23,7 @@ const CreditCardForm = () => {
     }, [formData])
 
     return (
-        <form>
+        <form className="flex flex-col gap-y-3">
             {/* Form Inputs */}
             <FormInput type={formInputType.CC_HOLDER} formData={formData} setFormData={setFormData} />
             <FormInput type={formInputType.CC_NUMBER} formData={formData} setFormData={setFormData} />

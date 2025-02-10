@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import '@fontsource/poppins';
 import "./globals.css";
 
 export const metadata: Metadata = {

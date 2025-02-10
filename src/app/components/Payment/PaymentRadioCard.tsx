@@ -22,9 +22,9 @@ const PaymentRadioCard = ({ type, selectedPayment, setSelectedPayment }: payment
 
     const ccSrcIcons: imageAttributes[] = [
         { src: "/icons/payment_icons/svg/visa.svg", alt: "Visa" },
-        { src: "/icons/payment_icons/svg/diners.svg", alt: "Diners" },
+        { src: "/icons/payment_icons/svg/diners-club.svg", alt: "Diners" },
         { src: "/icons/payment_icons/svg/mastercard.svg", alt: "Mastercard" },
-        { src: "/icons/payment_icons/svg/amex.svg", alt: "American Express" },
+        { src: "/icons/payment_icons/svg/american-express.svg", alt: "American Express" },
     ]
 
     const paypalSrcIcon: imageAttributes[] = [
