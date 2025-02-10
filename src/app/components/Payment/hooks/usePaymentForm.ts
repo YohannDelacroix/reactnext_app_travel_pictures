@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import creditCardType from 'credit-card-type';
 import { formInputType } from "../types/formInputTypes";
 
@@ -13,17 +13,17 @@ const usePaymentForm = () => {
     * If a card is detected store the cvcLength (3 or 4)
     * @param ccn credit card number typed in the input
     */
-    const detectCardType = (ccn: string) => {
+    const detectCardType = useCallback((ccn: string) => {
         const cardInfo = creditCardType(ccn);
         if (cardInfo.length > 0) {
             setCardType({ type: cardInfo[0].type, cvcLength: cardInfo[0].code.size }); // Mettre à jour le type de carte
         } else {
             setCardType(null);
         }
-    }
+    }, [])
 
     /*************************** CREDIT CARD NUMBER ***************************/
-    const formatCCN = (ccn: string) => {
+    const formatCCN = useCallback((ccn: string) => {
         let formattedCCN = ccn;
 
         // Delete all no numeric characters
@@ -53,7 +53,7 @@ const usePaymentForm = () => {
         }
 
         return formattedCCN;
-    }
+    }, [cardType])
 
     /**
      * 
@@ -71,7 +71,7 @@ const usePaymentForm = () => {
      * @param expDate typed by the user
      * @returns a formatted date
      */
-    const handleCCNChange = (ccn: string) => {
+    const handleCCNChange = useCallback((ccn: string) => {
         const formattedExpDate = formatCCN(ccn);
 
         const errorMessage = validateCCN(formattedExpDate);
@@ -82,7 +82,7 @@ const usePaymentForm = () => {
         }));
 
         return formattedExpDate;
-    }
+    },[formatCCN, validateCCN, setErrors])
 
 
     /*************************** EXPIRATION DATE ***************************/
@@ -133,7 +133,7 @@ const usePaymentForm = () => {
      * @param expDate typed by the user
      * @returns a formatted date
      */
-    const handleExpDateChange = (expDate: string) => {
+    const handleExpDateChange = useCallback((expDate: string) => {
         const formattedExpDate = formatExpDate(expDate);
 
         const errorMessage = validateExpDate(formattedExpDate);
@@ -144,7 +144,7 @@ const usePaymentForm = () => {
         }));
 
         return formattedExpDate;
-    };
+    }, [formatExpDate, validateExpDate, setErrors]);
 
 
     /*************************** CVC ***************************/
@@ -185,7 +185,7 @@ const usePaymentForm = () => {
      * @param cvc typed by the user
      * @returns a formatted date
      */
-    const handleCVCChange = (cvc: string) => {
+    const handleCVCChange = useCallback((cvc: string) => {
         const formattedCVC = formatCVC(cvc);
 
         const errorMessage = validateCVC(formattedCVC);
@@ -196,14 +196,14 @@ const usePaymentForm = () => {
         }));
 
         return formattedCVC;
-    };
+    }, [formatCVC, validateCVC, setErrors]);
 
 
     return {
         errors,
-        cardType, setCardType, detectCardType,
-        handleCCNChange, formatCCN, validateCCN,
-        handleExpDateChange, formatExpDate, validateExpDate,
+        cardType, detectCardType,
+        handleCCNChange, 
+        handleExpDateChange, 
         handleCVCChange
     }
 }
