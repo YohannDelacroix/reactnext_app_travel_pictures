@@ -66,8 +66,44 @@ const usePaymentForm = () => {
      * @returns a string describing the error
      */
     const validateCCN = (ccn: string): string | null => {
-        //TODO
+
+        /**
+         * isValidLuhn implements Lunh algorithm to determine if the card number is valid
+         * @param number credit card number
+         * @returns a boolean to determine wether the ccn is valid or not
+         */
+        const isValidLuhn = (number: string): boolean => {
+            let sum = 0;
+            let shouldDouble = false;
         
+            // Parcours les chiffres de droite à gauche
+            for (let i = number.length - 1; i >= 0; i--) {
+                let digit = parseInt(number[i], 10);
+        
+                if (shouldDouble) {
+                    digit *= 2;
+                    if (digit > 9) digit -= 9;
+                }
+        
+                sum += digit;
+                shouldDouble = !shouldDouble;
+            }
+        
+            return sum % 10 === 0;
+        };
+
+        const cleanedCCN = ccn.replace(/\D/g, "");
+
+        if (!cardType) return "Card type not recognized";
+
+        const possibleLengths = cardType.lengths;
+        if (!possibleLengths.includes(cleanedCCN.length)) {
+            return `Invalid card number length (expected ${possibleLengths.join(" or ")} digits)`;
+        }
+
+        if (!isValidLuhn(cleanedCCN)) {
+            return "Invalid card number";
+        }
 
         return null; //No error
     };
@@ -204,6 +240,10 @@ const usePaymentForm = () => {
         return formattedCVC;
     }, [formatCVC, validateCVC, setErrors]);
 
+
+    useEffect(() => {
+        console.log("errors = ", errors)
+    }, [errors])
 
     return {
         errors,
