@@ -196,7 +196,14 @@ const usePaymentForm = () => {
         * @returns a string describing the error
         */
     const validateCVC = (cvc: string): string | null => {
-        //TODO
+        if (!cardType) return "Card type unknown";
+
+        //Retrieve the expected length of the card
+        const expectedLength = cardType.code.size;
+
+        if (cvc.length !== expectedLength) {
+            return `CVC must be ${expectedLength} digits`;
+        }
 
         return null; //No error
     };
@@ -234,7 +241,7 @@ const usePaymentForm = () => {
 
         setErrors((prevErrors) => ({
             ...prevErrors,
-            [formInputType.CC_EXP]: errorMessage || undefined,
+            [formInputType.CC_CVC]: errorMessage || undefined,
         }));
 
         return formattedCVC;
