@@ -42,9 +42,9 @@ const usePaymentForm = () => {
             formattedCCN = formattedCCN.replace(/(\d{4})(?=\d)/, "$1 "); // Add a space after 4 digits
             formattedCCN = formattedCCN.replace(/(\d{6})(?=\d)/, "$1 "); // Add a space after 6 digits
 
-            // Limit to 17 charachters for american-express (14 digits + 2 spaces)
+            // Limit to 17 charachters for american-express (15 digits + 2 spaces)
             if (cardType.type === "american-express" && formattedCCN.length > 16) {
-                formattedCCN = formattedCCN.slice(0, 16);
+                formattedCCN = formattedCCN.slice(0, 17);
             }
         }
         else {
@@ -61,9 +61,9 @@ const usePaymentForm = () => {
     }, [cardType])
 
     /**
-     * 
-     * @param ccn 
-     * @returns a string describing the error
+     * validateCCN validate the ccn typed by the user 
+     * @param ccn the credit card number in string format
+     * @returns a string describing the error or null if there is no error found
      */
     const validateCCN = (ccn: string): string | null => {
 
