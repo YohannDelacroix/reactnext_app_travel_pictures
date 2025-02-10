@@ -4,9 +4,7 @@ import { formInputType } from "../types/formInputTypes";
 
 const usePaymentForm = () => {
     const [errors, setErrors] = useState<{ [key in formInputType]?: string }>({});
-    const [cardType, setCardType] = useState<{ type: string, cvcLength: number } | null>(null);
-
-
+    const [cardType, setCardType] = useState<ReturnType<typeof creditCardType>[0] | null>(null);
 
     /**
     * Detect and store the card type in cardType state
@@ -16,13 +14,19 @@ const usePaymentForm = () => {
     const detectCardType = useCallback((ccn: string) => {
         const cardInfo = creditCardType(ccn);
         if (cardInfo.length > 0) {
-            setCardType({ type: cardInfo[0].type, cvcLength: cardInfo[0].code.size }); // Mettre à jour le type de carte
+            setCardType(cardInfo[0]); // Mettre à jour le type de carte
         } else {
             setCardType(null);
         }
     }, [])
 
     /*************************** CREDIT CARD NUMBER ***************************/
+
+    /**
+     * formatCCN
+     * @param ccn is a string corresponding to the card number "1111111111111111"
+     * @returns a formatted credit card number (ccn) adding spaces and limit length
+     */
     const formatCCN = useCallback((ccn: string) => {
         let formattedCCN = ccn;
 
@@ -31,6 +35,7 @@ const usePaymentForm = () => {
 
         if (!cardType) {
             //Do nothing if cardType is not defined
+            return formattedCCN;
         }
         else if (cardType.type === "american-express" || (cardType.type === "diners-club" && formattedCCN.length < 16 /*Format XXXX XXXX XXXX XXXX when reaching 16 digits (jump on the else) */)) {
             //Format XXXX XXXXXX XXXX or XXXX XXXXXX XXXXX for 14-15 digits
@@ -62,6 +67,7 @@ const usePaymentForm = () => {
      */
     const validateCCN = (ccn: string): string | null => {
         //TODO
+        
 
         return null; //No error
     };
@@ -172,8 +178,8 @@ const usePaymentForm = () => {
 
         if(cardType){
             // Limit to 19 charachters (16 digits + 3 spaces)
-            if (formattedCVC.length > cardType.cvcLength) {
-                formattedCVC = formattedCVC.slice(0, cardType.cvcLength);
+            if (formattedCVC.length > cardType.code.size) {
+                formattedCVC = formattedCVC.slice(0, cardType.code.size);
             }
         }
             
