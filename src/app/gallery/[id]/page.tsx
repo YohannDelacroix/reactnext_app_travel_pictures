@@ -1,11 +1,52 @@
+"use client"
 import CardImage from "@/app/gallery/components/CardImage"
 import imagesSrc from "@/imageList.json";
 import { parentSrcType } from "../types/parentSrcType";
-import { FaLongArrowAltRight } from "react-icons/fa";
 import SideBar from "@/app/gallery/components/SideBar";
+import { useDispatch } from "react-redux";
+import { AppDispatch, RootState } from "../store/store";
+import { useEffect } from "react";
+import { setSessionInfo } from "../store/gallerySlice";
+
+
 
 export default function PrivateGallery() {
     const parentSrc = parentSrcType.PRIVATE_GALLERY; //Ensure CardImage will work for PrivateGallery uses
+    const dispatch = useDispatch<AppDispatch>();
+
+    useEffect(() => {
+        /**
+        * call the database to load the session info (photos, name, country, ...)
+        * store the datas in the redux store
+        * @param id relative to the photo session with the clients
+        */
+        const fetchGalleryData = async (id: string) => {
+            //const response = await fetch(`/api/gallery/${galleryId}`); 
+            //const data = await response.json();
+            let data = {
+                photos: [],
+                shootingInfo: {
+                    id: "2354636",
+                    modelName: "James Hetfield",
+                    country: "Spain",
+                    city: "Barcelona"
+                }
+            }
+
+            if (data) {
+                // Met à jour Redux avec les photos et les infos du shooting
+                dispatch(setSessionInfo({ photos: data.photos, shootingInfo: data.shootingInfo }));
+
+                // Définir le prix unitaire et maximal
+                //const unitPrice = data.unitPrice ?? 10; // Valeur par défaut
+                //dispatch(setUnitPrice(unitPrice));
+                //dispatch(setMaxPrice(data.photos.length * unitPrice));
+            }
+        };
+
+        fetchGalleryData("54646"); //Call with a fake id to test
+    }, []);
+
 
     return (
         <form className="flex flex-col gap-y-2 text-[3vw]">
@@ -31,9 +72,6 @@ export default function PrivateGallery() {
             }
 
             <SideBar parentSrc={parentSrc} />
-
-            
-
         </form>
     );
 }

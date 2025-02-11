@@ -5,6 +5,13 @@
  * 
  */
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Get Your Travel Pictures",
+    description: "Fill your ID and get your pictures",
+};
+
 export default function Gallery() {
     //TODO
     return (
