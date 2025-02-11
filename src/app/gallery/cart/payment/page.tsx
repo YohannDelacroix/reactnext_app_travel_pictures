@@ -15,7 +15,7 @@ export default function PaymentPage() {
                     <span>Total:</span>
                     <span className="text-mygreen text-[4vw] font-bold">15,99€</span>
                 </div>
-                <p>🔒 Secure payment with SSL encryption.</p>
+                <p>📩 Instant delivery: Your download link will be sent via email immediately after payment.</p>
             </div>
 
             <Payment />
