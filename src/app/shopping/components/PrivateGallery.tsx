@@ -1,9 +1,9 @@
 "use client"
 import React from 'react'
-import CardImage from "@/app/gallery/components/CardImage"
+import CardImage from "@/app/shopping/components/CardImage"
 import staticPrivateGallery from "@/../data/staticPrivateGallery.json"
 import { parentSrcType } from "../types/parentSrcType";
-import SideBar from "@/app/gallery/components/SideBar";
+import SideBar from "@/app/shopping/components/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store";
 import { useEffect } from "react";

@@ -1,8 +1,8 @@
 "use client"
 import React from 'react'
-import CardImage from "@/app/gallery/components/CardImage";
+import CardImage from "@/app/shopping/components/CardImage";
 import { parentSrcType } from "../types/parentSrcType";
-import SideBar from "@/app/gallery/components/SideBar";
+import SideBar from "@/app/shopping/components/SideBar";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 

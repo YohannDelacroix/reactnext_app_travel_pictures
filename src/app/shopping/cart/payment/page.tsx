@@ -1,4 +1,4 @@
-import Payment from "@/app/components/Payment/Payment";
+import Payment from "@/app/shopping/components/Payment/Payment";
 
 export default function PaymentPage() {
     return (

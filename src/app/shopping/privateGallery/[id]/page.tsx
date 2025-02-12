@@ -1,4 +1,4 @@
-import PrivateGallery from "../components/PrivateGallery";
+import PrivateGallery from "../../components/PrivateGallery";
 
 export default function PrivateGalleryPage() {
     return (

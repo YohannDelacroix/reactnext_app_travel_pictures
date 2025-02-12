@@ -78,7 +78,7 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
                 </div>
                 :
                 <button className="flex justify-center items-center gap-x-2 w-full bg-[#B4E1B9] py-2 text-black">
-                    <span><Link href="/gallery/cart">GO TO CART</Link></span><FaLongArrowAltRight />
+                    <span><Link href="/shopping/cart">GO TO CART</Link></span><FaLongArrowAltRight />
                 </button>
             }
 

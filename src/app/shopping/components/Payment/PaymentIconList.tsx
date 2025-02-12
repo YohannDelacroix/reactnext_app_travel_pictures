@@ -1,4 +1,4 @@
-import { imageAttributes } from '@/app/gallery/types/imageAttributes'
+import { imageAttributes } from '@/app/shopping/types/imageAttributes'
 import Image from 'next/image'
 import React from 'react'
 import { paymentType } from './types/paymentType'
