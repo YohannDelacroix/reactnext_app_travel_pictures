@@ -5,6 +5,8 @@ import { FaLongArrowAltLeft } from "react-icons/fa";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import classNames from 'classnames';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 
 interface SideBarProps {
     parentSrc: parentSrcType;
@@ -12,7 +14,7 @@ interface SideBarProps {
 
 const SideBar = ({ parentSrc }: SideBarProps) => {
     const [isShrunk, setIsShrunk] = useState(false); // Par défaut, elle est rétrécie
-
+    const galleryId = 1; //Set to 1 before implementation
 
     useEffect(() => {
         const handleScroll = () => {
@@ -21,7 +23,7 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
             const currentScrollY = window.scrollY;  //Actual position relative to top (0)
             const sideBar = document.getElementById("sidebar");
 
-            if(sideBar){
+            if (sideBar) {
                 //console.log("sideBar.scrollHeight", sideBar.scrollHeight)
                 //console.log("windowHeight", windowHeight)
                 //console.log("currentScrollY", currentScrollY, " VS pageHeight", pageHeight);
@@ -30,7 +32,7 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
                 } else {
                     setIsShrunk(true);
                 }
-            }    
+            }
         };
 
         window.addEventListener("scroll", handleScroll);
@@ -38,22 +40,26 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
     }, []);
 
     return (
-        <div    id="sidebar"
-                className={classNames(
-                    "flex flex-col items-center gap-y-1 p-8 text-[3vw] overflow-visible bg-black bg-opacity-50 text-[#f0e4d7]",
-                    { "sticky bottom-0": parentSrc === parentSrcType.PRIVATE_GALLERY }
-        )}>
+        <div id="sidebar"
+            className={classNames(
+                "flex flex-col items-center gap-y-1 p-8 text-[3vw] overflow-visible bg-black bg-opacity-50 text-[#f0e4d7]",
+                { "sticky bottom-0": parentSrc === parentSrcType.PRIVATE_GALLERY }
+            )}>
 
-            {parentSrc === parentSrcType.CART && 
+            {parentSrc === parentSrcType.CART &&
                 <div className="flex flex-col items-center gap-y-1 w-full my-20">
                     <p className="text-center">Get the best deal and purchase the entire collection!</p>
-                    <button className="w-[70%] bg-mygreen font-bold py-10 text-[3vw] text-black">GET ALL PHOTOS FOR ONLY 21,99€</button>
+                    <Link   href="/shopping/cart/payment"
+                            className="block w-[70%] bg-mygreen font-bold py-10 text-[3vw] text-black text-center"
+                            /* TODO : onClick={handleBestDeal} */>
+                                GET ALL PHOTOS FOR ONLY 21,99€
+                    </Link>
                 </div>
             }
-                                                              
-            <div    className={classNames(
-                    "flex flex-col items-center gap-y-1 w-full ",
-                    { "my-20": parentSrc === parentSrcType.CART }
+
+            <div className={classNames(
+                "flex flex-col items-center gap-y-1 w-full ",
+                { "my-20": parentSrc === parentSrcType.CART }
             )}>
                 <h2 className="text-center font-bold">🎯 Your Order Summary 🎯</h2>
 
@@ -71,30 +77,33 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
             {parentSrc === parentSrcType.CART ?
                 <div className="flex flex-col items-center gap-y-3 w-full my-20">
                     <p>🔒 Secure payment with SSL encryption.</p>
-                    <button className="flex justify-center items-center gap-x-2 w-[90%] bg-mygreen py-14 text-black">
+                    <Link   href="/shopping/cart/payment"
+                            className="flex justify-center items-center gap-x-2 w-[90%] bg-mygreen py-14 text-black">
                         <span>PROCEED TO CHECKOUT</span>
-                    </button>
+                    </Link>
                     <p>📩 Instant delivery! Your download link will be sent via email.</p>
                 </div>
                 :
-                <button className="flex justify-center items-center gap-x-2 w-full bg-[#B4E1B9] py-2 text-black">
-                    <span><Link href="/shopping/cart">GO TO CART</Link></span><FaLongArrowAltRight />
-                </button>
+                <Link href="/shopping/cart" className="flex justify-center items-center gap-x-2 w-full bg-[#B4E1B9] py-2 text-black">
+                    <span>GO TO CART</span><FaLongArrowAltRight />
+                </Link>
             }
 
             {parentSrc === parentSrcType.CART &&
-                <button className="flex justify-center items-center gap-x-2 self-start w-[40%] py-2 bg-myblue text-black">
+                <Link   href={`/shopping/privateGallery/${galleryId}`} 
+                        className="flex justify-center items-center gap-x-2 self-start w-[40%] py-2 bg-myblue text-black">
                     <FaLongArrowAltLeft /> Back to gallery
-                </button>
+                </Link>
             }
 
             {/* Fixed menu in CART mode */}
             {(isShrunk && parentSrc === parentSrcType.CART) && <div className="fixed bottom-0 left-global2 right-global2 bg-black bg-opacity-50 text-[#f0e4d7]">
                 <div className="flex flex-col items-center gap-y-3 w-full my-20">
                     <p>🔒 Secure payment with SSL encryption.</p>
-                    <button className="flex justify-around items-center gap-x-2 w-[90%] bg-mygreen py-14 text-black">
-                        <span>PROCEED TO CHECKOUT </span>                        
-                    </button>
+                    <Link href="/shopping/cart/payment"
+                        className="flex justify-around items-center gap-x-2 w-[90%] bg-mygreen py-14 text-black">
+                        <span>PROCEED TO CHECKOUT </span>
+                    </Link>
                     <p>📩 Instant delivery! Your download link will be sent via email.</p>
                 </div>
             </div>}

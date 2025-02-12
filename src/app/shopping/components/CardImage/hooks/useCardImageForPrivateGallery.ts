@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Photo } from "../types/galleryTypes";
+import { Photo } from "../../../types/galleryTypes";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../store/store";
-import { addPhoto, removePhoto } from "../store/cartSlice";
+import { AppDispatch } from "../../../store/store";
+import { addPhoto, removePhoto } from "../../../store/cartSlice";
 
 
 /**
@@ -17,7 +17,7 @@ function useCardImageForPrivateGallery() {
     const [isChecked, setIsChecked] = useState(false);    //Control the pictures selected
     const dispatch = useDispatch<AppDispatch>();
 
-    /*
+    /* 
     *   Method: handleChecking                  
     *   Manage the photo's checkboxes
     */

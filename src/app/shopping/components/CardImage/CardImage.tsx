@@ -14,10 +14,12 @@ import classNames from 'classnames';
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import { ImCross } from "react-icons/im";
-import { parentSrcType } from '../types/parentSrcType';
-import useCardImageForPrivateGallery from "@/app/shopping/hooks/useCardImageForPrivateGallery"
-import useCardImageForCart from '../hooks/useCardImageForCart';
-import { Photo } from '../types/galleryTypes';
+import { parentSrcType } from '../../types/parentSrcType';
+import useCardImageForPrivateGallery from "@/app/shopping/components/CardImage/hooks/useCardImageForPrivateGallery"
+import useCardImageForCart from './hooks/useCardImageForCart';
+import { Photo } from '../../types/galleryTypes';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
 
 interface cardImageProps {
@@ -35,6 +37,8 @@ const CardImage = ({ index, price, photo, parentSrc }: cardImageProps) => {
     const { isChecked, handleChecking } = useCardImageForPrivateGallery();
     const { removeConfirmation, handleToggleRemoveConfirmation, handleKeepPhoto, handleRemovePhoto} = useCardImageForCart();
 
+    const selectedPhotos = useSelector((state: RootState) => state.cart.selectedPhotos);
+    //selectedPhotos.some((p) => p.id === photo.id)
 
     const titleClass = classNames(
         isDescriptionVisible ? "" : "truncate overflow-hidden whitespace-nowrap"

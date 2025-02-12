@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import CardImage from "@/app/shopping/components/CardImage"
+import CardImage from "@/app/shopping/components/CardImage/CardImage"
 import staticPrivateGallery from "@/../data/staticPrivateGallery.json"
 import { parentSrcType } from "../types/parentSrcType";
 import SideBar from "@/app/shopping/components/SideBar";
@@ -9,7 +9,7 @@ import { AppDispatch, RootState } from "../store/store";
 import { useEffect } from "react";
 import { setSessionInfo } from "../store/gallerySlice";
 import { setTotalNumberOfPhotos, setUnitPrice } from "../store/cartSlice";
-import { useRouter } from "next/router";
+import Link from 'next/link';
 
 const PrivateGallery = () => {
     const parentSrc = parentSrcType.PRIVATE_GALLERY; //Ensure CardImage will work for PrivateGallery uses
@@ -70,7 +70,11 @@ const PrivateGallery = () => {
     return (
         <form className="flex flex-col gap-y-2 text-[3vw]">
             <p className="text-center">Get the best deal and purchase the entire collection!</p>
-            <button className="bg-[#B4E1B9] font-bold py-4 text-[3vw]">GET ALL PHOTOS FOR ONLY 21,99€</button>
+            <Link   href="/shopping/cart/payment" 
+                    className="bg-[#B4E1B9] font-bold py-4 text-[3vw] text-center"
+                    /* TODO onClick */>
+                        GET ALL PHOTOS FOR ONLY 21,99€
+            </Link>
 
             {/* Image Card (render with a map)*/}
             {
