@@ -1,0 +1,95 @@
+{
+    "photos": [
+        {
+            "id": "57542379089755",
+            "title": "Pseudo title of a picture",
+            "resolution": "6000x4000",
+            "description": "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+            "src": "/images/malaga/image1.jpg"
+        },
+        {
+            "id": "576563525678995755",
+            "title": "Pseudo title of a picture",
+            "resolution": "",
+            "description": "",
+            "src": "/images/malaga/image2.jpg"
+        },
+        {
+            "id": "575743553532255",
+            "title": "Titre de la photo, un titre vraiment très long, interminable en fait",
+            "resolution": "6000x4000",
+            "description": "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+            "src": "/images/malaga/image3.jpg"
+        },
+        {
+            "id": "575724566432255",
+            "title": "Titre de la photo, un titre vraiment très long, interminable en fait",
+            "resolution": "6000x4000",
+            "description": "",
+            "src": "/images/malaga/image4.jpg"
+        },
+        {
+            "id": "57574326832255",
+            "title": "Pseudo title of a picture",
+            "resolution": "6000x4000",
+            "description": "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+            "src": "/images/malaga/image5.jpg"
+        },
+        {
+            "id": "573223786355",
+            "title": "Pseudo title of a picture",
+            "resolution": "6000x4000",
+            "description": "A short description",
+            "src": "/images/malaga/image6.jpg"
+        },
+        {
+            "id": "5757486333855",
+            "title": "Pseudo title of a picture",
+            "resolution": "6000x4000",
+            "description": "A short description",
+            "src": "/images/malaga/image7.jpg"
+        },
+        {
+            "id": "575887432255",
+            "title": "Pseudo title of a picture",
+            "resolution": "6000x4000",
+            "description": "A short description",
+            "src": "/images/malaga/image8.jpg"
+        },
+        {
+            "id": "575743228855",
+            "title": "Pseudo title of a picture",
+            "resolution": "6000x4000",
+            "description": "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+            "src": "/images/malaga/image9.jpg"
+        },
+        {
+            "id": "575786432255",
+            "title": "Titre de la photo, un titre vraiment très long, interminable en fait",
+            "resolution": "6000x4000",
+            "description": "A short description",
+            "src": "/images/malaga/image10.jpg"
+        },
+        {
+            "id": "57574366652255",
+            "title": "Pseudo title of a picture",
+            "resolution": "6000x4000",
+            "description": "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit... Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+            "src": "/images/malaga/image11.jpg"
+        },
+        {
+            "id": "575743543322255",
+            "title": "Titre de la photo, un titre vraiment très long, interminable en fait",
+            "resolution": "6000x4000",
+            "description": "A short description",
+            "src": "/images/malaga/image12.jpg"
+        }
+    ],
+    "shootingInfo": {
+        "id": "2354636",
+        "modelName": "James Hetfield",
+        "country": "Spain",
+        "city": "Barcelona"
+    },
+    "unitPrice": 8.99
+}

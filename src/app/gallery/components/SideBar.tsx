@@ -4,6 +4,7 @@ import { parentSrcType } from '../types/parentSrcType'
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import classNames from 'classnames';
+import Link from 'next/link';
 
 interface SideBarProps {
     parentSrc: parentSrcType;
@@ -21,9 +22,9 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
             const sideBar = document.getElementById("sidebar");
 
             if(sideBar){
-                console.log("sideBar.scrollHeight", sideBar.scrollHeight)
-                console.log("windowHeight", windowHeight)
-                console.log("currentScrollY", currentScrollY, " VS pageHeight", pageHeight);
+                //console.log("sideBar.scrollHeight", sideBar.scrollHeight)
+                //console.log("windowHeight", windowHeight)
+                //console.log("currentScrollY", currentScrollY, " VS pageHeight", pageHeight);
                 if (currentScrollY > pageHeight - windowHeight - sideBar.scrollHeight) {
                     setIsShrunk(false);
                 } else {
@@ -77,7 +78,7 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
                 </div>
                 :
                 <button className="flex justify-center items-center gap-x-2 w-full bg-[#B4E1B9] py-2 text-black">
-                    <span>GO TO CART</span><FaLongArrowAltRight />
+                    <span><Link href="/gallery/cart">GO TO CART</Link></span><FaLongArrowAltRight />
                 </button>
             }
 

@@ -17,25 +17,22 @@ import { ImCross } from "react-icons/im";
 import { parentSrcType } from '../types/parentSrcType';
 import useCardImageForPrivateGallery from "@/app/gallery/hooks/useCardImageForPrivateGallery"
 import useCardImageForCart from '../hooks/useCardImageForCart';
+import { Photo } from '../types/galleryTypes';
 
 
 interface cardImageProps {
     //Configuration props
-    parentSrc: parentSrcType;       //Source component
+    parentSrc: parentSrcType;                   //Source component
     // Main props
+    photo: Photo                                //Photo object
     index: number;                              //Index of the photo in the gallery
     price: number;                              //Price in euros
-    src: string;                                //Source file
-    // Facultative props
-    title?: string;                             //Explicit title of the photo or nothing
-    resolution?: string;                        //Resolution like 6000x4000
-    description?: string;                       //Photo Description or nothing
 }
 
-const CardImage = ({ index, price, src, title, resolution, description, parentSrc }: cardImageProps) => {
+const CardImage = ({ index, price, photo, parentSrc }: cardImageProps) => {
     const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);    //Control the visibility of the description
     
-    const { checked, handleChecking } = useCardImageForPrivateGallery();
+    const { isChecked, handleChecking } = useCardImageForPrivateGallery();
     const { removeConfirmation, handleToggleRemoveConfirmation, handleKeepPhoto, handleRemovePhoto} = useCardImageForCart();
 
 
@@ -53,7 +50,7 @@ const CardImage = ({ index, price, src, title, resolution, description, parentSr
     return (
         <div className={classNames(
             "flex flex-col gap-y-2 w-full p-global shadow-[0px_4px_8px_rgba(0,0,0,0.25)]",
-            { "bg-[#B4E1B9]": checked }
+            { "bg-[#B4E1B9]": isChecked }
         )}>
             <div className="relative">
                 {
@@ -71,8 +68,8 @@ const CardImage = ({ index, price, src, title, resolution, description, parentSr
                 }
 
                 <Image
-                    src={src}
-                    alt={description ? description : `photo-${index}`}
+                    src={photo.src}
+                    alt={photo.description ? photo.description : `photo-${index}`}
                     width={16}
                     height={9}
                     sizes="100vw"
@@ -89,7 +86,7 @@ const CardImage = ({ index, price, src, title, resolution, description, parentSr
                             onClick={toggleDescription}>
                             {isDescriptionVisible ? <IoIosArrowUp /> : <IoIosArrowDown />}
                         </button>
-                        <h2 className={titleClass}>#{index} {title && <span> - {title}</span>}</h2>
+                        <h2 className={titleClass}>#{index} {photo.title && <span> - {photo.title}</span>}</h2>
                     </div>
                     <div className="flex flex-row self-start items-center justify-end gap-x-2">
                         <span><span className='text-[2vw] leading-[3vw] line-through text-red-500'>{price}€</span> - {price}€</span>
@@ -99,7 +96,7 @@ const CardImage = ({ index, price, src, title, resolution, description, parentSr
                                     type="checkbox"
                                     id={`check-photo-${index}`}
                                     name={`check-photo-${index}`}
-                                    onChange={handleChecking}
+                                    onChange={(e) => handleChecking(e, photo)}
                                     className="align-middle w-[1em]" />
                                 :
                                 <button onClick={handleToggleRemoveConfirmation}
@@ -113,11 +110,11 @@ const CardImage = ({ index, price, src, title, resolution, description, parentSr
                     </div>
                 </div>
                 {isDescriptionVisible && <div>
-                    {resolution &&
-                        <div className="flex flex-row justify-between"><b>Resolution :</b> <span>{resolution}</span></div>
+                    {photo.resolution &&
+                        <div className="flex flex-row justify-between"><b>Resolution :</b> <span>{photo.resolution}</span></div>
                     }
-                    {description &&
-                        <div><b>Description :</b> <p className="italic text-[2vw] text-justify">{description}</p></div>
+                    {photo.description &&
+                        <div><b>Description :</b> <p className="italic text-[2vw] text-justify">{photo.description}</p></div>
                     }
                 </div>}
             </div>
