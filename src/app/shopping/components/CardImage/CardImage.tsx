@@ -38,7 +38,10 @@ const CardImage = ({ index, price, photo, parentSrc }: cardImageProps) => {
     const { removeConfirmation, handleToggleRemoveConfirmation, handleKeepPhoto, handleRemovePhoto} = useCardImageForCart();
 
     const selectedPhotos = useSelector((state: RootState) => state.cart.selectedPhotos);
-    //selectedPhotos.some((p) => p.id === photo.id)
+
+    const isPhotoSelected = () => {
+        return selectedPhotos.some((p) => p.id === photo.id)
+    }
 
     const titleClass = classNames(
         isDescriptionVisible ? "" : "truncate overflow-hidden whitespace-nowrap"
@@ -54,7 +57,7 @@ const CardImage = ({ index, price, photo, parentSrc }: cardImageProps) => {
     return (
         <div className={classNames(
             "flex flex-col gap-y-2 w-full p-global shadow-[0px_4px_8px_rgba(0,0,0,0.25)]",
-            { "bg-[#B4E1B9]": isChecked }
+            { "bg-[#B4E1B9]": isPhotoSelected()}
         )}>
             <div className="relative">
                 {
@@ -66,7 +69,7 @@ const CardImage = ({ index, price, photo, parentSrc }: cardImageProps) => {
                                     onClick={handleKeepPhoto}>Keep</button>
                             <button type="button" 
                                     className="block w-[33%] px-1 py-[0.5em] bg-[#D1B3E0]"
-                                    onClick={handleRemovePhoto}>Remove</button>
+                                    onClick={() => handleRemovePhoto(photo.id)}>Remove</button>
                         </div>
                     </div>
                 }
@@ -100,6 +103,7 @@ const CardImage = ({ index, price, photo, parentSrc }: cardImageProps) => {
                                     type="checkbox"
                                     id={`check-photo-${index}`}
                                     name={`check-photo-${index}`}
+                                    checked={isPhotoSelected()}
                                     onChange={(e) => handleChecking(e, photo)}
                                     className="align-middle w-[1em]" />
                                 :

@@ -1,4 +1,7 @@
+import { removePhoto } from "@/app/shopping/store/cartSlice";
+import { AppDispatch } from "@/app/shopping/store/store";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 
 /**
@@ -7,9 +10,10 @@ import { useState } from "react";
  */
 function useCardImageForCart() {
     const [removeConfirmation, setRemoveConfirmation] = useState(false);
+    const dispatch = useDispatch<AppDispatch>();
 
     /*
-    *   Method: handleToggleRemoveConfirmation   (only in Cart mode)
+    *   Method: handleToggleRemoveConfirmation   
     *   Display a confirmation before the user delete a photo
     */
     const handleToggleRemoveConfirmation = () => {
@@ -17,19 +21,19 @@ function useCardImageForCart() {
     }
 
     /*
-    *   Method: handleKeepPhoto                 (only in Cart mode)
-    *   Cancel the remove operation 
+    *   Method: handleKeepPhoto                 
+    *   Cancel the remove operation, nothing is done
     */
     const handleKeepPhoto = () => {
         setRemoveConfirmation(false);
     }
 
     /*
-    *   Method: handleRemovePhoto                 (only in Cart mode)
+    *   Method: handleRemovePhoto                 
     *   Remove the photo from the shopping cart
     */
-    const handleRemovePhoto = () => {
-        //TODO
+    const handleRemovePhoto = (id: string) => {
+        dispatch(removePhoto(id));
         setRemoveConfirmation(false);
     }
 
