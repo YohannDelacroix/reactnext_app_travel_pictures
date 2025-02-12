@@ -28,20 +28,21 @@ interface cardImageProps {
     // Main props
     photo: Photo                                //Photo object
     index: number;                              //Index of the photo in the gallery
-    price: number;                              //Price in euros
 }
 
-const CardImage = ({ index, price, photo, parentSrc }: cardImageProps) => {
+const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
     const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);    //Control the visibility of the description
-    
+
     const { isChecked, handleChecking } = useCardImageForPrivateGallery();
-    const { removeConfirmation, handleToggleRemoveConfirmation, handleKeepPhoto, handleRemovePhoto} = useCardImageForCart();
+    const { removeConfirmation, handleToggleRemoveConfirmation, handleKeepPhoto, handleRemovePhoto } = useCardImageForCart();
 
     const selectedPhotos = useSelector((state: RootState) => state.cart.selectedPhotos);
 
     const isPhotoSelected = () => {
         return selectedPhotos.some((p) => p.id === photo.id)
     }
+
+    const { unitPrice, currentUnitPrice } = useSelector((state: RootState) => state.cart);
 
     const titleClass = classNames(
         isDescriptionVisible ? "" : "truncate overflow-hidden whitespace-nowrap"
@@ -57,19 +58,19 @@ const CardImage = ({ index, price, photo, parentSrc }: cardImageProps) => {
     return (
         <div className={classNames(
             "flex flex-col gap-y-2 w-full p-global shadow-[0px_4px_8px_rgba(0,0,0,0.25)]",
-            { "bg-[#B4E1B9]": isPhotoSelected()}
+            { "bg-[#B4E1B9]": isPhotoSelected() }
         )}>
             <div className="relative">
                 {
                     removeConfirmation && <div className="w-[60%] p-3 flex flex-col justify-around gap-y-2 bg-[#A6C9E2] bg-opacity-60 absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-[2vw]">
                         <p className='text-center text-white'>Are you sure you want to remove this photo from your cart ?</p>
                         <div className="flex justify-around">
-                            <button type="button" 
-                                    className="block w-[33%] px-1 py-[0.5em] bg-[#B4E1B9]"
-                                    onClick={handleKeepPhoto}>Keep</button>
-                            <button type="button" 
-                                    className="block w-[33%] px-1 py-[0.5em] bg-[#D1B3E0]"
-                                    onClick={() => handleRemovePhoto(photo.id)}>Remove</button>
+                            <button type="button"
+                                className="block w-[33%] px-1 py-[0.5em] bg-[#B4E1B9]"
+                                onClick={handleKeepPhoto}>Keep</button>
+                            <button type="button"
+                                className="block w-[33%] px-1 py-[0.5em] bg-[#D1B3E0]"
+                                onClick={() => handleRemovePhoto(photo.id)}>Remove</button>
                         </div>
                     </div>
                 }
@@ -96,7 +97,13 @@ const CardImage = ({ index, price, photo, parentSrc }: cardImageProps) => {
                         <h2 className={titleClass}>#{index} {photo.title && <span> - {photo.title}</span>}</h2>
                     </div>
                     <div className="flex flex-row self-start items-center justify-end gap-x-2">
-                        <span><span className='text-[2vw] leading-[3vw] line-through text-red-500'>{price}€</span> - {price}€</span>
+                        <span>
+                            {unitPrice !== currentUnitPrice && <span><span className='text-[2vw] leading-[3vw] line-through text-red-500'>{unitPrice}€</span> - </span>}
+                            <span>
+                                {currentUnitPrice}€
+                            </span>
+
+                        </span>
                         {
                             parentSrc === parentSrcType.PRIVATE_GALLERY ?
                                 <input

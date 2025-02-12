@@ -16,8 +16,6 @@ const Cart = () => {
             <p className="text-center">Review your selected photos and complete your order.</p>
             <p className="text-center">⏳ You can modify your selection before checkout.</p>
 
-
-
             {/* Image Card (render with a map)*/}
             {
                 selectedPhotos.map((photo, index) => {
@@ -27,7 +25,6 @@ const Cart = () => {
                             photo={photo}
                             key={index}
                             index={index}
-                            price={8.99}
                         />
                     )
                 }

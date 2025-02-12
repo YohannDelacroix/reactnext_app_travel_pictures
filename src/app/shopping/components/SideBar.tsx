@@ -16,6 +16,9 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
     const [isShrunk, setIsShrunk] = useState(false); // Par défaut, elle est rétrécie
     const galleryId = 1; //Set to 1 before implementation
 
+    const { totalPrice, maxPrice, savedPrice, totalPriceBeforeDiscount } = useSelector((state: RootState) => state.cart);
+
+
     useEffect(() => {
         const handleScroll = () => {
             const windowHeight = window.innerHeight;  //Visible height 
@@ -52,7 +55,7 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
                     <Link   href="/shopping/cart/payment"
                             className="block w-[70%] bg-mygreen font-bold py-10 text-[3vw] text-black text-center"
                             /* TODO : onClick={handleBestDeal} */>
-                                GET ALL PHOTOS FOR ONLY 21,99€
+                                GET ALL PHOTOS FOR ONLY {maxPrice}€
                     </Link>
                 </div>
             }
@@ -63,14 +66,14 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
             )}>
                 <h2 className="text-center font-bold">🎯 Your Order Summary 🎯</h2>
 
-                <p className='w-full'>Congratulations! You saved <span className="text-mygreen text-[4vw] font-bold">3€</span> on your order!</p>
+                <p className='w-full'>Congratulations! You saved <span className="text-mygreen text-[4vw] font-bold">{savedPrice}€</span> on your order!</p>
                 <div className="flex justify-between items-end w-full">
                     <span>Total before discount:</span>
-                    <span className="leading-[3vw] line-through text-red-500">18.99€</span>
+                    <span className="leading-[3vw] line-through text-red-500">{totalPriceBeforeDiscount}€</span>
                 </div>
                 <div className="flex justify-between items-center w-full">
                     <span>Total:</span>
-                    <span className="text-mygreen text-[4vw] font-bold">15,99€</span>
+                    <span className="text-mygreen text-[4vw] font-bold">{totalPrice}€</span>
                 </div>
             </div>
 

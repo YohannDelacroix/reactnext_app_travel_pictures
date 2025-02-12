@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store";
 import { useEffect } from "react";
 import { setSessionInfo } from "../store/gallerySlice";
-import { setTotalNumberOfPhotos, setUnitPrice } from "../store/cartSlice";
+import { setCart } from "../store/cartSlice";
 import Link from 'next/link';
 
 const PrivateGallery = () => {
@@ -17,12 +17,15 @@ const PrivateGallery = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     const photos = useSelector((state: RootState) => state.gallery.photos)
+    const{ maxPrice } = useSelector((state: RootState) => state.cart);
 
 
+    //Only for debugging
     const selectedPhotos = useSelector((state: RootState) => state.cart.selectedPhotos);
     useEffect(() => {
         console.log("seelcted photos ", selectedPhotos)
     }, [selectedPhotos])
+    //Only for debugging
 
     useEffect(() => {
         /**
@@ -37,33 +40,17 @@ const PrivateGallery = () => {
 
             const data = staticPrivateGallery;
 
-            /*let data = {
-                photos: [],
-                shootingInfo: {
-                    id: "2354636",
-                    modelName: "James Hetfield",
-                    country: "Spain",
-                    city: "Barcelona"
-                },
-                unitPrice: 8.99,
-            }*/
-
             if (data) {
-                // Met à jour Redux avec les photos et les infos du shooting
+                // Updates redux state with main data : photos and shooting info
                 dispatch(setSessionInfo({ photos: data.photos, shootingInfo: data.shootingInfo }));
 
-                // Définir le prix unitaire et maximal
-                const unitPrice = data.unitPrice ?? 10; // Valeur par défaut
-                dispatch(setUnitPrice(unitPrice));
-
-                //Define the number of photos
-                dispatch(setTotalNumberOfPhotos(data.photos.length));
-
-                //dispatch(setMaxPrice(data.photos.length * unitPrice));
+                //Define the number of photos and define prices
+                console.log("data.ph=", data.photos.length)
+                dispatch(setCart({basePrice: data.unitPrice, numberOfPhotos: data.photos.length}))
             }
         };
 
-        fetchGalleryData("54646"); //Call with a fake id to test
+        fetchGalleryData("54646"); //Call with a fake id waiting backend implementation
     }, []);
 
 
@@ -73,7 +60,7 @@ const PrivateGallery = () => {
             <Link   href="/shopping/cart/payment" 
                     className="bg-[#B4E1B9] font-bold py-4 text-[3vw] text-center"
                     /* TODO onClick */>
-                        GET ALL PHOTOS FOR ONLY 21,99€
+                        GET ALL PHOTOS FOR ONLY {maxPrice}€
             </Link>
 
             {/* Image Card (render with a map)*/}
@@ -85,7 +72,6 @@ const PrivateGallery = () => {
                             photo={photo}
                             key={index}
                             index={index}
-                            price={8.99}
                          />
                     )
                 }
