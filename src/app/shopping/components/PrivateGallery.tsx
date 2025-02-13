@@ -18,7 +18,6 @@ const PrivateGallery = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     const photos = useSelector((state: RootState) => state.gallery.photos)
-    const { maxPrice } = useSelector((state: RootState) => state.cart);
 
 
     //Only for debugging
@@ -62,12 +61,6 @@ const PrivateGallery = () => {
 
     return (
         <form className="flex flex-col gap-y-2 text-[3vw]">
-            <p className="text-center">Get the best deal and purchase the entire collection!</p>
-            <LinkButton href="/shopping/cart/payment"
-                type={buttonType.GET_THE_BEST_DEAL}>
-                GET ALL PHOTOS FOR ONLY {maxPrice.toFixed(2)}€
-            </LinkButton>
-
             {/* Image Card (render with a map)*/}
             {
                 photos.map((photo, index) => {
