@@ -96,24 +96,29 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
             }
 
             {parentSrc === parentSrcType.CART &&
-
                 <LinkButton href={`/shopping/privateGallery/${galleryId}`}
                     type={buttonType.BACK}>
                     <FaLongArrowAltLeft /> Back to gallery
                 </LinkButton>
-
-
             }
 
             {/* Fixed menu in CART mode */}
             {(isShrunk && parentSrc === parentSrcType.CART) && <div className="fixed bottom-0 left-global2 right-global2 bg-black bg-opacity-50 text-[#f0e4d7]">
-                <div className="flex flex-col items-center gap-y-3 w-full my-20 px-4 text-center">
+                <div className="flex flex-col items-center gap-y-3 relative w-full my-10 px-4 text-center">
                     <p>🔒 Secure payment with SSL encryption.</p>
                     <LinkButton href="/shopping/cart/payment"
                         type={buttonType.NEXT}>
                         PROCEED TO CHECKOUT
                     </LinkButton>
-                    <p>📩 Instant delivery! Your download link will be sent via email.</p>
+                    <LinkButton href={`/shopping/privateGallery/${galleryId}`}
+                        type={buttonType.BACK}>
+                        <FaLongArrowAltLeft /> Back to gallery
+                    </LinkButton>
+
+                    <div className="flex justify-between items-center absolute right-global bottom-0 w-[40%]">
+                        <span>Total:</span>
+                        <span className="text-mygreen text-[4vw] font-bold">{totalPrice.toFixed(2)}€</span>
+                    </div>
                 </div>
             </div>}
 
