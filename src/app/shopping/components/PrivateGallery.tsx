@@ -13,12 +13,13 @@ import Link from 'next/link';
 import LinkButton, { buttonType } from './LinkButton';
 import { ShootingInfo } from '../types/galleryTypes';
 
-const PrivateGallery = ({id}: {id: string}) => {
+const PrivateGallery = ({ id }: { id: string }) => {
     //Ensure CardImage will work for PrivateGallery uses
-    const parentSrc = parentSrcType.PRIVATE_GALLERY; 
-    
+    const parentSrc = parentSrcType.PRIVATE_GALLERY;
+
     const dispatch = useDispatch<AppDispatch>();
-    const photos = useSelector((state: RootState) => state.gallery.photos)
+    const photos = useSelector((state: RootState) => state.gallery.photos);
+    const { city, country, modelName } = useSelector((state: RootState) => state.gallery.shootingInfo);
 
 
     //Only for debugging
@@ -52,7 +53,7 @@ const PrivateGallery = ({id}: {id: string}) => {
 
             if (data) {
                 //Only for debugging and test the ID param page, waiting for database implementation
-                const shootingInfo: ShootingInfo = {...data.shootingInfo, id: id}
+                const shootingInfo: ShootingInfo = { ...data.shootingInfo, id: id }
                 console.log("shootingInfo = ", shootingInfo);
                 //Only -----TO REMOVE LATER--------------------
 
@@ -65,12 +66,22 @@ const PrivateGallery = ({id}: {id: string}) => {
             }
         };
 
-        fetchGalleryData(id); 
+        fetchGalleryData(id);
     }, []);
 
 
     return (
         <form className="flex flex-col gap-y-2 text-[3vw]">
+            <h2 className="text-[4vw] font-bold">Welcome to your private gallery! </h2>
+            <p>
+                You can watch and enjoy the pictures of your last trip in <b>{city}</b>, <b>{country}</b>.
+            </p>
+            <p>
+                Now, review the gallery and select the pictures you want to buy and keep forever. The more you buy, the more the price is decreasing. 
+            </p>
+            <p>
+                I really thank you {modelName} because you help me living and i hope you will find it incredible !
+            </p>
             {/* Image Card (render with a map)*/}
             {
                 photos.map((photo, index) => {
