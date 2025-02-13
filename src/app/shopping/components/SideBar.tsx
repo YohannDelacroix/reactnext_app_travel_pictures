@@ -55,7 +55,7 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
                     <p className="text-center">Get the best deal and purchase the entire collection!</p>
                     <LinkButton href="/shopping/cart/payment"
                         type={buttonType.GET_THE_BEST_DEAL}>
-                        GET ALL PHOTOS FOR ONLY {maxPrice}€
+                        GET ALL PHOTOS FOR ONLY {maxPrice.toFixed(2)}€
                     </LinkButton>
                 </div>
             }
@@ -66,14 +66,14 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
             )}>
                 <h2 className="text-center font-bold">🎯 Your Order Summary 🎯</h2>
 
-                <p className='w-full'>Congratulations! You saved <span className="text-mygreen text-[4vw] font-bold">{savedPrice}€</span> on your order!</p>
+                <p className='w-full'>Congratulations! You saved <span className="text-mygreen text-[4vw] font-bold">{savedPrice.toFixed(2)}€</span> on your order!</p>
                 <div className="flex justify-between items-end w-full">
                     <span>Total before discount:</span>
-                    <span className="leading-[3vw] line-through text-red-500">{totalPriceBeforeDiscount}€</span>
+                    <span className="leading-[3vw] line-through text-red-500">{totalPriceBeforeDiscount.toFixed(2)}€</span>
                 </div>
                 <div className="flex justify-between items-center w-full">
                     <span>Total:</span>
-                    <span className="text-mygreen text-[4vw] font-bold">{totalPrice}€</span>
+                    <span className="text-mygreen text-[4vw] font-bold">{totalPrice.toFixed(2)}€</span>
                 </div>
             </div>
 

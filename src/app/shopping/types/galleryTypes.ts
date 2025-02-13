@@ -11,6 +11,7 @@ export interface Photo {
     title?: string;        
     resolution?: string;   // Optional resolution of the photo (e.g., "1920x1080")
     description?: string;  
+    price?: number;
     src: string;           // Source URL of the photo
 }
 

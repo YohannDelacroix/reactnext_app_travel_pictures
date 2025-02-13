@@ -4,6 +4,7 @@ import { setCartPayload } from "./types/setCartPayload";
 
 interface CartState {
     selectedPhotos: Photo[];
+    prices: number[];
     totalNumberPhotos: number;
     unitPrice: number;
     currentUnitPrice: number;
@@ -15,6 +16,7 @@ interface CartState {
 
 const initialState: CartState = {
     selectedPhotos: [],
+    prices: [],
     totalNumberPhotos: 0,
     unitPrice: 0,
     currentUnitPrice: 0,
@@ -29,20 +31,28 @@ const initialState: CartState = {
  * @returns the new current price
  */
 function calculateCurrentPrice(totalPhotos: number, purchasedPhotos: number, basePrice: number, factor: number) {
-    const remainingPhotos = totalPhotos - purchasedPhotos;
-    const currentDiscount = basePrice * Math.pow(factor, remainingPhotos);
-    const currentPrice = Math.round((basePrice - currentDiscount) * 100) / 100;
-    return currentPrice;
+    if(purchasedPhotos === 0){ //No discount applied if 0 photos purchased
+        return basePrice;
+    }
+    else{
+        const remainingPhotos = totalPhotos - purchasedPhotos;
+        const currentDiscount = basePrice * Math.pow(factor, remainingPhotos);
+        const currentPrice = Math.round((basePrice - currentDiscount) * 100) / 100;
+        return currentPrice;
+    }
 }
+
+
 
 /**
  * calculateCurrentTotalPrice uses calculateCurrentPrice to calculate the totalPrice given the number of photos purchased
  * @returns the new total price
  */
-function calculateCurrentTotalPrice(totalPhotos: number, purchasedPhotos: number, basePrice: number, factor: number) {
+function calculateCurrentTotalPrice(prices: number[], purchasedPhotos: number) {
     let totalPrice = 0;
     for(let i = 0; i < purchasedPhotos; i++){
-        totalPrice += calculateCurrentPrice(totalPhotos, i, basePrice, degressiveFactor)
+        //totalPrice += calculateCurrentPrice(totalPhotos, i, basePrice, degressiveFactor)
+        totalPrice += prices[i];
     }
     return Math.round(totalPrice * 100) / 100;
 }
@@ -58,7 +68,7 @@ function calculateSavedPrice(totalPrice: number, basePrice: number, purchasedPho
 
 
 function updateCartPricing(state: CartState){
-    state.totalPrice = calculateCurrentTotalPrice(state.totalNumberPhotos, state.selectedPhotos.length, state.unitPrice, degressiveFactor);
+    state.totalPrice = calculateCurrentTotalPrice(state.prices, state.selectedPhotos.length);
     state.currentUnitPrice = calculateCurrentPrice(state.totalNumberPhotos, state.selectedPhotos.length, state.unitPrice, degressiveFactor);
     state.savedPrice = calculateSavedPrice(state.totalPrice, state.unitPrice, state.selectedPhotos.length);
     state.totalPriceBeforeDiscount = state.selectedPhotos.length * state.unitPrice;
@@ -93,9 +103,11 @@ const cartSlice = createSlice({
 
             let maxPrice = 0;
             for(let i = 0; i < state.totalNumberPhotos; i++){
-                maxPrice += calculateCurrentPrice(state.totalNumberPhotos, i, state.unitPrice, degressiveFactor)
+                let iPrice = calculateCurrentPrice(state.totalNumberPhotos, i, state.unitPrice, degressiveFactor);
+                state.prices[i] = iPrice;
+                maxPrice += iPrice; 
             }
-            state.maxPrice = maxPrice;
+            state.maxPrice = Math.round(maxPrice * 100) / 100;;
         },
         resetCart: (state) => {
             state.selectedPhotos = [];

@@ -36,7 +36,7 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
     const { isChecked, handleChecking } = useCardImageForPrivateGallery();
     const { removeConfirmation, handleToggleRemoveConfirmation, handleKeepPhoto, handleRemovePhoto } = useCardImageForCart();
 
-    const selectedPhotos = useSelector((state: RootState) => state.cart.selectedPhotos);
+    const { selectedPhotos, prices } = useSelector((state: RootState) => state.cart);
 
     const isPhotoSelected = () => {
         return selectedPhotos.some((p) => p.id === photo.id)
@@ -54,6 +54,14 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
     const toggleDescription = () => {
         setIsDescriptionVisible(prevIsDescriptionVisible => !prevIsDescriptionVisible);
     }
+
+
+    // Find photo index in selectedPhotos
+    const photoIndex = selectedPhotos.findIndex(p => p.id === photo.id);
+
+    // Determines the price to display
+    const priceToDisplay = photoIndex !== -1 ? prices[photoIndex] : currentUnitPrice;
+
 
     return (
         <div className={classNames(
@@ -98,9 +106,9 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
                     </div>
                     <div className="flex flex-row self-start items-center justify-end gap-x-2">
                         <span>
-                            {unitPrice !== currentUnitPrice && <span><span className='text-[2vw] leading-[3vw] line-through text-red-500'>{unitPrice}€</span> - </span>}
+                            {unitPrice !== priceToDisplay && <span><span className='text-[2vw] leading-[3vw] line-through text-red-500'>{unitPrice.toFixed(2)}€</span> - </span>}
                             <span>
-                                {currentUnitPrice}€
+                                {priceToDisplay.toFixed(2)}€
                             </span>
 
                         </span>

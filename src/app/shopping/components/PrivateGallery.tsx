@@ -26,6 +26,11 @@ const PrivateGallery = () => {
     useEffect(() => {
         console.log("seelcted photos ", selectedPhotos)
     }, [selectedPhotos])
+
+    const prices = useSelector((state: RootState) => state.cart.prices);
+    useEffect(() => {
+        console.log("prices ", prices)
+    }, [prices])
     //Only for debugging
 
     useEffect(() => {
@@ -60,7 +65,7 @@ const PrivateGallery = () => {
             <p className="text-center">Get the best deal and purchase the entire collection!</p>
             <LinkButton href="/shopping/cart/payment"
                 type={buttonType.GET_THE_BEST_DEAL}>
-                GET ALL PHOTOS FOR ONLY {maxPrice}€
+                GET ALL PHOTOS FOR ONLY {maxPrice.toFixed(2)}€
             </LinkButton>
 
             {/* Image Card (render with a map)*/}
