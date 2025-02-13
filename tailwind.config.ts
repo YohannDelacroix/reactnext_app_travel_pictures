@@ -11,6 +11,7 @@ export default {
       colors: {
         mygreen: "#B4E1B9",
         myblue: "#A6C9E2",
+        myred: "#D1B3E0",
         "black0.1": 'rgba(0, 0, 0, 0.1)'
       },
       spacing: {

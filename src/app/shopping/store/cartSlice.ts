@@ -98,7 +98,8 @@ const cartSlice = createSlice({
             state.maxPrice = maxPrice;
         },
         resetCart: (state) => {
-            //TODO
+            state.selectedPhotos = [];
+            updateCartPricing(state);
         },
     },
 });

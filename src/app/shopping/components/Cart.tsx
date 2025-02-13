@@ -5,16 +5,28 @@ import { parentSrcType } from "../types/parentSrcType";
 import SideBar from "@/app/shopping/components/SideBar";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
+import LinkButton, { buttonType } from './LinkButton';
+import { FaRegTrashAlt } from "react-icons/fa";
 
 const Cart = () => {
     const parentSrc = parentSrcType.CART; //Ensure CardImage will work for PrivateGallery uses
     const selectedPhotos = useSelector((state: RootState) => state.cart.selectedPhotos);
 
+    const galleryId = 1; //Set to 1 before implementation (searchParams)
+
 
     return (
         <form className="flex flex-col gap-y-2 text-[3vw]">
+            <LinkButton
+                href={`/shopping/privateGallery/${galleryId}`}
+                type={buttonType.CLEAR}
+                >
+                    <span className="absolute left-3"><FaRegTrashAlt /></span> Clear Cart 
+            </LinkButton>
             <p className="text-center">Review your selected photos and complete your order.</p>
             <p className="text-center">⏳ You can modify your selection before checkout.</p>
+
+            
 
             {/* Image Card (render with a map)*/}
             {
