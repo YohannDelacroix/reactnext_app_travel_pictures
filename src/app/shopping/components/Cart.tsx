@@ -12,7 +12,7 @@ const Cart = () => {
     const parentSrc = parentSrcType.CART; //Ensure CardImage will work for PrivateGallery uses
     const selectedPhotos = useSelector((state: RootState) => state.cart.selectedPhotos);
 
-    const galleryId = 1; //Set to 1 before implementation (searchParams)
+    const galleryId = useSelector((state: RootState) => state.gallery.shootingInfo.id); 
 
 
     return (

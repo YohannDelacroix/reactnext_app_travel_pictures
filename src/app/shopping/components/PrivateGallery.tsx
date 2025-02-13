@@ -11,12 +11,13 @@ import { setSessionInfo } from "../store/gallerySlice";
 import { setCart } from "../store/cartSlice";
 import Link from 'next/link';
 import LinkButton, { buttonType } from './LinkButton';
+import { ShootingInfo } from '../types/galleryTypes';
 
-const PrivateGallery = () => {
-    const parentSrc = parentSrcType.PRIVATE_GALLERY; //Ensure CardImage will work for PrivateGallery uses
-    //const router = useRouter();
+const PrivateGallery = ({id}: {id: string}) => {
+    //Ensure CardImage will work for PrivateGallery uses
+    const parentSrc = parentSrcType.PRIVATE_GALLERY; 
+    
     const dispatch = useDispatch<AppDispatch>();
-
     const photos = useSelector((state: RootState) => state.gallery.photos)
 
 
@@ -30,6 +31,10 @@ const PrivateGallery = () => {
     useEffect(() => {
         console.log("prices ", prices)
     }, [prices])
+
+    useEffect(() => {
+        console.log("id = ", id);
+    }, [id])
     //Only for debugging
 
     useEffect(() => {
@@ -46,8 +51,13 @@ const PrivateGallery = () => {
             const data = staticPrivateGallery;
 
             if (data) {
+                //Only for debugging and test the ID param page, waiting for database implementation
+                const shootingInfo: ShootingInfo = {...data.shootingInfo, id: id}
+                console.log("shootingInfo = ", shootingInfo);
+                //Only -----TO REMOVE LATER--------------------
+
                 // Updates redux state with main data : photos and shooting info
-                dispatch(setSessionInfo({ photos: data.photos, shootingInfo: data.shootingInfo }));
+                dispatch(setSessionInfo({ photos: data.photos, shootingInfo: shootingInfo }));
 
                 //Define the number of photos and define prices
                 console.log("data.ph=", data.photos.length)
@@ -55,7 +65,7 @@ const PrivateGallery = () => {
             }
         };
 
-        fetchGalleryData("54646"); //Call with a fake id waiting backend implementation
+        fetchGalleryData(id); 
     }, []);
 
 

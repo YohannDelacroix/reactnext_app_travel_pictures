@@ -15,7 +15,7 @@ interface SideBarProps {
 
 const SideBar = ({ parentSrc }: SideBarProps) => {
     const [isShrunk, setIsShrunk] = useState(false); // Par défaut, elle est rétrécie
-    const galleryId = 1; //Set to 1 before implementation (searchParams)
+    const galleryId = useSelector((state: RootState) => state.gallery.shootingInfo.id); 
 
     const { totalPrice, maxPrice, savedPrice, totalPriceBeforeDiscount } = useSelector((state: RootState) => state.cart);
 
