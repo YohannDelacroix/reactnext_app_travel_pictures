@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
+import LinkButton, { buttonType } from './LinkButton';
 
 interface SideBarProps {
     parentSrc: parentSrcType;
@@ -52,11 +53,10 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
             {parentSrc === parentSrcType.CART &&
                 <div className="flex flex-col items-center gap-y-1 w-full my-20">
                     <p className="text-center">Get the best deal and purchase the entire collection!</p>
-                    <Link   href="/shopping/cart/payment"
-                            className="block w-[70%] bg-mygreen font-bold py-10 text-[3vw] text-black text-center"
-                            /* TODO : onClick={handleBestDeal} */>
-                                GET ALL PHOTOS FOR ONLY {maxPrice}€
-                    </Link>
+                    <LinkButton href="/shopping/cart/payment"
+                        type={buttonType.GET_THE_BEST_DEAL}>
+                        GET ALL PHOTOS FOR ONLY {maxPrice}€
+                    </LinkButton>
                 </div>
             }
 
@@ -80,33 +80,39 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
             {parentSrc === parentSrcType.CART ?
                 <div className="flex flex-col items-center gap-y-3 w-full my-20">
                     <p>🔒 Secure payment with SSL encryption.</p>
-                    <Link   href="/shopping/cart/payment"
-                            className="flex justify-center items-center gap-x-2 w-[90%] bg-mygreen py-14 text-black">
-                        <span>PROCEED TO CHECKOUT</span>
-                    </Link>
+                    <LinkButton href="/shopping/cart/payment"
+                        type={buttonType.NEXT}>
+                        PROCEED TO CHECKOUT
+                    </LinkButton>
                     <p>📩 Instant delivery! Your download link will be sent via email.</p>
                 </div>
                 :
-                <Link href="/shopping/cart" className="flex justify-center items-center gap-x-2 w-full bg-[#B4E1B9] py-2 text-black">
+                <LinkButton href="/shopping/cart"
+                    type={buttonType.NEXT}>
                     <span>GO TO CART</span><FaLongArrowAltRight />
-                </Link>
+                </LinkButton>
+
+
             }
 
             {parentSrc === parentSrcType.CART &&
-                <Link   href={`/shopping/privateGallery/${galleryId}`} 
-                        className="flex justify-center items-center gap-x-2 self-start w-[40%] py-2 bg-myblue text-black">
+
+                <LinkButton href={`/shopping/privateGallery/${galleryId}`}
+                    type={buttonType.BACK}>
                     <FaLongArrowAltLeft /> Back to gallery
-                </Link>
+                </LinkButton>
+
+
             }
 
             {/* Fixed menu in CART mode */}
             {(isShrunk && parentSrc === parentSrcType.CART) && <div className="fixed bottom-0 left-global2 right-global2 bg-black bg-opacity-50 text-[#f0e4d7]">
-                <div className="flex flex-col items-center gap-y-3 w-full my-20">
+                <div className="flex flex-col items-center gap-y-3 w-full my-20 px-4 text-center">
                     <p>🔒 Secure payment with SSL encryption.</p>
-                    <Link href="/shopping/cart/payment"
-                        className="flex justify-around items-center gap-x-2 w-[90%] bg-mygreen py-14 text-black">
-                        <span>PROCEED TO CHECKOUT </span>
-                    </Link>
+                    <LinkButton href="/shopping/cart/payment"
+                        type={buttonType.NEXT}>
+                        PROCEED TO CHECKOUT
+                    </LinkButton>
                     <p>📩 Instant delivery! Your download link will be sent via email.</p>
                 </div>
             </div>}

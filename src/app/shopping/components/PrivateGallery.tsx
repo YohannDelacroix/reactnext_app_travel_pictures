@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { setSessionInfo } from "../store/gallerySlice";
 import { setCart } from "../store/cartSlice";
 import Link from 'next/link';
+import LinkButton, { buttonType } from './LinkButton';
 
 const PrivateGallery = () => {
     const parentSrc = parentSrcType.PRIVATE_GALLERY; //Ensure CardImage will work for PrivateGallery uses
@@ -17,7 +18,7 @@ const PrivateGallery = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     const photos = useSelector((state: RootState) => state.gallery.photos)
-    const{ maxPrice } = useSelector((state: RootState) => state.cart);
+    const { maxPrice } = useSelector((state: RootState) => state.cart);
 
 
     //Only for debugging
@@ -46,7 +47,7 @@ const PrivateGallery = () => {
 
                 //Define the number of photos and define prices
                 console.log("data.ph=", data.photos.length)
-                dispatch(setCart({basePrice: data.unitPrice, numberOfPhotos: data.photos.length}))
+                dispatch(setCart({ basePrice: data.unitPrice, numberOfPhotos: data.photos.length }))
             }
         };
 
@@ -57,11 +58,10 @@ const PrivateGallery = () => {
     return (
         <form className="flex flex-col gap-y-2 text-[3vw]">
             <p className="text-center">Get the best deal and purchase the entire collection!</p>
-            <Link   href="/shopping/cart/payment" 
-                    className="bg-[#B4E1B9] font-bold py-4 text-[3vw] text-center"
-                    /* TODO onClick */>
-                        GET ALL PHOTOS FOR ONLY {maxPrice}€
-            </Link>
+            <LinkButton href="/shopping/cart/payment"
+                type={buttonType.GET_THE_BEST_DEAL}>
+                GET ALL PHOTOS FOR ONLY {maxPrice}€
+            </LinkButton>
 
             {/* Image Card (render with a map)*/}
             {
@@ -72,7 +72,7 @@ const PrivateGallery = () => {
                             photo={photo}
                             key={index}
                             index={index}
-                         />
+                        />
                     )
                 }
                 )
