@@ -5,6 +5,8 @@ import { paymentType } from './types/paymentType'
 import PaymentOption from './PaymentOption'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store/store'
+import LinkButton, { buttonType } from '../LinkButton'
+import { FaLongArrowAltLeft } from "react-icons/fa";
 
 const Payment = () => {
     const [selectedPayment, setSelectedPayment] = useState<paymentType | null>(null);
@@ -40,6 +42,11 @@ const Payment = () => {
                     selectedPayment={selectedPayment!}
                     setSelectedPayment={setSelectedPayment} />
             </ul>
+
+            <LinkButton href={`/shopping/cart`}
+                type={buttonType.BACK}>
+                <FaLongArrowAltLeft /> Back to cart
+            </LinkButton>
         </div>
 
     )
