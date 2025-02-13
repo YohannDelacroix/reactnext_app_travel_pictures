@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Photo, ShootingInfo } from "../types/galleryTypes";
+import { useDispatch } from "react-redux";
 
 
 interface GalleryState {
@@ -19,7 +20,7 @@ const gallerySlice = createSlice({
         setSessionInfo: (state, action: PayloadAction<GalleryState>) => {
             state.photos = action.payload.photos;
             state.shootingInfo = action.payload.shootingInfo;
-        }
+        },
     },
 });
 

@@ -22,9 +22,9 @@
 import classNames from 'classnames';
 import Link from 'next/link'
 import React from 'react'
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../store/store';
-import { resetCart } from '../store/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../store/store';
+import { buyAllPhotos, resetCart } from '../store/cartSlice';
 
 // Enum defining available button types
 export enum buttonType {
@@ -43,30 +43,36 @@ interface linkButtonProps {
 
 const LinkButton = ({ children, href, type }: linkButtonProps) => {
     const dispatch = useDispatch<AppDispatch>();
+    const photos = useSelector((state: RootState) => state.gallery.photos);
+    const selectedPhotosLength = useSelector((state: RootState) => state.cart.selectedPhotos.length);
 
     const handleClick = () => {
-        if(type === buttonType.GET_THE_BEST_DEAL){
-            //TODO
+        if (type === buttonType.GET_THE_BEST_DEAL) {
+            dispatch(buyAllPhotos(photos));
         }
-        else if(type === buttonType.CLEAR){
+        else if (type === buttonType.CLEAR) {
             dispatch(resetCart());
         }
     }
 
+    const isVisible = !(type === buttonType.GET_THE_BEST_DEAL && selectedPhotosLength === photos.length);
+
     return (
-        <Link 
-            href={href}
-            className={classNames(
-                "flex justify-center items-center gap-x-2 relative text-black",
-                { "w-full py-5 bg-mygreen " : type === buttonType.NEXT},
-                { "w-full font-bold py-4 bg-mygreen  text-[3vw]" : type === buttonType.GET_THE_BEST_DEAL},
-                { "self-start w-[40%] py-2 bg-myblue" : type === buttonType.BACK},
-                { "self-end w-[40%] py-2 bg-myred" : type === buttonType.CLEAR}
-            )}
-            onClick={handleClick}
-        >
-            {children} {/* Renders the content inside the button */}
-        </Link>
+
+        isVisible && (
+            <Link
+                href={href}
+                className={classNames(
+                    "flex justify-center items-center gap-x-2 relative text-black",
+                    { "w-full py-5 bg-mygreen ": type === buttonType.NEXT },
+                    { "w-full font-bold py-4 bg-mygreen  text-[3vw]": type === buttonType.GET_THE_BEST_DEAL },
+                    { "self-start w-[40%] py-2 bg-myblue": type === buttonType.BACK },
+                    { "self-end w-[40%] py-2 bg-myred": type === buttonType.CLEAR }
+                )}
+                onClick={handleClick}
+            >
+                {children} {/* Renders the content inside the button */}
+            </Link>)
     )
 }
 

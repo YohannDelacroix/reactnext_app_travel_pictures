@@ -95,6 +95,11 @@ const cartSlice = createSlice({
             
             updateCartPricing(state);
         },
+        buyAllPhotos: (state, action: PayloadAction<Photo[]>) => {
+            state.selectedPhotos = action.payload;
+
+            updateCartPricing(state);
+        },
         setCart: (state, action: PayloadAction<setCartPayload>) => { //At the beginning set unit, current and max price
             const { basePrice, numberOfPhotos } = action.payload;
             state.unitPrice = basePrice;
@@ -116,5 +121,5 @@ const cartSlice = createSlice({
     },
 });
 
-export const { addPhoto, removePhoto, setCart, resetCart } = cartSlice.actions;
+export const { addPhoto, buyAllPhotos, removePhoto, setCart, resetCart } = cartSlice.actions;
 export default cartSlice.reducer;
