@@ -77,7 +77,7 @@ const PrivateGallery = ({ id }: { id: string }) => {
                 You can watch and enjoy the pictures of your last trip in <b>{city}</b>, <b>{country}</b>.
             </p>
             <p>
-                Now, review the gallery and select the pictures you want to buy and keep forever. The more you buy, the more the price is decreasing. 
+                Now, review the gallery and select the pictures you want to buy and keep forever. The more you buy, the more the price decreases. 
             </p>
             <p>
                 I really thank you {modelName} because you help me living and i hope you will find it incredible !
