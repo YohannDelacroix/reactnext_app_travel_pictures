@@ -9,9 +9,9 @@ import { AppDispatch, RootState } from "../store/store";
 import { useEffect } from "react";
 import { setSessionInfo } from "../store/gallerySlice";
 import { setCart } from "../store/cartSlice";
-import Link from 'next/link';
 import LinkButton, { buttonType } from './LinkButton';
 import { ShootingInfo } from '../types/galleryTypes';
+import { FaRegTrashAlt } from "react-icons/fa";
 
 const PrivateGallery = ({ id }: { id: string }) => {
     //Ensure CardImage will work for PrivateGallery uses
@@ -82,6 +82,13 @@ const PrivateGallery = ({ id }: { id: string }) => {
             <p>
                 I really thank you {modelName} because you help me living and i hope you will find it incredible !
             </p>
+
+            <LinkButton
+                type={buttonType.CLEAR}
+                >
+                    <span className=""><FaRegTrashAlt /></span> Clear Selection 
+            </LinkButton>
+
             {/* Image Card (render with a map)*/}
             {
                 photos.map((photo, index) => {

@@ -36,7 +36,7 @@ export enum buttonType {
 
 // Props definition for the LinkButton component
 interface linkButtonProps {
-    href: string;                   // The destination URL
+    href?: string;                  // The destination URL - If not defined the link acts like a basic button
     type: buttonType;               // Defines the button's style
     children: React.ReactNode;      // Content inside the button (text, icons, etc.)
 }
@@ -57,22 +57,25 @@ const LinkButton = ({ children, href, type }: linkButtonProps) => {
 
     const isVisible = !(type === buttonType.GET_THE_BEST_DEAL && selectedPhotosLength === photos.length);
 
-    return (
+    const commonClasses = classNames(
+        "flex justify-center items-center gap-x-2 relative text-black",
+        { "w-full py-5 bg-mygreen": type === buttonType.NEXT },
+        { "w-full font-bold py-4 bg-mygreen text-[3vw]": type === buttonType.GET_THE_BEST_DEAL },
+        { "self-start w-[40%] py-2 bg-myblue": type === buttonType.BACK },
+        { "self-end w-[40%] py-2 bg-myred": type === buttonType.CLEAR }
+    );
 
+    return (
         isVisible && (
-            <Link
-                href={href}
-                className={classNames(
-                    "flex justify-center items-center gap-x-2 relative text-black",
-                    { "w-full py-5 bg-mygreen ": type === buttonType.NEXT },
-                    { "w-full font-bold py-4 bg-mygreen  text-[3vw]": type === buttonType.GET_THE_BEST_DEAL },
-                    { "self-start w-[40%] py-2 bg-myblue": type === buttonType.BACK },
-                    { "self-end w-[40%] py-2 bg-myred": type === buttonType.CLEAR }
-                )}
-                onClick={handleClick}
-            >
-                {children} {/* Renders the content inside the button */}
-            </Link>)
+            href ? (
+                <Link href={href} className={commonClasses} onClick={handleClick}>
+                    {children}
+                </Link>) : (
+                <span className={classNames(commonClasses, "inline-block cursor-pointer")} onClick={handleClick}>
+                    {children}
+                </span>
+            )
+        )
     )
 }
 
