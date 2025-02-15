@@ -72,12 +72,15 @@ const PrivateGallery = ({ id }: { id: string }) => {
 
     return (
         <form className="flex flex-col gap-y-2">
+
+
+
             <h2 className="text-[4vw] font-bold">Welcome to your private gallery! </h2>
             <p>
                 You can watch and enjoy the pictures of your last trip in <b>{city}</b>, <b>{country}</b>.
             </p>
             <p>
-                Now, review the gallery and select the pictures you want to buy and keep forever. The more you buy, the more the price decreases. 
+                Now, review the gallery and select the pictures you want to buy and keep forever. The more you buy, the more the price decreases.
             </p>
             <p>
                 I really thank you {modelName} because you help me living and i hope you will find it incredible !
@@ -85,26 +88,32 @@ const PrivateGallery = ({ id }: { id: string }) => {
 
             <LinkButton
                 type={buttonType.CLEAR}
-                >
-                    <span className=""><FaRegTrashAlt /></span> Clear Selection 
+            >
+                <span className=""><FaRegTrashAlt /></span> Clear Selection
             </LinkButton>
+            <div className="flex flex-col gap-y-2
+                            lg:flex-row lg:gap-x-2">
+                <div className="flex flex-col gap-y-2 gap-x-2 items-start justify-between
+                            md:flex-row md:flex-wrap">
+                    {/* Image Card (render with a map)*/}
+                    {
+                        photos.map((photo, index) => {
+                            return (
+                                <CardImage
+                                    parentSrc={parentSrc}
+                                    photo={photo}
+                                    key={index}
+                                    index={index}
+                                />
+                            )
+                        }
+                        )
+                    }
+                </div>
+                <SideBar parentSrc={parentSrc} />
+            </div>
 
-            {/* Image Card (render with a map)*/}
-            {
-                photos.map((photo, index) => {
-                    return (
-                        <CardImage
-                            parentSrc={parentSrc}
-                            photo={photo}
-                            key={index}
-                            index={index}
-                        />
-                    )
-                }
-                )
-            }
-
-            <SideBar parentSrc={parentSrc} />
+            
         </form>
     );
 }

@@ -66,6 +66,8 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
     return (
         <div className={classNames(
             "flex flex-col gap-y-2 w-full p-global shadow-[0px_4px_8px_rgba(0,0,0,0.25)]",
+            "md:max-w-[49%]",
+            "lg:max-w-[49%]",
             { "bg-[#B4E1B9]": isPhotoSelected() }
         )}>
             <div className="relative">
@@ -93,8 +95,8 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
                 ></Image>
             </div>
 
-
-            <div className="flex flex-col gap-y-2 text-[3vw]">
+            {/* Metadatas */}
+            <div className="flex flex-col gap-y-2">
                 <div className="flex flex-row justify-between max-w ">
                     <div className="flex flex-row items-start justify-start gap-x-2 max-w-[65%]">
                         <button className="block h-3"
@@ -106,7 +108,7 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
                     </div>
                     <div className="flex flex-row self-start items-center justify-end gap-x-2">
                         <span>
-                            {unitPrice !== priceToDisplay && <span><span className='text-[2vw] leading-[3vw] line-through text-red-500'>{unitPrice.toFixed(2)}€</span> - </span>}
+                            {unitPrice !== priceToDisplay && <span><span className='text-[0.5rem] leading-[1rem] line-through text-red-500'>{unitPrice.toFixed(2)}€</span> - </span>}
                             <span>
                                 {priceToDisplay.toFixed(2)}€
                             </span>
@@ -137,7 +139,7 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
                         <div className="flex flex-row justify-between"><b>Resolution :</b> <span>{photo.resolution}</span></div>
                     }
                     {photo.description &&
-                        <div><b>Description :</b> <p className="italic text-[2vw] text-justify">{photo.description}</p></div>
+                        <div><b>Description :</b> <p className="italic text-[0.5rem] text-justify">{photo.description}</p></div>
                     }
                 </div>}
             </div>
