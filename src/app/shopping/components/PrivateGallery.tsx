@@ -12,6 +12,7 @@ import { setCart } from "../store/cartSlice";
 import LinkButton, { buttonType } from './LinkButton';
 import { ShootingInfo } from '../types/galleryTypes';
 import { FaRegTrashAlt } from "react-icons/fa";
+import Gallery from './ShoppingGallery';
 
 const PrivateGallery = ({ id }: { id: string }) => {
     //Ensure CardImage will work for PrivateGallery uses
@@ -91,12 +92,10 @@ const PrivateGallery = ({ id }: { id: string }) => {
             >
                 <span className=""><FaRegTrashAlt /></span> Clear Selection
             </LinkButton>
-            <div className="flex flex-col gap-y-2
-                            lg:flex-row lg:gap-x-2">
-                <div className="flex flex-col gap-y-2 gap-x-2 items-start justify-between
-                            md:flex-row md:flex-wrap">
-                    {/* Image Card (render with a map)*/}
-                    {
+
+            <Gallery parentSrc={parentSrc}>
+                {/* Image Card (render with a map)*/}
+                {
                         photos.map((photo, index) => {
                             return (
                                 <CardImage
@@ -109,11 +108,7 @@ const PrivateGallery = ({ id }: { id: string }) => {
                         }
                         )
                     }
-                </div>
-                <SideBar parentSrc={parentSrc} />
-            </div>
-
-            
+            </Gallery>            
         </form>
     );
 }
