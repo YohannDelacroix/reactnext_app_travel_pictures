@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className="p-global">
+            <body className="p-global text-[1rem]">
                 {children}
             </body>
         </html>

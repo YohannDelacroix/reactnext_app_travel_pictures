@@ -71,7 +71,7 @@ const PrivateGallery = ({ id }: { id: string }) => {
 
 
     return (
-        <form className="flex flex-col gap-y-2 text-[3vw]">
+        <form className="flex flex-col gap-y-2">
             <h2 className="text-[4vw] font-bold">Welcome to your private gallery! </h2>
             <p>
                 You can watch and enjoy the pictures of your last trip in <b>{city}</b>, <b>{country}</b>.

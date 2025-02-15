@@ -15,7 +15,7 @@ const Payment = () => {
     const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
 
     return (
-        <div className="flex flex-col w-full gap-y-8 text-[3vw]">
+        <div className="flex flex-col w-full gap-y-8">
             <h2 className="text-center font-bold">One Step Away from Your Photos!</h2>
 
             {/* Recap */}
@@ -31,7 +31,7 @@ const Payment = () => {
                 <p>📩 Instant delivery: Your download link will be sent via email immediately after payment.</p>
             </div>
 
-            <ul className="flex flex-col gap-y-global text-[1.2rem]">
+            <ul className="flex flex-col gap-y-global">
                 {/* Card payment option */}
                 <PaymentOption type={paymentType.CC}
                     selectedPayment={selectedPayment!}

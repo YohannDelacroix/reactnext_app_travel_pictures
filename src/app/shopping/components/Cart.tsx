@@ -16,7 +16,7 @@ const Cart = () => {
 
 
     return (
-        <form className="flex flex-col gap-y-2 text-[3vw]">
+        <form className="flex flex-col gap-y-2">
             <LinkButton
                 href={`/shopping/privateGallery/${galleryId}`}
                 type={buttonType.CLEAR}
