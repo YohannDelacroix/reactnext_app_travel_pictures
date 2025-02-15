@@ -12,7 +12,7 @@ interface linkButtonProps {
 const ShoppingGallery = ({children, parentSrc}: linkButtonProps) => {
     return (
         <div className="flex flex-col gap-y-2
-                            lg:flex-row lg:gap-x-2">
+                            lg:flex-row lg:gap-x-2 lg:items-start">
             <div className="flex flex-col gap-y-2 gap-x-2 items-start justify-between
                             md:flex-row md:flex-wrap">
                 {children}

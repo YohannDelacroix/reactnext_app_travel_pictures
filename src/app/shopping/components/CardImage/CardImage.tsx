@@ -72,7 +72,9 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
         )}>
             <div className="relative">
                 {
-                    removeConfirmation && <div className="w-[60%] p-3 flex flex-col justify-around gap-y-2 bg-[#A6C9E2] bg-opacity-60 absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-[2vw]">
+                    removeConfirmation && 
+                    <div className="w-[60%] p-3 flex flex-col justify-around gap-y-2 bg-[#A6C9E2] bg-opacity-60 absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-[1rem]
+                                    lg:text-[0.7rem]">
                         <p className='text-center text-white'>Are you sure you want to remove this photo from your cart ?</p>
                         <div className="flex justify-around">
                             <button type="button"
