@@ -47,11 +47,6 @@ const Payment = () => {
                         selectedPayment={selectedPayment!}
                         setSelectedPayment={setSelectedPayment} />
                 </ul>
-
-                <LinkButton href={`/shopping/cart`}
-                    type={buttonType.BACK}>
-                    <FaLongArrowAltLeft /> Back to cart
-                </LinkButton>
             </div>
         </PageContainer>
     )
