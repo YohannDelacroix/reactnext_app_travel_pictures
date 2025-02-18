@@ -19,5 +19,6 @@
 
 export enum parentSrcType{
     PRIVATE_GALLERY = "private_gallery",
-    CART = "cart"
+    CART = "cart",
+    PAYMENT = "payment"
 }
