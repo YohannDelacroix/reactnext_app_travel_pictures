@@ -20,6 +20,7 @@ import useCardImageForCart from './hooks/useCardImageForCart';
 import { Photo } from '../../types/galleryTypes';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import Modal from '../Modal';
 
 
 interface cardImageProps {
@@ -72,10 +73,12 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
         )}>
             <div className="relative">
                 {
-                    removeConfirmation && 
-                    <div className="w-[60%] p-3 flex flex-col justify-around gap-y-2 bg-[#A6C9E2] bg-opacity-60 absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-[1rem]
+                    false && 
+                    <div className="flex flex-col justify-around w-[60%] h-[25%] px-3 py-6 bg-[#A6C9E2] bg-opacity-80 fixed z-10 top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-[0.8rem] text-black
                                     lg:text-[0.7rem]">
-                        <p className='text-center text-white'>Are you sure you want to remove this photo from your cart ?</p>
+                        <div className="absolute top-[0.5rem] right-[0.5rem] hover:text-red-500 cursor-pointer"
+                            onClick={handleKeepPhoto}><ImCross /></div>
+                        <p className='text-center'>Are you sure you want to remove this photo from your cart ?</p>
                         <div className="flex justify-around">
                             <button type="button"
                                 className="block w-[33%] px-1 py-[0.5em] bg-[#B4E1B9]"
@@ -85,6 +88,21 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
                                 onClick={() => handleRemovePhoto(photo.id)}>Remove</button>
                         </div>
                     </div>
+                }
+
+                {
+                    removeConfirmation && 
+                    <Modal handleClose={handleKeepPhoto} isOpen={removeConfirmation}>
+                        <p className='text-center'>Are you sure you want to remove this photo from your cart ?</p>
+                        <div className="flex justify-around">
+                            <button type="button"
+                                className="block w-[33%] px-1 py-[0.5em] bg-[#B4E1B9]"
+                                onClick={handleKeepPhoto}>Keep</button>
+                            <button type="button"
+                                className="block w-[33%] px-1 py-[0.5em] bg-[#D1B3E0]"
+                                onClick={() => handleRemovePhoto(photo.id)}>Remove</button>
+                        </div>
+                    </Modal>
                 }
 
                 <Image
