@@ -31,7 +31,9 @@ export enum buttonType {
     NEXT = "next",
     BACK = "back",
     GET_THE_BEST_DEAL = "get_the_best_deal",
-    CLEAR = "clear"
+    CLEAR = "clear",
+    PAY_CB = "pay_cb",
+    PAY_PAYPAL = "pay_paypal"
 }
 
 // Props definition for the LinkButton component
@@ -53,18 +55,33 @@ const LinkButton = ({ children, href, type }: linkButtonProps) => {
         else if (type === buttonType.CLEAR) {
             dispatch(resetCart());
         }
+        else if (type === buttonType.PAY_CB){
+            //TODO
+        }
+        else if (type === buttonType.PAY_PAYPAL){
+            //TODO
+        }
     }
 
     const isVisible = !(type === buttonType.GET_THE_BEST_DEAL && selectedPhotosLength === photos.length);
 
     const commonClasses = classNames(
+        //Common styles
         "flex justify-center items-center gap-x-2 relative text-black text-center",
+        //Next buttons styles
         { "w-full p-5 bg-mygreen": type === buttonType.NEXT },
+        //Get the best deal buttons styles
         { "w-full font-bold p-4 bg-mygreen": type === buttonType.GET_THE_BEST_DEAL },
+        //Back buttons styles  (mobile-first / desktop large screens)
         { "self-start w-[40%] p-3 bg-myblue": type === buttonType.BACK },
-        { "lg:w-[100%] lg:max-w-[39vw]": type === buttonType.BACK }, //Desktop screens
+        { "lg:w-[100%] lg:max-w-[39vw]": type === buttonType.BACK }, 
+        //Clear buttons styles (mobile-first / desktop large screens)
         { "self-end w-[40%] p-3 bg-myred": type === buttonType.CLEAR },
-        { "lg:w-[25%]": type === buttonType.CLEAR }//Desktop screens
+        { "lg:w-[25%]": type === buttonType.CLEAR },
+        //Pay by CB button styles
+        { "w-full bg-mygreen py-3 font-bold text-[1.5rem]": type === buttonType.PAY_CB},
+        //Pay by Paypal button styles
+        { "w-full bg-[#ffc439] py-3 font-bold text-[1.5rem]": type === buttonType.PAY_PAYPAL}
     );
 
     return (

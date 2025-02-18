@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import FormInput from './FormInput'
 
 import { formInputType, paymentCcFormDataType } from './types/formInputTypes';
+import LinkButton, { buttonType } from '../LinkButton';
 
 const CreditCardForm = () => {
     // State to control the form inputs
@@ -32,12 +33,12 @@ const CreditCardForm = () => {
 
             {/* Form Validation (submit) */}
             <div className="flex flex-col gap-y-3 mt-4">
-                <button className="flex justify-center items-center gap-x-2 w-full bg-[#B4E1B9] py-3 text-black font-bold text-[1.5rem]">
-                    <span>CONFIRM & PAY</span>
-                </button>
+                <LinkButton href="/shopping/cart/payment/confirmation"
+                            type={buttonType.PAY_CB}>
+                        CONFIRM & PAY
+                </LinkButton>
                 <p className="text-center">🔒 Secure payment with SSL encryption.</p>
             </div>
-
         </form>
     )
 }
