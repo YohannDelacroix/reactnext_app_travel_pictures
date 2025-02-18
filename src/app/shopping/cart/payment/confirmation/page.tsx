@@ -1,8 +1,7 @@
+import PaymentConfirmation from "@/app/shopping/components/Payment/PaymentConfirmation";
 
-export default function PaymentConfirmation() {
+export default function PaymentConfirmationPage() {
     return (
-        <div>
-            
-        </div>
+        <PaymentConfirmation />
     );
 }

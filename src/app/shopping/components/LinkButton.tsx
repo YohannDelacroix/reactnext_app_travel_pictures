@@ -62,7 +62,7 @@ const LinkButton = ({ children, href, type }: linkButtonProps) => {
         { "w-full p-5 bg-mygreen": type === buttonType.NEXT },
         { "w-full font-bold p-4 bg-mygreen": type === buttonType.GET_THE_BEST_DEAL },
         { "self-start w-[40%] p-3 bg-myblue": type === buttonType.BACK },
-        { "lg:w-[100%]": type === buttonType.BACK }, //Desktop screens
+        { "lg:w-[100%] lg:max-w-[39vw]": type === buttonType.BACK }, //Desktop screens
         { "self-end w-[40%] p-3 bg-myred": type === buttonType.CLEAR },
         { "lg:w-[25%]": type === buttonType.CLEAR }//Desktop screens
     );
