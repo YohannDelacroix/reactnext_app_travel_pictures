@@ -30,7 +30,8 @@ export interface ShootingInfo {
  */
 export interface UserInfo {
     lastName: string;     
-    firstName: string;   
+    firstName: string; 
+    email: string;  
 }
 
 /**

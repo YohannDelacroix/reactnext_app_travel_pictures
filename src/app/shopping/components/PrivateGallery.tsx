@@ -10,9 +10,10 @@ import { useEffect } from "react";
 import { setSessionInfo } from "../store/gallerySlice";
 import { setCart } from "../store/cartSlice";
 import LinkButton, { buttonType } from './LinkButton';
-import { ShootingInfo } from '../types/galleryTypes';
+import { ShootingInfo, UserInfo } from '../types/galleryTypes';
 import { FaRegTrashAlt } from "react-icons/fa";
 import ShoppingGallery from './ShoppingGallery';
+import { setUserInfo } from '../store/userSlice';
 
 const PrivateGallery = ({ id }: { id: string }) => {
     //Ensure CardImage will work for PrivateGallery uses
@@ -56,7 +57,13 @@ const PrivateGallery = ({ id }: { id: string }) => {
                 //Only for debugging and test the ID param page, waiting for database implementation
                 const shootingInfo: ShootingInfo = { ...data.shootingInfo, id: id }
                 console.log("shootingInfo = ", shootingInfo);
+
+                const userInfo: UserInfo = {...data.userInfo};
+                console.log("userInfo = ", userInfo);
                 //Only -----TO REMOVE LATER--------------------
+
+                // Updates redux state with userInfo
+                dispatch(setUserInfo(userInfo));
 
                 // Updates redux state with main data : photos and shooting info
                 dispatch(setSessionInfo({ photos: data.photos, shootingInfo: shootingInfo }));

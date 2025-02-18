@@ -1,14 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserInfo } from "../types/galleryTypes";
+import { paymentStatusType } from "../types/paymentStatusType";
 
 interface UserState {
     userInfo: UserInfo;
-    paymentStatus: "pending" | "completed" | "failed";
+    paymentStatus: paymentStatusType;
 }
 
 const initialState: UserState = {
-    userInfo: { firstName: "", lastName: "" },
-    paymentStatus: "pending",
+    userInfo: { firstName: "", lastName: "", email:"" },
+    paymentStatus: paymentStatusType.FAILED, 
 };
 
 const userSlice = createSlice({
@@ -17,7 +18,7 @@ const userSlice = createSlice({
     reducers: {
         setUserInfo: (
             state,
-            action: PayloadAction<{ firstName: string; lastName: string }>
+            action: PayloadAction<UserInfo>
         ) => {
             state.userInfo = action.payload;
         },

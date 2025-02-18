@@ -89,7 +89,12 @@
         "id": "2354636",
         "modelName": "James Hetfield",
         "country": "Spain",
-        "city": "Barcelona"
+        "city": "Malaga"
     },
-    "unitPrice": 8.99
+    "unitPrice": 8.99,
+    "userInfo": {
+        "firstName": "James",
+        "lastName": "Hetfield",
+        "email": "james.hetfield@gmail.com"
+    }
 }
