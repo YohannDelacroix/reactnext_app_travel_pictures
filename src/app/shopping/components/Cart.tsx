@@ -18,16 +18,18 @@ const Cart = () => {
 
     return (
         <form className="flex flex-col gap-y-2">
+
+            <p className="text-center
+                            md:text-left">Review your selected photos and complete your order.</p>
+            <p className="text-center
+                            md:text-left">⏳ You can modify your selection before checkout.</p>
+
             <LinkButton
                 href={`/shopping/privateGallery/${galleryId}`}
                 type={buttonType.CLEAR}
             >
                 <span className="absolute left-3"><FaRegTrashAlt /></span> Clear Cart
             </LinkButton>
-            <p className="text-center
-                            md:text-left">Review your selected photos and complete your order.</p>
-            <p className="text-center
-                            md:text-left">⏳ You can modify your selection before checkout.</p>
 
             <Gallery parentSrc={parentSrc}>
                 {/* Image Card (render with a map)*/}

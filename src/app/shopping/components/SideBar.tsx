@@ -46,7 +46,7 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
     return (
         <div id="sidebar"
             className={classNames(
-                "flex flex-col items-center gap-y-4 p-8 overflow-visible bg-black bg-opacity-50 text-[#f0e4d7]",
+                "flex flex-col items-center gap-y-4 p-8 overflow-visible bg-black bg-opacity-50 text-[#f0e4d7] shadow-md rounded-lg",
                 "lg:sticky lg:top-1 lg:min-w-[25%] lg:p-4 lg:gap-y-4",
                 { "sticky bottom-0": parentSrc === parentSrcType.PRIVATE_GALLERY }
             )}>
