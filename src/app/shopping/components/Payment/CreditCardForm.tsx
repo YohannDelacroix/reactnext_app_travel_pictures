@@ -4,6 +4,8 @@ import FormInput from './FormInput'
 import { formInputType, paymentCcFormDataType } from './types/formInputTypes';
 import LinkButton, { buttonType } from '../LinkButton';
 
+import { PATH_PAYMENT_CONFIRMATION } from "@/constants/paths"
+
 const CreditCardForm = () => {
     // State to control the form inputs
     const [formData, setFormData] = useState<paymentCcFormDataType>({
@@ -33,7 +35,7 @@ const CreditCardForm = () => {
 
             {/* Form Validation (submit) */}
             <div className="flex flex-col gap-y-3 mt-4">
-                <LinkButton href="/shopping/cart/payment/confirmation"
+                <LinkButton href={PATH_PAYMENT_CONFIRMATION}
                             type={buttonType.PAY_CB}>
                         CONFIRM & PAY
                 </LinkButton>

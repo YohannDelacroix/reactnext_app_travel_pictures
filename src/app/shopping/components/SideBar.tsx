@@ -4,10 +4,10 @@ import { parentSrcType } from '../types/parentSrcType'
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import classNames from 'classnames';
-import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import LinkButton, { buttonType } from './LinkButton';
+import { PATH_CART, PATH_PRIVATE_GALLERY, PATH_PAYMENT } from "@/constants/paths"
 
 interface SideBarProps {
     parentSrc: parentSrcType;
@@ -73,7 +73,7 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
                 <div className="flex flex-col items-center gap-y-1 w-full mb-5
                                 lg:hidden">
                     <p className="text-center">Get the best deal and purchase the entire collection!</p>
-                    <LinkButton href="/shopping/cart/payment"
+                    <LinkButton href={PATH_PAYMENT}
                         type={buttonType.GET_THE_BEST_DEAL}>
                         GET ALL PHOTOS FOR ONLY {maxPrice.toFixed(2)}€
                     </LinkButton>
@@ -111,13 +111,13 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
                 parentSrc === parentSrcType.CART ? (
                     <div className="flex flex-col items-center gap-y-3 w-full text-center">
                         <p className="text-[0.7rem]">🔒 Secure payment with SSL encryption.</p>
-                        <LinkButton href="/shopping/cart/payment" type={buttonType.NEXT}>
+                        <LinkButton href={PATH_PAYMENT} type={buttonType.NEXT}>
                             PROCEED TO CHECKOUT
                         </LinkButton>
                         <p className="text-[0.7rem]">📩 Instant delivery! Your download link will be sent via email.</p>
                     </div>
                 ) : (
-                    <LinkButton href="/shopping/cart" type={buttonType.NEXT}>
+                    <LinkButton href={PATH_CART} type={buttonType.NEXT}>
                         <span>GO TO CART</span> <FaLongArrowAltRight />
                     </LinkButton>
                 )
@@ -125,7 +125,7 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
 
             {/* Back buttons */}
             {(parentSrc === parentSrcType.CART || parentSrc === parentSrcType.PAYMENT)&&
-                <LinkButton href={parentSrc === parentSrcType.CART ? `/shopping/privateGallery/${galleryId}` : "/shopping/cart"}
+                <LinkButton href={parentSrc === parentSrcType.CART ? `${PATH_PRIVATE_GALLERY}${galleryId}` : "/shopping/cart"}
                     type={buttonType.BACK}>
                     <FaLongArrowAltLeft /> {parentSrc === parentSrcType.CART ? "Back to gallery" : "Back to Cart" }
                 </LinkButton>
@@ -137,11 +137,11 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
                             lg:hidden">
                     <div className="flex flex-col items-center gap-y-3 relative w-full my-10 px-4 text-center">
                         <p>🔒 Secure payment with SSL encryption.</p>
-                        <LinkButton href="/shopping/cart/payment"
+                        <LinkButton href={PATH_PAYMENT}
                             type={buttonType.NEXT}>
                             PROCEED TO CHECKOUT
                         </LinkButton>
-                        <LinkButton href={`/shopping/privateGallery/${galleryId}`}
+                        <LinkButton href={`${PATH_PRIVATE_GALLERY}${galleryId}`}
                             type={buttonType.BACK}>
                             <FaLongArrowAltLeft /> Back to gallery
                         </LinkButton>
