@@ -71,7 +71,7 @@ const LinkButton = ({ children, href, type }: linkButtonProps) => {
         //Next buttons styles
         { "w-full p-5 bg-mygreen": type === buttonType.NEXT },
         //Get the best deal buttons styles
-        { "w-full font-bold p-4 bg-mygreen": type === buttonType.GET_THE_BEST_DEAL },
+        { "w-full font-bold p-4 bg-mygreen uppercase": type === buttonType.GET_THE_BEST_DEAL },
         //Back buttons styles  (mobile-first / desktop large screens)
         { "self-start w-[40%] p-3 bg-myblue": type === buttonType.BACK },
         { "lg:w-[100%] lg:max-w-[39vw]": type === buttonType.BACK }, 

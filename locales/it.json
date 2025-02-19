@@ -1,0 +1,10 @@
+{
+    "galleryHeader":{
+        "greeting":"Ciao {{modelName}}, le tue foto sono pronte!",
+        "bestDealText":"Ottieni la migliore offerta e acquista l'intera collezione!",
+        "bestDealButtonText":"Ottieni tutte le foto per soli {{maxPrice}}€"
+    },
+    "privateGallery":{
+        "title":"Welcome to your private gallery!"
+    }
+  }
