@@ -1,12 +1,8 @@
-"use client"
-import { parseParameter } from "next/dist/shared/lib/router/utils/route-regex";
 import PrivateGallery from "../../components/PrivateGallery";
-import { useSearchParams } from "next/navigation";
 
-export default function PrivateGalleryPage() {
-    const searchParams = useSearchParams();
-    const id = searchParams.get('id') ?? "";
 
+export default async function PrivateGalleryPage({ params }: { params: { id: string } }) {
+    const { id } = await params;
     return (
         <PrivateGallery id={id} />
     );
