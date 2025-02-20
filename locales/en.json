@@ -5,6 +5,10 @@
         "bestDealButtonText":"GET ALL PHOTOS FOR ONLY {{maxPrice}}€"
     },
     "privateGallery":{
-        "title":"Welcome to your private gallery!"
+        "title":"Welcome to your private gallery!",
+        "p1":"You can watch and enjoy the pictures of your last trip in <1>{{city}}</1>, <3>{{country}}</3>.",
+        "p2":"Now, review the gallery and select the pictures you want to buy and keep forever. The more you buy, the more the price decreases.",
+        "p3":"I really thank you {{modelName}} because you help me living and i hope you will find it incredible !",
+        "clear":"Clear Selection"
     }
 }

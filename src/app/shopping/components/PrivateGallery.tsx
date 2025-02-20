@@ -14,6 +14,7 @@ import { ShootingInfo, UserInfo } from '../types/galleryTypes';
 import { FaRegTrashAlt } from "react-icons/fa";
 import ShoppingGallery from './ShoppingGallery';
 import { setUserInfo } from '../store/userSlice';
+import { Trans, useTranslation } from 'react-i18next';
 
 const PrivateGallery = ({ id }: { id: string }) => {
     //Ensure CardImage will work for PrivateGallery uses
@@ -22,6 +23,8 @@ const PrivateGallery = ({ id }: { id: string }) => {
     const dispatch = useDispatch<AppDispatch>();
     const photos = useSelector((state: RootState) => state.gallery.photos);
     const { city, country, modelName } = useSelector((state: RootState) => state.gallery.shootingInfo);
+
+    const { t } = useTranslation();
 
 
     //Only for debugging
@@ -58,7 +61,7 @@ const PrivateGallery = ({ id }: { id: string }) => {
                 const shootingInfo: ShootingInfo = { ...data.shootingInfo, id: id }
                 console.log("shootingInfo = ", shootingInfo);
 
-                const userInfo: UserInfo = {...data.userInfo};
+                const userInfo: UserInfo = { ...data.userInfo };
                 console.log("userInfo = ", userInfo);
                 //Only -----TO REMOVE LATER--------------------
 
@@ -80,24 +83,35 @@ const PrivateGallery = ({ id }: { id: string }) => {
 
     return (
         <form className="flex flex-col gap-y-2">
-
-
-
-            <h2 className="text-[4vw] font-bold">Welcome to your private gallery! </h2>
+            <h2 className="text-[4vw] font-bold">
+                <Trans defaults="Welcome to your private gallery!" i18nKey="privateGallery.title" /> 
+            </h2>
             <p>
-                You can watch and enjoy the pictures of your last trip in <b>{city}</b>, <b>{country}</b>.
+                {/* You can watch and enjoy the pictures of your last trip in <b>{city}</b>, <b>{country}</b>. */}
+                <Trans  i18nKey="privateGallery.p1" 
+                        defaults="You can watch and enjoy the pictures of your last trip in <b>{{city}}</b>, <b>{{country}}</b>."
+                        values={{ city, country }} 
+                        components={{ 1: <b />, 3: <b /> }} />
             </p>
             <p>
-                Now, review the gallery and select the pictures you want to buy and keep forever. The more you buy, the more the price decreases.
+                <Trans  i18nKey="privateGallery.p2"
+                        defaults="Now, review the gallery and select the pictures you want to buy and keep forever. The more you buy, the more the price decreases."
+                        />
             </p>
             <p>
-                I really thank you {modelName} because you help me living and i hope you will find it incredible !
+                <Trans i18nKey="privateGallery.p3" 
+                        defaults="I really thank you {{modelName}} because you help me living and i hope you will find it incredible !"
+                        values={{ modelName }} 
+                         />
             </p>
 
             <LinkButton
                 type={buttonType.CLEAR}
             >
-                <span className=""><FaRegTrashAlt /></span> Clear Selection
+                <span className=""><FaRegTrashAlt /></span> 
+                <Trans i18nKey="privateGallery.clear" 
+                        defaults="Clear Selection"
+                         />
             </LinkButton>
 
             <ShoppingGallery parentSrc={parentSrc}>

@@ -5,6 +5,10 @@
         "bestDealButtonText":"Obtén todas las fotos por solo {{maxPrice}}€"
     },
     "privateGallery":{
-        "title":"Welcome to your private gallery!"
+        "title":"¡Bienvenido a tu galería privada!",
+        "p1":"¡Revive tu viaje a <1>{{city}}</1>, <3>{{country}}</3> con increíbles fotos!",
+        "p2":"Explora la galería y elige las fotos que quieres comprar y conservar para siempre. ¡Cuantas más fotos compres, más baja el precio!",
+        "p3":"¡Muchísimas gracias, {{modelName}}! Gracias a ti, puedo vivir de mi pasión, y espero que encuentres tus fotos increíbles.",
+        "clear":"Borrar selección"
     }
   }
