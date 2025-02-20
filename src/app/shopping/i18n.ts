@@ -20,7 +20,7 @@ i18n
     lng: 'en',          //Default language
     fallbackLng: 'en',  //Chosen lang in case of fail
     interpolation: { escapeValue: false },
-    debug: true         //Show logs in console
+    debug: false         //Show logs in console
   });
 
 export default i18n;
