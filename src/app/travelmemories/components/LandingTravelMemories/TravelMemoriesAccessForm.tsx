@@ -1,18 +1,38 @@
 "use client"
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { PATH_PRIVATE_GALLERY } from '@/constants/paths';
+import { useDispatch } from 'react-redux';
+import { persistor, resetAll } from '../../store/store';
 
+
+/**
+ * 
+ * @returns a JSX component to render the ID form to access the private gallery
+ */
 const TravelMemoriesAccessForm = () => {
     const [galleryId, setGalleryId] = useState("");
     const router = useRouter();
+    const dispatch = useDispatch();
 
+    //Redirect to the corresponding page 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (galleryId) {
             router.push(`${PATH_PRIVATE_GALLERY}${galleryId}`);
         }
     };
+
+
+    //Reinitialize the redux store when loading component
+    useEffect(() => {
+        const resetStore = async () => {
+            await persistor.purge(); //Delete the data in navigator storage
+            dispatch(resetAll()); // Reset all the redux store
+        };
+
+        resetStore();
+    }, [dispatch]);
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">

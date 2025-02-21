@@ -1,7 +1,7 @@
 "use client"
 import { Provider } from "react-redux";
 import store, { persistor } from "./store/store"
-import GalleryHeader from "./components/GalleryHeader";
+import GalleryHeader from "./components/GalleryHeader/GalleryHeader";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
 import { PersistGate } from "redux-persist/integration/react";
