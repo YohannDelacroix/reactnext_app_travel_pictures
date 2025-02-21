@@ -15,7 +15,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import { ImCross } from "react-icons/im";
 import { parentSrcType } from '../../types/parentSrcType';
-import useCardImageForPrivateGallery from "@/app/shopping/components/CardImage/hooks/useCardImageForPrivateGallery"
+import useCardImageForPrivateGallery from "@/app/travelmemories/components/CardImage/hooks/useCardImageForPrivateGallery"
 import useCardImageForCart from './hooks/useCardImageForCart';
 import { Photo } from '../../types/galleryTypes';
 import { useSelector } from 'react-redux';

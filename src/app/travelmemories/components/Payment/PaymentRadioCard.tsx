@@ -1,6 +1,6 @@
 import React from 'react'
 import { paymentType } from './types/paymentType'
-import { imageAttributes } from '@/app/shopping/types/imageAttributes';
+import { imageAttributes } from '@/app/travelmemories/types/imageAttributes';
 import PaymentIconList from './PaymentIconList';
 
 interface paymentRadioCardProps {

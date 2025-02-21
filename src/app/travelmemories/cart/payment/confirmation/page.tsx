@@ -1,4 +1,4 @@
-import PaymentConfirmation from "@/app/shopping/components/Payment/PaymentConfirmation";
+import PaymentConfirmation from "@/app/travelmemories/components/Payment/PaymentConfirmation";
 
 export default function PaymentConfirmationPage() {
     return (

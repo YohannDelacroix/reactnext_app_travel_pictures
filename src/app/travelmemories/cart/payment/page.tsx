@@ -1,4 +1,4 @@
-import Payment from "@/app/shopping/components/Payment/Payment";
+import Payment from "@/app/travelmemories/components/Payment/Payment";
 
 export default function PaymentPage() {
     return (

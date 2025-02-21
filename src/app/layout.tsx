@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className="p-global text-[1rem]">
+            <body className="min-h-screen bg-gradient-to-b from-[#f9f9f9] to-[#f0e4d7] p-global text-[1rem]">
                 {children}
             </body>
         </html>

@@ -30,7 +30,7 @@ export default function GalleryLayout({
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
             <I18nextProvider i18n={i18n}>
-            <div>
+            <div className="">
                 {/* Welcome and language selection*/}
                 <GalleryHeader /> 
                 {children}

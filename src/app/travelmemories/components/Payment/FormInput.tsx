@@ -4,7 +4,7 @@ import { formInputType, inputMetadata, paymentCcFormDataType } from './types/for
 import usePaymentForm from './hooks/usePaymentForm';
 import classNames from 'classnames';
 import Image from 'next/image';
-import { imageAttributes } from '@/app/shopping/types/imageAttributes';
+import { imageAttributes } from '@/app/travelmemories/types/imageAttributes';
 
 interface formInputProps {
     type: formInputType;

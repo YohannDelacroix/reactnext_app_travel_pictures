@@ -4,6 +4,7 @@ import { RootState } from '../store/store'
 import LinkButton, { buttonType } from './LinkButton'
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
+import { PATH_PAYMENT } from '@/constants/paths';
 
 interface flagIcon {
     id: string;         //A country code like fr, en, it
@@ -72,7 +73,7 @@ const GalleryHeader = () => {
                 {/* Get the best deal and purchase the entire collection! */}
                 <p className="hidden text-center">Get the best deal and purchase the entire collection!</p>
                 <div className="md:w-[40%]">
-                    <LinkButton href="/shopping/cart/payment"
+                    <LinkButton href={PATH_PAYMENT}
                         type={buttonType.GET_THE_BEST_DEAL}>
                         {t("galleryHeader.bestDealButtonText", { maxPrice: maxPrice.toFixed(2) })}
                         {/* GET ALL PHOTOS FOR ONLY {maxPrice.toFixed(2)}€ */}

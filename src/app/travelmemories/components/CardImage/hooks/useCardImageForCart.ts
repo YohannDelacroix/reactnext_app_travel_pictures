@@ -1,5 +1,5 @@
-import { removePhoto } from "@/app/shopping/store/cartSlice";
-import { AppDispatch } from "@/app/shopping/store/store";
+import { removePhoto } from "@/app/travelmemories/store/cartSlice";
+import { AppDispatch } from "@/app/travelmemories/store/store";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
