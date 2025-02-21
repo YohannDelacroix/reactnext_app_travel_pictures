@@ -125,7 +125,7 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
 
             {/* Back buttons */}
             {(parentSrc === parentSrcType.CART || parentSrc === parentSrcType.PAYMENT)&&
-                <LinkButton href={parentSrc === parentSrcType.CART ? `${PATH_PRIVATE_GALLERY}${galleryId}` : "/shopping/cart"}
+                <LinkButton href={parentSrc === parentSrcType.CART ? `${PATH_PRIVATE_GALLERY}${galleryId}` : `${PATH_CART}`}
                     type={buttonType.BACK}>
                     <FaLongArrowAltLeft /> {parentSrc === parentSrcType.CART ? "Back to gallery" : "Back to Cart" }
                 </LinkButton>
