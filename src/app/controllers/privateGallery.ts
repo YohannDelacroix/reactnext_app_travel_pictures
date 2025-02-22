@@ -1,6 +1,9 @@
 import { db } from '@/../libs/firebaseAdmin';
 import { privateGallery } from "../models/privateGallery";
+<<<<<<< HEAD
 import { ErrorTypes } from '@/types/errorTypes';
+=======
+>>>>>>> 13dc3c9 (privateGallery (POST) added :)
 
 
 /**
@@ -10,6 +13,7 @@ import { ErrorTypes } from '@/types/errorTypes';
  */
 export async function addPrivateGallery(privateGallery: privateGallery): Promise<{ id: string; message: string }> {
     try {
+<<<<<<< HEAD
         //Retrieves the unique ID
         const galleryId = privateGallery.shootingInfo.id;
 
@@ -67,5 +71,12 @@ export async function getGalleryById(id: string) {
         } else {
             throw new Error('An unknown error occurred');
         }
+=======
+        const newGalleryRef = await db.collection('privateGallery').add(privateGallery);
+        return { id: newGalleryRef.id, message: 'New private gallery added' };
+    } catch (error) {
+        console.error('Error adding gallery:', error);
+        throw new Error('Failed to add gallery');
+>>>>>>> 13dc3c9 (privateGallery (POST) added :)
     }
 }
