@@ -10,7 +10,7 @@
 app/
 │── layout.tsx                      # 🌍 Main layout (Header & Footer)
 │── page.tsx                        # Landing page
-│── shopping/                       # 📂 Shopping section
+│── travelmemories/                 # 📂 Shopping section
 │   ├── layout.tsx                  # ✅ Shared layout between Gallery & Cart, contains redux provider
 │   ├── privateGallery/             # 📂 Private Gallery section
     │   ├── [id]                    # Private gallery (Identified with id)
