@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^2.5.1",
     "classnames": "^2.5.1",
     "credit-card-type": "^10.0.2",
+    "firebase-admin": "^13.1.0",
     "i18next": "^24.2.2",
     "next": "15.1.6",
     "react": "^19.0.0",
