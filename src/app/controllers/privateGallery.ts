@@ -1,5 +1,6 @@
 import { db } from '@/../libs/firebaseAdmin';
 import { privateGallery } from "../models/privateGallery";
+import { ErrorTypes } from '@/types/errorTypes';
 
 
 /**
@@ -9,11 +10,23 @@ import { privateGallery } from "../models/privateGallery";
  */
 export async function addPrivateGallery(privateGallery: privateGallery): Promise<{ id: string; message: string }> {
     try {
-        const newGalleryRef = await db.collection('privateGallery').add(privateGallery);
-        return { id: newGalleryRef.id, message: 'New private gallery added' };
+        //Retrieves the unique ID
+        const galleryId = privateGallery.shootingInfo.id;
+
+        //Check there is no other document with the same ID
+        const docRef = db.collection('privateGallery').doc(galleryId);
+        const docSnapshot = await docRef.get();
+
+        if (docSnapshot.exists) {
+            throw new Error(ErrorTypes.GALLERY_ALREADY_EXISTS);
+        }
+
+        await docRef.set(privateGallery);
+        //const newGalleryRef = await db.collection('privateGallery').add(privateGallery);
+        return { id: galleryId, message: 'New private gallery added' };
     } catch (error) {
         console.error('Error adding gallery:', error);
-        throw new Error('Failed to add gallery');
+        throw error;
     }
 }
 
