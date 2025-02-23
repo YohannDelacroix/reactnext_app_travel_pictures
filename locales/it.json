@@ -16,5 +16,19 @@
         "description":"Hai incontrato uno dei nostri fotografi per strada? Accedi alle foto che ti ha scattato inserendo l'ID che hai ricevuto nella tua casella di posta!",
         "inputPlaceholder":"Inserisci l'identificativo della tua galleria",
         "buttonText":"Guardale!"
+    },
+    "sidebar":{
+        "total":"Totale:",
+        "totalBeforeDiscount":"Totale prima dello sconto:",
+        "securePayment":"🔒 Pagamento sicuro con crittografia SSL.",
+        "instantDelivery":"📩 Consegna istantanea! Il link per il download sarà inviato via email.",
+        "paymentTitle":"Ancora un attimo e le tue foto saranno tue!",
+        "numberPhotos":"Numero di foto acquistate:",
+        "orderSummary":"🎯 Riepilogo del tuo ordine 🎯",
+        "congratulations":"Complimenti! Hai risparmiato <1>{{savedPrice}}€</1> sul tuo ordine!",
+        "proceed":"Procedi al pagamento",
+        "goToCart":"Vai al carrello",
+        "BackToGalery":"Torna alla galleria",
+        "BackToCart":"Torna al carrello"
     }
   }

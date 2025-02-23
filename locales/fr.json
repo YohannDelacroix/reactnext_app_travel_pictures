@@ -16,6 +16,20 @@
         "description":"Vous avez rencontré l'un de nos photographes dans la rue ? Accédez aux photos qu'il a prises de vous en entrant l'ID que vous avez reçu dans votre boîte de réception !",
         "inputPlaceholder":"Entrez l'identifiant de votre galerie",
         "buttonText":"Regardez-les !"
+    },
+    "sidebar":{
+        "total":"Total :",
+        "totalBeforeDiscount":"Total avant remise :",
+        "securePayment":"🔒 Paiement sécurisé avec cryptage SSL.",
+        "instantDelivery":"📩 Livraison instantanée ! Le lien de téléchargement vous sera envoyé par email.",
+        "paymentTitle":"Plus qu'une étape avant d'obtenir vos photos !",
+        "numberPhotos":"Nombre de photos achetées :",
+        "orderSummary":"Récapitulatif de votre commande",
+        "congratulations":"Félicitations ! Vous avez économisé <1>{{savedPrice}}€</1> sur votre commande !",
+        "proceed":"Passer à la caisse",
+        "goToCart":"Aller au panier",
+        "BackToGalery":"Retour à la galerie",
+        "BackToCart":"Retour au panier"
     }
   }
   

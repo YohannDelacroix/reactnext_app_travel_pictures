@@ -16,5 +16,19 @@
         "description":"Haben Sie einen unserer Fotografen auf der Straße getroffen? Greifen Sie auf die Fotos zu, die er von Ihnen gemacht hat, indem Sie die ID eingeben, die Sie in Ihrem Posteingang erhalten haben!",
         "inputPlaceholder":"Geben Sie die ID Ihrer Galerie ein",
         "buttonText":"Schau sie dir an!"
+    },
+    "sidebar":{
+        "total":"Gesamtbetrag:",
+        "totalBeforeDiscount":"Gesamtbetrag vor Rabatt:",
+        "securePayment":"🔒 Sichere Zahlung mit SSL-Verschlüsselung.",
+        "instantDelivery":"📩 Sofortige Lieferung! Ihr Download-Link wird per E-Mail gesendet.",
+        "paymentTitle":"Nur noch ein Schritt bis zu Ihren Fotos!",
+        "numberPhotos":"Anzahl der gekauften Fotos:",
+        "orderSummary":"🎯 Ihre Bestellübersicht 🎯",
+        "congratulations":"Glückwunsch! Sie haben <1>{{savedPrice}}€</1> bei Ihrer Bestellung gespart!",
+        "proceed":"Zur Kasse gehen",
+        "goToCart":"Zum Warenkorb",
+        "BackToGalery":"Zurück zur Galerie",
+        "BackToCart":"Zurück zum Warenkorb"
     }
 }

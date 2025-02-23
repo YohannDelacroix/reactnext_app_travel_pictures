@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import LinkButton, { buttonType } from './LinkButton';
 import { PATH_CART, PATH_PRIVATE_GALLERY, PATH_PAYMENT } from "@/constants/paths"
+import { Trans, useTranslation } from 'react-i18next';
 
 interface SideBarProps {
     parentSrc: parentSrcType;
@@ -17,9 +18,12 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
     const [isShrunk, setIsShrunk] = useState(false); // Par défaut, elle est rétrécie
     const galleryId = useSelector((state: RootState) => state.gallery.shootingInfo.id);
 
-    const { totalPrice, maxPrice, savedPrice, totalPriceBeforeDiscount } = useSelector((state: RootState) => state.cart);
+    const { totalPrice, maxPrice, savedPrice, totalPriceBeforeDiscount, totalNumberPhotos } = useSelector((state: RootState) => state.cart);
     const purchasedPhotos: number = useSelector((state: RootState) => state.cart.selectedPhotos.length);
 
+    const { t } = useTranslation();
+
+    //Used to track when the fixed block appears on screen in mobile view
     useEffect(() => {
         const handleScroll = () => {
             const windowHeight = window.innerHeight;  //Visible height 
@@ -28,9 +32,6 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
             const sideBar = document.getElementById("sidebar");
 
             if (sideBar) {
-                //console.log("sideBar.scrollHeight", sideBar.scrollHeight)
-                //console.log("windowHeight", windowHeight)
-                //console.log("currentScrollY", currentScrollY, " VS pageHeight", pageHeight);
                 if (currentScrollY > pageHeight - windowHeight - sideBar.scrollHeight) {
                     setIsShrunk(false);
                 } else {
@@ -53,29 +54,42 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
 
             {/* PAYMENT SIDEBAR */}
             {
-                parentSrc === parentSrcType.PAYMENT && 
+                parentSrc === parentSrcType.PAYMENT &&
                 <div className="flex flex-col items-center w-full gap-y-2">
-                    <h2 className="text-center font-bold">One Step Away from Your Photos!</h2>
+                    <h2 className="text-center font-bold">
+                        <Trans i18nKey="sidebar.paymentTitle"
+                            defaults="One Step Away from Your Photos!" />
+                    </h2>
                     <div className="flex justify-between items-center w-full">
-                        <span>Number of photos purchased:</span>
+                        <span>
+                            <Trans i18nKey="sidebar.numberPhotos"
+                            defaults="Number of photos purchased:" />
+                        </span>
                         <span>{purchasedPhotos}</span>
                     </div>
                     <div className="flex justify-between items-center w-full">
-                        <span>Total:</span>
+                        <span>{t("sidebar.total")}</span>
                         <span className="text-mygreen text-[1.5rem] font-bold">{totalPrice}€</span>
                     </div>
-                    <p className="text-[0.7rem]">📩 Instant delivery: Your download link will be sent via email immediately after payment.</p>
+                    <p className="text-[0.7rem]">
+                        <Trans i18nKey="sidebar.instantDelivery"
+                            defaults="📩 Instant delivery! Your download link will be sent via email." />
+                    </p>
                 </div>
             }
 
             {/* GET THE BEST DEAL LinkButton */}
-            {parentSrc === parentSrcType.CART &&
+            {(parentSrc === parentSrcType.CART && purchasedPhotos !== totalNumberPhotos)&&
                 <div className="flex flex-col items-center gap-y-1 w-full mb-5
                                 lg:hidden">
-                    <p className="text-center">Get the best deal and purchase the entire collection!</p>
+                    <p className="text-center">
+                        <Trans i18nKey="galleryHeader.bestDealText"
+                                    defaults="Get the best deal and purchase the entire collection!" />
+                    </p>
                     <LinkButton href={PATH_PAYMENT}
                         type={buttonType.GET_THE_BEST_DEAL}>
-                        GET ALL PHOTOS FOR ONLY {maxPrice.toFixed(2)}€
+                        {t("galleryHeader.bestDealButtonText", { maxPrice: maxPrice.toFixed(2) })}
+                        {/* GET ALL PHOTOS FOR ONLY {maxPrice.toFixed(2)}€ */}
                     </LinkButton>
                 </div>
             }
@@ -88,46 +102,72 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
                         "lg: gap-y-4",
                         { "mb-5": parentSrc === parentSrcType.CART }
                     )}>
-                        <h2 className="text-center font-bold whitespace-nowrap
-                                        ">🎯 Your Order Summary 🎯</h2>
-        
-                        <p className='w-full'>Congratulations! You saved <span className="text-mygreen text-[1.5rem] font-bold">{savedPrice.toFixed(2)}€</span> on your order!</p>
+                        <h2 className="text-center font-bold whitespace-nowrap">
+
+                            <Trans i18nKey="sidebar.orderSummary"
+                                defaults="🎯 Your Order Summary 🎯" />
+                        </h2>
+
+                        <p className='w-full'>
+                            <Trans i18nKey="sidebar.congratulations"
+                                defaults="Congratulations! You saved <1>{{savedPrice}}€</1> on your order!"
+                                values={{ savedPrice: savedPrice.toFixed(2) }}
+                                components={{ 1: <span className="text-mygreen text-[1.5rem] font-bold" /> }} />
+                        </p>
                         <div className="flex justify-between items-end w-full
                                         lg:flex-col">
-                            <span className="lg:self-start">Total before discount:</span>
+                            <span className="lg:self-start">
+                                <Trans i18nKey="sidebar.totalBeforeDiscount"
+                                    defaults="Total before discount:" />
+                            </span>
                             <span className="leading-[1rem] line-through text-red-500">{totalPriceBeforeDiscount.toFixed(2)}€</span>
                         </div>
                         <div className="flex justify-between items-center w-full
                                         lg:flex-col lg:items-end">
-                            <span className="lg:self-start">Total:</span>
+                            <span className="lg:self-start">
+                                <Trans i18nKey="sidebar.total"
+                                    defaults="Total:" />
+                            </span>
                             <span className="text-mygreen text-[1.5rem] font-bold">{totalPrice.toFixed(2)}€</span>
                         </div>
                     </div>
                 )
             }
-            
+
             {/* Buttons - Proceed to Checkout (Cart mode) - Go to cart (Private Gallery mode) */}
             {(parentSrc === parentSrcType.CART || parentSrc === parentSrcType.PRIVATE_GALLERY) && (
                 parentSrc === parentSrcType.CART ? (
                     <div className="flex flex-col items-center gap-y-3 w-full text-center">
-                        <p className="text-[0.7rem]">🔒 Secure payment with SSL encryption.</p>
+                        <p className="text-[0.7rem]">
+                            <Trans i18nKey="sidebar.securePayment"
+                                defaults="🔒 Secure payment with SSL encryption." />
+                        </p>
                         <LinkButton href={PATH_PAYMENT} type={buttonType.NEXT}>
-                            PROCEED TO CHECKOUT
+                            <span className="uppercase">
+                                <Trans i18nKey="sidebar.proceed"
+                                    defaults="PROCEED TO CHECKOUT" />
+                            </span>
                         </LinkButton>
-                        <p className="text-[0.7rem]">📩 Instant delivery! Your download link will be sent via email.</p>
+                        <p className="text-[0.7rem]">
+                            <Trans i18nKey="sidebar.instantDelivery"
+                                defaults="📩 Instant delivery! Your download link will be sent via email." />
+                        </p>
                     </div>
                 ) : (
                     <LinkButton href={PATH_CART} type={buttonType.NEXT}>
-                        <span>GO TO CART</span> <FaLongArrowAltRight />
+                        <span className="uppercase">
+                            <Trans i18nKey="sidebar.goToCart"
+                                defaults="GO TO CART" />
+                        </span> <FaLongArrowAltRight />
                     </LinkButton>
                 )
             )}
 
             {/* Back buttons */}
-            {(parentSrc === parentSrcType.CART || parentSrc === parentSrcType.PAYMENT)&&
+            {(parentSrc === parentSrcType.CART || parentSrc === parentSrcType.PAYMENT) &&
                 <LinkButton href={parentSrc === parentSrcType.CART ? `${PATH_PRIVATE_GALLERY}${galleryId}` : `${PATH_CART}`}
                     type={buttonType.BACK}>
-                    <FaLongArrowAltLeft /> {parentSrc === parentSrcType.CART ? "Back to gallery" : "Back to Cart" }
+                    <FaLongArrowAltLeft /> {parentSrc === parentSrcType.CART ? t("sidebar.BackToGalery") : t("sidebar.BackToCart")}
                 </LinkButton>
             }
 
@@ -136,18 +176,24 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
                 <div className="fixed bottom-0 left-global2 right-global2 bg-black bg-opacity-50 text-[#f0e4d7]
                             lg:hidden">
                     <div className="flex flex-col items-center gap-y-3 relative w-full my-10 px-4 text-center">
-                        <p>🔒 Secure payment with SSL encryption.</p>
+                        <p>
+                            <Trans i18nKey="sidebar.securePayment"
+                                defaults="🔒 Secure payment with SSL encryption." />
+                        </p>
                         <LinkButton href={PATH_PAYMENT}
                             type={buttonType.NEXT}>
-                            PROCEED TO CHECKOUT
+                            <span className="uppercase">
+                                <Trans i18nKey="sidebar.proceed"
+                                    defaults="PROCEED TO CHECKOUT" />
+                            </span>
                         </LinkButton>
                         <LinkButton href={`${PATH_PRIVATE_GALLERY}${galleryId}`}
                             type={buttonType.BACK}>
-                            <FaLongArrowAltLeft /> Back to gallery
+                            <FaLongArrowAltLeft /> {t("sidebar.BackToGalery")}
                         </LinkButton>
 
                         <div className="flex justify-between items-center absolute right-global bottom-0 w-[40%]">
-                            <span>Total:</span>
+                            <span>{t("sidebar.total")}</span>
                             <span className="text-mygreen text-[4vw] font-bold">{totalPrice.toFixed(2)}€</span>
                         </div>
                     </div>

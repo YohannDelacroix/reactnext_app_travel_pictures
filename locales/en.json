@@ -16,5 +16,19 @@
         "description":"Did you just meet one of our photographers on the street? Gain access to the photos they took of you by entering the ID you received in your inbox!",
         "inputPlaceholder":"Enter the identifier of your gallery",
         "buttonText":"See it !"
+    },
+    "sidebar":{
+        "total":"Total:",
+        "totalBeforeDiscount":"Total before discount:",
+        "securePayment":"🔒 Secure payment with SSL encryption.",
+        "instantDelivery":"📩 Instant delivery! Your download link will be sent via email.",
+        "paymentTitle":"One Step Away from Your Photos!",
+        "numberPhotos":"Number of photos purchased:",
+        "orderSummary":"🎯 Your Order Summary 🎯",
+        "congratulations":"Congratulations! You saved <1>{{savedPrice}}€</1> on your order!",
+        "proceed":"Proceed to checkout",
+        "goToCart":"Go To Cart",
+        "BackToGalery":"Back to gallery",
+        "BackToCart":""
     }
 }
