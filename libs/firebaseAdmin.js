@@ -12,4 +12,15 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
+
+// Verify the authentification token provided
+export const verifyToken = async (token) => {
+    try {
+        const decodedToken = await admin.auth().verifyIdToken(token);
+        return decodedToken; //Decoded and validated
+    } catch (error) {
+        throw new Error('Unauthorized');
+    }
+}
+
 export { db };
