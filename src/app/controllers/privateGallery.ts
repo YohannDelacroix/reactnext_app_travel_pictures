@@ -124,3 +124,15 @@ export async function getGalleryById(id: string) {
         }
     }
 }
+
+
+export async function getPrivateGallery(): Promise<privateGallery[]> {
+    try {
+        const snapshot = await db.collection('privateGallery').get();
+        const galleries: privateGallery[] = snapshot.docs.map(doc => doc.data() as privateGallery);
+        return galleries;
+    } catch (error) {
+        console.error('Error fetching galleries:', error);
+        throw new Error('Failed to retrieve galleries');
+    }
+}
