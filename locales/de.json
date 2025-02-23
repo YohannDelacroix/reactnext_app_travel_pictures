@@ -10,5 +10,11 @@
         "p2":"Stöbern Sie in der Galerie und wählen Sie die Fotos aus, die Sie kaufen und für immer behalten möchten. Je mehr Sie kaufen, desto günstiger wird es!",
         "p3":"Vielen Dank, {{modelName}}! Dank Ihnen kann ich von meiner Leidenschaft leben, und ich hoffe, Sie werden Ihre Fotos großartig finden!",
         "clear":"Auswahl löschen"
+    },
+    "landingPage":{
+        "title":"Schau sie dir an!",
+        "description":"Haben Sie einen unserer Fotografen auf der Straße getroffen? Greifen Sie auf die Fotos zu, die er von Ihnen gemacht hat, indem Sie die ID eingeben, die Sie in Ihrem Posteingang erhalten haben!",
+        "inputPlaceholder":"Geben Sie die ID Ihrer Galerie ein",
+        "buttonText":"Schau sie dir an!"
     }
 }

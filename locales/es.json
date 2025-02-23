@@ -10,5 +10,11 @@
         "p2":"Explora la galería y elige las fotos que quieres comprar y conservar para siempre. ¡Cuantas más fotos compres, más baja el precio!",
         "p3":"¡Muchísimas gracias, {{modelName}}! Gracias a ti, puedo vivir de mi pasión, y espero que encuentres tus fotos increíbles.",
         "clear":"Borrar selección"
+    },
+    "landingPage":{
+        "title":"¡Consigue tus recuerdos de viaje!",
+        "description":"¿Acabas de encontrarte con uno de nuestros fotógrafos en la calle? ¡Accede a las fotos que te tomó introduciendo el ID que recibiste en tu bandeja de entrada!",
+        "inputPlaceholder":"Introduce el identificador de tu galería",
+        "buttonText":"¡Míralas!"
     }
   }

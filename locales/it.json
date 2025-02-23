@@ -10,5 +10,11 @@
         "p2":"Sfoglia la galleria e scegli le foto che vuoi acquistare e conservare per sempre. Più ne compri, più il prezzo scende!",
         "p3":"Grazie di cuore, {{modelName}}! Grazie a te posso vivere della mia passione, e spero che troverai le tue foto straordinarie!",
         "clear":"Cancella selezione"
+    },
+    "landingPage":{
+        "title":"Ottieni i tuoi ricordi di viaggio!",
+        "description":"Hai incontrato uno dei nostri fotografi per strada? Accedi alle foto che ti ha scattato inserendo l'ID che hai ricevuto nella tua casella di posta!",
+        "inputPlaceholder":"Inserisci l'identificativo della tua galleria",
+        "buttonText":"Guardale!"
     }
   }

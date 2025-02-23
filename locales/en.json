@@ -10,5 +10,11 @@
         "p2":"Now, review the gallery and select the pictures you want to buy and keep forever. The more you buy, the more the price decreases.",
         "p3":"I really thank you {{modelName}} because you help me living and i hope you will find it incredible !",
         "clear":"Clear Selection"
+    },
+    "landingPage":{
+        "title":"Get your travel memories!",
+        "description":"Did you just meet one of our photographers on the street? Gain access to the photos they took of you by entering the ID you received in your inbox!",
+        "inputPlaceholder":"Enter the identifier of your gallery",
+        "buttonText":"See it !"
     }
 }
