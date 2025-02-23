@@ -125,7 +125,10 @@ export async function getGalleryById(id: string) {
     }
 }
 
-
+/**
+ * 
+ * @returns all the private Galleries
+ */
 export async function getPrivateGallery(): Promise<privateGallery[]> {
     try {
         const snapshot = await db.collection('privateGallery').get();
@@ -134,5 +137,30 @@ export async function getPrivateGallery(): Promise<privateGallery[]> {
     } catch (error) {
         console.error('Error fetching galleries:', error);
         throw new Error('Failed to retrieve galleries');
+    }
+}
+
+/**
+ * 
+ * @param id a string representing private Gallery's ID
+ * @returns the privateGallery retrieved from the database
+ */
+export async function getGalleryById(id: string) {
+    try {
+        const docRef = db.collection('privateGallery').doc(id);
+        const docSnapshot = await docRef.get();
+
+        if (!docSnapshot.exists) {
+            throw new Error('Document not found');
+        }
+
+        return docSnapshot.data();
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            // Give access to error.message
+            throw new Error('Error fetching gallery by ID: ' + error.message);
+        } else {
+            throw new Error('An unknown error occurred');
+        }
     }
 }
