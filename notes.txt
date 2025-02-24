@@ -108,10 +108,10 @@ git reset --soft HEAD~1
 
 
     A faire -
-        Implémenter Traduction CardImage (+Remove confirmation)
         Implémenter Traduction Payment 
         Implémenter Traduction Confirmation Page 
         Sur Edge une outline degueulasse apparait en dessous de la checkbox image card
+        Voir le payment en mode Paypal et changer les langues, les blocs bougent alors qu'ils ne devraient pas
         
         
 
@@ -121,9 +121,10 @@ git reset --soft HEAD~1
 
 ### - MESSAGES DE COMMIT : 
 
-    git commit -m "privateGallery api: 
-        - Added errorTypes enum
-        - POST route is now using a given ID with Firebase
+    git commit -m "Payment components: 
+        - Added Translations for payment components
+        - Added comments for payment components
+        - Removed debug and console.logs
     "
 
 

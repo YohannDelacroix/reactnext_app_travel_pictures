@@ -24,7 +24,7 @@
         "instantDelivery": "📩 Consegna istantanea! Il link per il download sarà inviato via email.",
         "paymentTitle": "Ancora un attimo e le tue foto saranno tue!",
         "numberPhotos": "Numero di foto acquistate:",
-        "orderSummary": "🎯 Riepilogo del tuo ordine 🎯",
+        "orderSummary": "Riepilogo del tuo ordine",
         "congratulations": "Complimenti! Hai risparmiato <1>{{savedPrice}}€</1> sul tuo ordine!",
         "proceed": "Procedi al pagamento",
         "goToCart": "Vai al carrello",
@@ -42,5 +42,15 @@
         "removeButtonRemove":"Rimuovi",
         "resolution":"Risoluzione:",
         "description":"Descrizione:"
+    },
+    "payment":{
+        "nameLabel":"Nome del titolare della carta:",
+        "ccLabel":"Numero della carta:",
+        "expirationLabel":"Data di scadenza:",
+        "cvcLabel":"CVC",
+        "confirmCardButton":"Conferma e paga",
+        "paypalDescription":"Scegliendo questo metodo di pagamento, verrai reindirizzato al server sicuro di PayPal e accederai al tuo account PayPal. Il tuo ordine sarà registrato una volta confermato il pagamento tramite il tuo online banking o la tua app mobile.",
+        "ccOption":"Paga con carta",
+        "paypalOption":"Paga con PayPal"
     }
 }

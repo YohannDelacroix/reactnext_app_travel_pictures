@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from 'react'
+import React from 'react'
 import LinkButton, { buttonType } from '../LinkButton'
 import { FaLongArrowAltLeft } from 'react-icons/fa'
 import { useSelector } from 'react-redux';
@@ -7,6 +7,11 @@ import { RootState } from '../../store/store';
 import { paymentStatusType } from '../../types/paymentStatusType';
 import classNames from 'classnames';
 
+
+/**
+ * Use the paymentStatusType to determine and render the payment status
+ * @returns a payment confirmation page (success or failure)
+ */
 const PaymentConfirmation = () => {
     const galleryId = useSelector((state: RootState) => state.gallery.shootingInfo.id);
     const { selectedPhotos, totalPrice } = useSelector((state: RootState) => state.cart);

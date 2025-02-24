@@ -102,7 +102,7 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
                         "lg: gap-y-4",
                         { "mb-5": parentSrc === parentSrcType.CART }
                     )}>
-                        <h2 className="text-center font-bold whitespace-nowrap">
+                        <h2 className="text-center font-bold">
 
                             <Trans i18nKey="sidebar.orderSummary"
                                 defaults="🎯 Your Order Summary 🎯" />

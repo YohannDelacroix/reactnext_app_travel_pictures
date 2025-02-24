@@ -2,6 +2,7 @@ import React from 'react'
 import { paymentType } from './types/paymentType'
 import { imageAttributes } from '@/app/travelmemories/types/imageAttributes';
 import PaymentIconList from './PaymentIconList';
+import { useTranslation } from 'react-i18next';
 
 interface paymentRadioCardProps {
     type: paymentType;
@@ -19,7 +20,7 @@ interface paymentRadioCardProps {
  */
 const PaymentRadioCard = ({ type, selectedPayment, setSelectedPayment }: paymentRadioCardProps) => {
 
-
+    //Credit card icons for the Credit card payment
     const ccSrcIcons: imageAttributes[] = [
         { src: "/icons/payment_icons/svg/visa.svg", alt: "Visa" },
         { src: "/icons/payment_icons/svg/diners-club.svg", alt: "Diners" },
@@ -27,6 +28,7 @@ const PaymentRadioCard = ({ type, selectedPayment, setSelectedPayment }: payment
         { src: "/icons/payment_icons/svg/american-express.svg", alt: "American Express" },
     ]
 
+    //Paypal src icon 
     const paypalSrcIcon: imageAttributes[] = [
         { src: "/icons/payment_icons/svg/paypal.svg", alt: "Paypal" },
     ]
@@ -34,6 +36,8 @@ const PaymentRadioCard = ({ type, selectedPayment, setSelectedPayment }: payment
     const handleRadioButton = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedPayment(event.target.value as paymentType);
     }
+
+    const {t} = useTranslation();
 
     return (
         <div className="flex flex-row justify-between w-full items-center gap-x-2 h-8 max-[216px]:h-auto cursor-pointer">
@@ -46,7 +50,7 @@ const PaymentRadioCard = ({ type, selectedPayment, setSelectedPayment }: payment
                 <label className="flex justify-between items-center w-full font-bold cursor-pointer"
                     htmlFor={`payment-type-method/${type}`}>
                         <div className="grid items-center">
-                            {type === paymentType.CC ? "Pay by card" : "Pay by Paypal"}
+                            {type === paymentType.CC ? t("payment.ccOption"): t("payment.paypalOption")}
                         </div>
                     {/* On the right : Payment Icons */}
                     <ul className="flex flex-row justify-end flex-wrap">

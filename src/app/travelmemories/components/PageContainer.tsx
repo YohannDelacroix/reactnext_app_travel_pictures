@@ -18,8 +18,9 @@ const PageContainer = ({ children, parentSrc }: pageContainerProps) => {
             {"flex-col-reverse": parentSrc === parentSrcType.PAYMENT}
         )}
         >
-            {children}
-            <SideBar parentSrc={parentSrc} />
+            <div className="lg:w-[75%]">{children}</div>
+            <div className="lg:w-[25%]"><SideBar parentSrc={parentSrc} /></div>
+            
         </div >
     )
 }

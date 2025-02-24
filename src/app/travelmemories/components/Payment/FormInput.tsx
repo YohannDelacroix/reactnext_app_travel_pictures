@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
-
+import React, { useEffect } from 'react'
 import { formInputType, inputMetadata, paymentCcFormDataType } from './types/formInputTypes';
 import usePaymentForm from './hooks/usePaymentForm';
 import classNames from 'classnames';
 import Image from 'next/image';
 import { imageAttributes } from '@/app/travelmemories/types/imageAttributes';
+import { useTranslation } from 'react-i18next';
 
 interface formInputProps {
     type: formInputType;
@@ -22,7 +22,7 @@ interface formInputProps {
  * @returns An input field with a label
  */
 const FormInput = ({ type, formData, setFormData }: formInputProps) => {
-    const { label, placeholder, pattern, inputMode, maxLength } = inputMetadata[type];
+    const { placeholder, pattern, inputMode, maxLength } = inputMetadata[type];
     const { errors, cardType, handleCCNChange, detectCardType, handleExpDateChange, handleCVCChange } = usePaymentForm();
 
     const ccSrcIcons: imageAttributes[] = [
@@ -31,6 +31,8 @@ const FormInput = ({ type, formData, setFormData }: formInputProps) => {
         { src: "/icons/payment_icons/svg/mastercard.svg", alt: "Mastercard" },
         { src: "/icons/payment_icons/svg/american-express.svg", alt: "American Express" },
     ]
+
+    const {t} = useTranslation();
 
     /**
     * handle change on this FormInput field
@@ -52,20 +54,29 @@ const FormInput = ({ type, formData, setFormData }: formInputProps) => {
         else setFormData({ ...formData, [name]: value });
     }
 
+    const getLabel = (type: formInputType) => {
+        switch (type) {
+            case formInputType.CC_HOLDER:
+                return t("payment.nameLabel");
+            case formInputType.CC_NUMBER:
+                return t("payment.ccLabel");
+            case formInputType.CC_EXP:
+                return t("payment.expirationLabel");
+            case formInputType.CC_CVC:
+                return t("payment.cvcLabel");
+        }
+    };
 
+    //Each time the credit card number changes, detect the card type and store it with detectCardType()
     useEffect(() => {
         detectCardType(formData[formInputType.CC_NUMBER])
     }, [formData[formInputType.CC_NUMBER]])
-
-    useEffect(() => {
-        console.log("Card type : ", cardType)
-    }, [cardType])
 
     return (
         <div className="flex flex-col gap-y-2 tracking-wider">
             <label className="font-[500]"
                 htmlFor={`${type}`}>
-                {label}
+                {getLabel(type)}
             </label>
             {/* Field container */}
 

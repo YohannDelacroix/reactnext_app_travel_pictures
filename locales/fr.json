@@ -42,6 +42,16 @@
         "removeButtonRemove":"Supprimer",
         "resolution":"Résolution :",
         "description":"Description :"
+    },
+    "payment":{
+        "nameLabel":"Nom du titulaire de la carte :",
+        "ccLabel":"Numéro de carte :",
+        "expirationLabel":"Date d’expiration :",
+        "cvcLabel":"CVC",
+        "confirmCardButton":"Confirmer et payer",
+        "paypalDescription":"En choisissant ce mode de paiement, vous serez redirigé vers le serveur sécurisé de PayPal et accéderez à votre compte PayPal. Votre commande sera enregistrée une fois votre paiement validé via votre banque en ligne ou votre application mobile.",
+        "ccOption":"Payer par carte",
+        "paypalOption":"Payer avec PayPal"
     }
   }
   

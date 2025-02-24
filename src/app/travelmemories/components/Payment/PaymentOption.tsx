@@ -11,6 +11,13 @@ interface paymentOptionProps {
     setSelectedPayment: (value: paymentType) => void;
 }
 
+/**
+ * 
+ * @param type The payment type PAYPAL or CC
+ * @param selectedPayment The selected Payment is the payment user have chosen now
+ * @param setSelectedPayment If the radio button is checked, we use this method to set this payment option
+ * @returns 
+ */
 const PaymentOption = ({ type, selectedPayment, setSelectedPayment }: paymentOptionProps) => {
     return (
         <li className={classNames(
@@ -22,6 +29,7 @@ const PaymentOption = ({ type, selectedPayment, setSelectedPayment }: paymentOpt
             {
                 type === selectedPayment && <div>
                     <hr className="border-black0.1 mt-3"></hr>
+                    {/* Render a CreditCardForm or Paypal component given the Type in props */}
                     <div className="mt-7">
                         {type === paymentType.CC ? <CreditCardForm /> : <PaypalForm />}
                     </div>

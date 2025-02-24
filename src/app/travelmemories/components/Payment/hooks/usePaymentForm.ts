@@ -247,11 +247,6 @@ const usePaymentForm = () => {
         return formattedCVC;
     }, [formatCVC, validateCVC, setErrors]);
 
-
-    useEffect(() => {
-        console.log("errors = ", errors)
-    }, [errors])
-
     return {
         errors,
         cardType, detectCardType,

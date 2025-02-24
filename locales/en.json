@@ -24,7 +24,7 @@
         "instantDelivery":"📩 Instant delivery! Your download link will be sent via email.",
         "paymentTitle":"One Step Away from Your Photos!",
         "numberPhotos":"Number of photos purchased:",
-        "orderSummary":"🎯 Your Order Summary 🎯",
+        "orderSummary":"Your Order Summary",
         "congratulations":"Congratulations! You saved <1>{{savedPrice}}€</1> on your order!",
         "proceed":"Proceed to checkout",
         "goToCart":"Go To Cart",
@@ -42,5 +42,15 @@
         "removeButtonRemove":"Remove",
         "resolution":"Resolution:",
         "description":"Description:"
+    },
+    "payment":{
+        "nameLabel":"Cardholder Name:",
+        "ccLabel":"Card Number:",
+        "expirationLabel":"Expiration Date:",
+        "cvcLabel":"CVC",
+        "confirmCardButton":"Confirm and pay",
+        "paypalDescription":"By choosing this payment method, you will be redirected to PayPal’s secure server and log into your PayPal account. Your order will be recorded once you have validated your payment via online banking or your mobile app.",
+        "ccOption":"Pay by card",
+        "paypalOption":"Pay by Paypal"
     }
 }
