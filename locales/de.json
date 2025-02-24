@@ -30,5 +30,10 @@
         "goToCart":"Zum Warenkorb",
         "BackToGalery":"Zurück zur Galerie",
         "BackToCart":"Zurück zum Warenkorb"
+    },
+    "cart":{
+        "p1":"Wählen Sie Ihre Fotos aus und schließen Sie Ihre Bestellung ab.",
+        "p2":"⏳ Sie können Ihre Auswahl vor dem Bezahlen noch ändern.",
+        "clear":"Warenkorb leeren"
     }
 }

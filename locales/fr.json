@@ -30,6 +30,11 @@
         "goToCart":"Aller au panier",
         "BackToGalery":"Retour à la galerie",
         "BackToCart":"Retour au panier"
+    },
+    "cart":{
+        "p1":"Faites votre choix final et validez votre commande.",
+        "p2":"⏳ Vous pouvez encore modifier votre sélection avant de finaliser votre achat.",
+        "clear":"Vider le panier"
     }
   }
   

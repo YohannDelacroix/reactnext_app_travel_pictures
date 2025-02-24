@@ -8,6 +8,7 @@ import { RootState } from "../store/store";
 import LinkButton, { buttonType } from './LinkButton';
 import { FaRegTrashAlt } from "react-icons/fa";
 import Gallery from './ShoppingGallery';
+import { Trans, useTranslation } from 'react-i18next';
 
 const Cart = () => {
     const parentSrc = parentSrcType.CART; //Ensure CardImage will work for PrivateGallery uses
@@ -15,20 +16,33 @@ const Cart = () => {
 
     const galleryId = useSelector((state: RootState) => state.gallery.shootingInfo.id);
 
+    const { t } = useTranslation();
 
     return (
         <form className="flex flex-col gap-y-2">
 
             <p className="text-center
-                            md:text-left">Review your selected photos and complete your order.</p>
+                            md:text-left">
+                <Trans i18nKey="cart.p1"
+                    defaults="Review your selected photos and complete your order."
+                />
+            </p>
             <p className="text-center
-                            md:text-left">⏳ You can modify your selection before checkout.</p>
+                            md:text-left">
+                <Trans i18nKey="cart.p2"
+                    defaults="⏳ You can modify your selection before checkout."
+                />
+            </p>
 
             <LinkButton
                 href={`/shopping/privateGallery/${galleryId}`}
                 type={buttonType.CLEAR}
             >
-                <span className="absolute left-3"><FaRegTrashAlt /></span> Clear Cart
+                <span className="absolute left-3"><FaRegTrashAlt /></span> 
+                <Trans i18nKey="cart.clear"
+                    defaults="Clear Cart"
+                />
+                
             </LinkButton>
 
             <Gallery parentSrc={parentSrc}>

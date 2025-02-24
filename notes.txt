@@ -1,0 +1,134 @@
+git reset --soft HEAD~1
+
+### - A IMPLEMENTER : 
+    LAYOUT :
+        Impossible de définir les métadonnées a cause du store redux , voir comment solutionner le probleme
+
+    HEADER :
+        Ajouter les icônes des drapeaux dans le selection
+        Ajouter le comportement de changement de langue
+
+    CART :
+        Si le panier est vide, rediriger automatiquement vers la privateGallery
+
+    CALCUL DES PRIX :
+        Dans cartSlice.tsx, la fonction calculateCurrentTotalPrice() fait parcourir des boucle à chaque changement de prix, réfléchir à une optimisation des performances
+        
+        Au niveau de l'experience utilisateur, l'utilisateur ne sait pas combien il va economiser
+        en décochant une photo et cela peut être frustrant
+            SOLUTION ENVISAGEE : Diviser le prix total par le nombre de photo achetées et l'afficher uniformément
+
+    CARD IMAGE : 
+        Une capture d'écran sur le composant doit être enregistrée et sauvegardée en base de données
+        Les images ne doivent pas être téléchargeables
+
+    COMPONENT CardImage
+        Ajouter des transitions descendante lors du clic sur le bouton de toggle
+        Ajouter des comportements pour les cases cochées
+            Une transition peut s'effectuer lors de la sélection de la checkbox
+        
+        Probleme de conception : Lors de la suppression d'une photo du panier, 
+            la boite de confirmation peut être hors de l'écran, 
+            il faudrait afficher la pop-up au centre du viewport.
+
+        Au survol de l'icone de déroulement descriptif faire grossir l'icone
+        
+        Logique de calcul des prix
+
+        Empêcher le téléchargement des images (voir google drive)
+
+        S'il n'y a rien à afficher dans l'encart descriptif, ne pas afficher le bouton
+
+        S'interroger : Quand une card image est sélectionnée son fond vert est controlé par isChecked state au lieu de s'appuyer sur le state selectedPhotos
+
+        Permettre à l'utilisateur de voir à quel prix ont été achetées les précédentes photos
+
+        Au REMOVE, pendant la confirmation, faire clignoter en rouge la photo sur le point d'être suppriméee
+
+        La checkbox est trop petite et difficilement cliquable
+            L'agrandir dans un premier temps
+            Dans un deuxieme temps rendre la zone cliquable avec le label (span qui deviendra label)
+
+    LINK BUTTON 
+        Ajouter des effets au survol du bouton
+        Ajouter des effets au clic sur le bouton (pour savoir qu'on a bien cliqué)
+    
+    SIDEBAR 
+        Lorsqu'on est en scroll au dessus des photos le bg-opacity doit être à 50 alors qu'il doit être à 100 fixé en bas
+        C'est inutile d'afficher les discounts si ils sont de 0€ (le saved et le before)
+        Isoler les design de "PRIX" en vert dans un composant span 
+
+    PAYMENT : 
+        PaymentRadioCard : 
+            Trouver comment modifier le design du radio-button pour qu'il s'affiche en noir sur firefox
+        
+        FormInput :
+            Actuellement le formInput ne prend en charge que 4 icones de carte bancaire et pourrait éventuellement en prendre davantage pour améliorer l'expérience UX
+            ATTENTION ! L'affichage des icones est dépendant de ce que retourne credit-card-type !!! 
+            Lorsqu'on type un premier chiffre dans le card input on voit l'icone visa qui apparait en clignotant
+
+        usePaymentForm :
+            Implémenter le controle/validation du holder name
+            Faire en sorte que le mois ne s'affiche pas tout de suite en rouge quand il n'est pas fini d'être tapé
+        
+        FEATS : 
+            Ajouter un bouton Back to cart et Back to Selection
+            Ajouter des lignes en dessous les blocs pour mettre en valeur l'alignement (sensation de non alignement)
+            Si le montant à payer est de 0€ il faut redirect vers la shopping Gallery, en règle generale la page de paiement ne doit pas être accessible du tout
+
+        Tests : 
+            Validation des formats de cartes
+                Tester que les carte amex commençant par 34 prennent bien le format XXXX XXXXXX XXXX
+                Tester que les carte diners commençant par 36 prennent bien le format XXXX XXXXXX XXXX ou XXXX XXXXXXX XXXXX
+                Tester que toutes les autres cartes prennent le format 4444 4444 4444 4444
+                Tester qu'il est impossible d'entrer un caractère autre que numérique dans le champ de carte 
+            Validation des formats de dates
+                Un mois supérieur a 12 doit produire une erreur
+                Un mois inférieur à 1 doit produire une erreur
+                Une année inférieure à l'année en cours doit produire une erreur
+
+    PrivateGallery 
+        Sticky Div Finalisation
+            Ajouter un comportement de transition lorsque l'élement se déplace vers le haut
+            Les blocs passent en display: none à un certain niveau de scroll
+    
+    SECURITE & BASE DE DONNEES
+        Si l'ID est modifié manuellement dans l'URL, que cet ID existe 
+        et que le store a déjà été initialisé, il se pourrait qu'il y ait un problème...
+        (A tester quand la database sera implémenter)
+    
+    DATAS : 
+
+    COOKIES / DATA 
+        persistor.purge(); doit être utilisé pour nettoyer le store côté navigateur si une autre privateGallery est chargée
+
+    Transformer les icones en react icons
+
+
+
+
+    A faire -
+        Implémenter Traduction CardImage (+Remove confirmation)
+        Implémenter Traduction Cart
+        Implémenter Traduction Payment 
+        Implémenter Traduction Confirmation Page 
+        Sur Edge une outline degueulasse apparait en dessous de la checkbox image card
+        
+        
+
+
+### - AUTRES
+
+
+### - MESSAGES DE COMMIT : 
+
+    git commit -m "privateGallery api: 
+        - Added errorTypes enum
+        - POST route is now using a given ID with Firebase
+    "
+
+
+
+FIREBASE : 
+    Demain , faire la route GET
+    Voir comment storer les photos dans l'hebergeur

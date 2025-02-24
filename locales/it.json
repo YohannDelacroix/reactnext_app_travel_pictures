@@ -1,34 +1,39 @@
 {
-    "galleryHeader":{
-        "greeting":"Ciao {{modelName}}, le tue foto sono pronte!",
-        "bestDealText":"Ottieni la migliore offerta e acquista l'intera collezione!",
-        "bestDealButtonText":"Ottieni tutte le foto per soli {{maxPrice}}€"
+    "galleryHeader": {
+        "greeting": "Ciao {{modelName}}, le tue foto sono pronte!",
+        "bestDealText": "Ottieni la migliore offerta e acquista l'intera collezione!",
+        "bestDealButtonText": "Ottieni tutte le foto per soli {{maxPrice}}€"
     },
-    "privateGallery":{
-        "title":"Benvenuto nella tua galleria privata!",
-        "p1":"Rivivi il tuo viaggio a <1>{{city}}</1>, <3>{{country}}</3> con splendide foto!",
-        "p2":"Sfoglia la galleria e scegli le foto che vuoi acquistare e conservare per sempre. Più ne compri, più il prezzo scende!",
-        "p3":"Grazie di cuore, {{modelName}}! Grazie a te posso vivere della mia passione, e spero che troverai le tue foto straordinarie!",
-        "clear":"Cancella selezione"
+    "privateGallery": {
+        "title": "Benvenuto nella tua galleria privata!",
+        "p1": "Rivivi il tuo viaggio a <1>{{city}}</1>, <3>{{country}}</3> con splendide foto!",
+        "p2": "Sfoglia la galleria e scegli le foto che vuoi acquistare e conservare per sempre. Più ne compri, più il prezzo scende!",
+        "p3": "Grazie di cuore, {{modelName}}! Grazie a te posso vivere della mia passione, e spero che troverai le tue foto straordinarie!",
+        "clear": "Cancella selezione"
     },
-    "landingPage":{
-        "title":"Ottieni i tuoi ricordi di viaggio!",
-        "description":"Hai incontrato uno dei nostri fotografi per strada? Accedi alle foto che ti ha scattato inserendo l'ID che hai ricevuto nella tua casella di posta!",
-        "inputPlaceholder":"Inserisci l'identificativo della tua galleria",
-        "buttonText":"Guardale!"
+    "landingPage": {
+        "title": "Ottieni i tuoi ricordi di viaggio!",
+        "description": "Hai incontrato uno dei nostri fotografi per strada? Accedi alle foto che ti ha scattato inserendo l'ID che hai ricevuto nella tua casella di posta!",
+        "inputPlaceholder": "Inserisci l'identificativo della tua galleria",
+        "buttonText": "Guardale!"
     },
-    "sidebar":{
-        "total":"Totale:",
-        "totalBeforeDiscount":"Totale prima dello sconto:",
-        "securePayment":"🔒 Pagamento sicuro con crittografia SSL.",
-        "instantDelivery":"📩 Consegna istantanea! Il link per il download sarà inviato via email.",
-        "paymentTitle":"Ancora un attimo e le tue foto saranno tue!",
-        "numberPhotos":"Numero di foto acquistate:",
-        "orderSummary":"🎯 Riepilogo del tuo ordine 🎯",
-        "congratulations":"Complimenti! Hai risparmiato <1>{{savedPrice}}€</1> sul tuo ordine!",
-        "proceed":"Procedi al pagamento",
-        "goToCart":"Vai al carrello",
-        "BackToGalery":"Torna alla galleria",
-        "BackToCart":"Torna al carrello"
+    "sidebar": {
+        "total": "Totale:",
+        "totalBeforeDiscount": "Totale prima dello sconto:",
+        "securePayment": "🔒 Pagamento sicuro con crittografia SSL.",
+        "instantDelivery": "📩 Consegna istantanea! Il link per il download sarà inviato via email.",
+        "paymentTitle": "Ancora un attimo e le tue foto saranno tue!",
+        "numberPhotos": "Numero di foto acquistate:",
+        "orderSummary": "🎯 Riepilogo del tuo ordine 🎯",
+        "congratulations": "Complimenti! Hai risparmiato <1>{{savedPrice}}€</1> sul tuo ordine!",
+        "proceed": "Procedi al pagamento",
+        "goToCart": "Vai al carrello",
+        "BackToGalery": "Torna alla galleria",
+        "BackToCart": "Torna al carrello"
+    },
+    "cart": {
+        "p1": "Scegli le tue foto definitive e conferma l'ordine.",
+        "p2": "⏳ Puoi ancora modificare la tua selezione prima di completare l'acquisto.",
+        "clear":"Svuota il carrello"
     }
-  }
+}

@@ -30,5 +30,10 @@
         "goToCart":"Go To Cart",
         "BackToGalery":"Back to gallery",
         "BackToCart":""
+    },
+    "cart":{
+        "p1":"Review your selected photos and complete your order.",
+        "p2":"⏳ You can modify your selection before checkout.",
+        "clear":"Clear cart"
     }
 }
