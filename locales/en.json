@@ -35,5 +35,12 @@
         "p1":"Review your selected photos and complete your order.",
         "p2":"⏳ You can modify your selection before checkout.",
         "clear":"Clear cart"
+    },
+    "cardImage":{
+        "removeMessage":"Are you sure you want to remove this photo from your cart ?",
+        "removeButtonKeep":"Keep",
+        "removeButtonRemove":"Remove",
+        "resolution":"Resolution:",
+        "description":"Description:"
     }
 }

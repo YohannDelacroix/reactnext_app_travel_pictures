@@ -35,5 +35,12 @@
         "p1": "Scegli le tue foto definitive e conferma l'ordine.",
         "p2": "⏳ Puoi ancora modificare la tua selezione prima di completare l'acquisto.",
         "clear":"Svuota il carrello"
+    },
+    "cardImage":{
+        "removeMessage":"Sei sicuro di voler rimuovere questa foto dal carrello?",
+        "removeButtonKeep":"Mantieni",
+        "removeButtonRemove":"Rimuovi",
+        "resolution":"Risoluzione:",
+        "description":"Descrizione:"
     }
 }

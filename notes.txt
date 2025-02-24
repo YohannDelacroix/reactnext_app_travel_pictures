@@ -109,7 +109,6 @@ git reset --soft HEAD~1
 
     A faire -
         Implémenter Traduction CardImage (+Remove confirmation)
-        Implémenter Traduction Cart
         Implémenter Traduction Payment 
         Implémenter Traduction Confirmation Page 
         Sur Edge une outline degueulasse apparait en dessous de la checkbox image card

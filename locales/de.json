@@ -35,5 +35,12 @@
         "p1":"Wählen Sie Ihre Fotos aus und schließen Sie Ihre Bestellung ab.",
         "p2":"⏳ Sie können Ihre Auswahl vor dem Bezahlen noch ändern.",
         "clear":"Warenkorb leeren"
+    },
+    "cardImage":{
+        "removeMessage":"Sind Sie sicher, dass Sie dieses Foto aus Ihrem Warenkorb entfernen möchten?",
+        "removeButtonKeep":"Behalten",
+        "removeButtonRemove":"Entfernen",
+        "resolution":"Auflösung:",
+        "description":"Beschreibung:"
     }
 }

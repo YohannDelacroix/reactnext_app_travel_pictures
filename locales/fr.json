@@ -35,6 +35,13 @@
         "p1":"Faites votre choix final et validez votre commande.",
         "p2":"⏳ Vous pouvez encore modifier votre sélection avant de finaliser votre achat.",
         "clear":"Vider le panier"
+    },
+    "cardImage":{
+        "removeMessage":"Êtes-vous sûr de vouloir retirer cette photo de votre panier ?",
+        "removeButtonKeep":"Garder",
+        "removeButtonRemove":"Supprimer",
+        "resolution":"Résolution :",
+        "description":"Description :"
     }
   }
   

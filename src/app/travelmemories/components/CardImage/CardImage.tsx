@@ -21,6 +21,7 @@ import { Photo } from '../../types/galleryTypes';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import Modal from '../Modal';
+import { Trans, useTranslation } from 'react-i18next';
 
 
 interface cardImageProps {
@@ -63,6 +64,7 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
     // Determines the price to display
     const priceToDisplay = photoIndex !== -1 ? prices[photoIndex] : currentUnitPrice;
 
+    const { t } = useTranslation();
 
     return (
         <div className={classNames(
@@ -73,34 +75,28 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
         )}>
             <div className="relative">
                 {
-                    false && 
-                    <div className="flex flex-col justify-around w-[60%] h-[25%] px-3 py-6 bg-[#A6C9E2] bg-opacity-80 fixed z-10 top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-[0.8rem] text-black
-                                    lg:text-[0.7rem]">
-                        <div className="absolute top-[0.5rem] right-[0.5rem] hover:text-red-500 cursor-pointer"
-                            onClick={handleKeepPhoto}><ImCross /></div>
-                        <p className='text-center'>Are you sure you want to remove this photo from your cart ?</p>
-                        <div className="flex justify-around">
-                            <button type="button"
-                                className="block w-[33%] px-1 py-[0.5em] bg-[#B4E1B9]"
-                                onClick={handleKeepPhoto}>Keep</button>
-                            <button type="button"
-                                className="block w-[33%] px-1 py-[0.5em] bg-[#D1B3E0]"
-                                onClick={() => handleRemovePhoto(photo.id)}>Remove</button>
-                        </div>
-                    </div>
-                }
-
-                {
-                    removeConfirmation && 
+                    removeConfirmation &&
                     <Modal handleClose={handleKeepPhoto} isOpen={removeConfirmation}>
-                        <p className='text-center'>Are you sure you want to remove this photo from your cart ?</p>
+                        <p className='text-center'>
+                            <Trans i18nKey="cardImage.removeMessage"
+                                defaults="Are you sure you want to remove this photo from your cart ?"
+                            />
+                        </p>
                         <div className="flex justify-around">
                             <button type="button"
                                 className="block w-[33%] px-1 py-[0.5em] bg-[#B4E1B9]"
-                                onClick={handleKeepPhoto}>Keep</button>
+                                onClick={handleKeepPhoto}>
+                                <Trans i18nKey="cardImage.removeButtonKeep"
+                                    defaults="Keep"
+                                />
+                            </button>
                             <button type="button"
                                 className="block w-[33%] px-1 py-[0.5em] bg-[#D1B3E0]"
-                                onClick={() => handleRemovePhoto(photo.id)}>Remove</button>
+                                onClick={() => handleRemovePhoto(photo.id)}>
+                                <Trans i18nKey="cardImage.removeButtonRemove"
+                                    defaults="Remove"
+                                />
+                            </button>
                         </div>
                     </Modal>
                 }
@@ -156,10 +152,21 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
                 </div>
                 {isDescriptionVisible && <div>
                     {photo.resolution &&
-                        <div className="flex flex-row justify-between"><b>Resolution :</b> <span>{photo.resolution}</span></div>
+                        <div className="flex flex-row justify-between"><b>
+                            <Trans i18nKey="cardImage.resolution"
+                                defaults="Resolution:"
+                            />
+                        </b> <span>{photo.resolution}</span></div>
                     }
                     {photo.description &&
-                        <div><b>Description :</b> <p className="italic text-[0.5rem] text-justify">{photo.description}</p></div>
+                        <div>
+                            <b>
+                                <Trans i18nKey="cardImage.description"
+                                    defaults="Description:"
+                                />
+                            </b>
+                            <p className="italic text-[0.5rem] text-justify">{photo.description}</p>
+                        </div>
                     }
                 </div>}
             </div>
