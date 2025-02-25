@@ -15,6 +15,11 @@ input:focus {
   box-shadow: inset 0 -3px 0 0 black;
 }
 
+input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
