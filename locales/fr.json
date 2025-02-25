@@ -51,7 +51,19 @@
         "confirmCardButton":"Confirmer et payer",
         "paypalDescription":"En choisissant ce mode de paiement, vous serez redirigé vers le serveur sécurisé de PayPal et accéderez à votre compte PayPal. Votre commande sera enregistrée une fois votre paiement validé via votre banque en ligne ou votre application mobile.",
         "ccOption":"Payer par carte",
-        "paypalOption":"Payer avec PayPal"
+        "paypalOption":"Payer avec PayPal",
+        "confirmation":{
+            "completed":{
+                "title":"Merci pour votre achat !",
+                "p1":"Votre paiement a été traité avec succès et vous avez acheté {{selectedPhotosLength}} photo{{s}} pour <1>{{totalPrice}}€</1>.",
+                "p2":"📩 Le lien de téléchargement sera envoyé sous peu à l’adresse <1>{{userEmail}}</1>."
+            },
+            "rejected":{
+                "title":"Un problème est survenu avec votre paiement.",
+                "p1":"Il semble y avoir un problème avec votre moyen de paiement. Veuillez vérifier vos informations ou essayer un autre mode de paiement.",
+                "retryButton":"Réessayer le paiement"
+            }
+        }
     }
   }
   

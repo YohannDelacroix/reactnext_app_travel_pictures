@@ -29,7 +29,7 @@
         "proceed":"Proceed to checkout",
         "goToCart":"Go To Cart",
         "BackToGalery":"Back to gallery",
-        "BackToCart":""
+        "BackToCart":"Back to cart"
     },
     "cart":{
         "p1":"Review your selected photos and complete your order.",
@@ -51,6 +51,18 @@
         "confirmCardButton":"Confirm and pay",
         "paypalDescription":"By choosing this payment method, you will be redirected to PayPal’s secure server and log into your PayPal account. Your order will be recorded once you have validated your payment via online banking or your mobile app.",
         "ccOption":"Pay by card",
-        "paypalOption":"Pay by Paypal"
+        "paypalOption":"Pay by Paypal",
+        "confirmation":{
+            "completed":{
+                "title":"Thank you for your purchase!",
+                "p1":"Your payment has been successfully processed and have purchased {{selectedPhotosLength}} photo{{s}} for <1>{{totalPrice}}€</1>.",
+                "p2":"📩 The download link will be sent via email shortly on <1>{{userEmail}}</1>"
+            },
+            "rejected":{
+                "title":"Something went wrong with your payment.",
+                "p1":"It seems there was an issue with your payment method. Please check your payment details or try another method.",
+                "retryButton":"Retry Payment"
+            }
+        }
     }
 }

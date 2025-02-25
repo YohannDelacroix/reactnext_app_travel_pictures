@@ -1,3 +1,11 @@
+# **APP TRAVEL PICTURE**
+
+## Description
+
+## Demo
+
+## Technologies Used
+
 
 app/
 │── layout.tsx                      # 🌍 Main layout (Header & Footer)

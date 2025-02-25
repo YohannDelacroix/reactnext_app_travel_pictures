@@ -108,10 +108,8 @@ git reset --soft HEAD~1
 
 
     A faire -
-        Implémenter Traduction Payment 
         Implémenter Traduction Confirmation Page 
         Sur Edge une outline degueulasse apparait en dessous de la checkbox image card
-        Voir le payment en mode Paypal et changer les langues, les blocs bougent alors qu'ils ne devraient pas
         
         
 
