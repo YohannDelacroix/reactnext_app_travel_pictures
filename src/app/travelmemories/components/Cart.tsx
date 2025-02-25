@@ -9,6 +9,7 @@ import LinkButton, { buttonType } from './LinkButton';
 import { FaRegTrashAlt } from "react-icons/fa";
 import Gallery from './ShoppingGallery';
 import { Trans, useTranslation } from 'react-i18next';
+import { PATH_PRIVATE_GALLERY } from '@/constants/paths';
 
 const Cart = () => {
     const parentSrc = parentSrcType.CART; //Ensure CardImage will work for PrivateGallery uses
@@ -35,7 +36,7 @@ const Cart = () => {
             </p>
 
             <LinkButton
-                href={`/shopping/privateGallery/${galleryId}`}
+                href={`${PATH_PRIVATE_GALLERY}${galleryId}`}
                 type={buttonType.CLEAR}
             >
                 <span className="absolute left-3"><FaRegTrashAlt /></span> 
