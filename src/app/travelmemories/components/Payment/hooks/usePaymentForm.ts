@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import creditCardType from 'credit-card-type';
 import { formInputType } from "../types/formInputTypes";
 
@@ -28,10 +28,8 @@ const usePaymentForm = () => {
      * @returns a formatted credit card number (ccn) adding spaces and limit length
      */
     const formatCCN = useCallback((ccn: string) => {
-        let formattedCCN = ccn;
-
         // Delete all no numeric characters
-        formattedCCN = formattedCCN.replace(/\D/g, "");
+        let formattedCCN = ccn.replace(/\D/g, "");
 
         if (!cardType) {
             //Do nothing if cardType is not defined
@@ -65,7 +63,7 @@ const usePaymentForm = () => {
      * @param ccn the credit card number in string format
      * @returns a string describing the error or null if there is no error found
      */
-    const validateCCN = (ccn: string): string | null => {
+    const validateCCN = useCallback((ccn: string): string | null => {
 
         /**
          * isValidLuhn implements Lunh algorithm to determine if the card number is valid
@@ -106,7 +104,7 @@ const usePaymentForm = () => {
         }
 
         return null; //No error
-    };
+    },[cardType]);
 
     /**
      * 
@@ -124,7 +122,7 @@ const usePaymentForm = () => {
         }));
 
         return formattedExpDate;
-    },[formatCCN, validateCCN, setErrors])
+    },[formatCCN, validateCCN])
 
 
     /*************************** EXPIRATION DATE ***************************/
@@ -134,7 +132,7 @@ const usePaymentForm = () => {
      * @param expDate expiration date as a string
      * @returns a string describing the error
      */
-    const validateExpDate = (expDate: string): string | null => {
+    const validateExpDate = useCallback((expDate: string): string | null => {
         const [month, year] = expDate.split("/").map(Number);
         if (!month || !year) return "Invalid format (MM/YY)";
 
@@ -148,14 +146,14 @@ const usePaymentForm = () => {
         }
 
         return null; //No error
-    };
+    },[]);
 
     /**
      * 
      * @param expDate a non formatted expDate typed by the user on the interface
      * @returns a formatted MM/YY date 
      */
-    const formatExpDate = (expDate: string) => {
+    const formatExpDate = useCallback((expDate: string) => {
         // Delete all no numeric characters
         const cleanedValue = expDate.replace(/\D/g, "");
 
@@ -168,7 +166,7 @@ const usePaymentForm = () => {
         }
 
         return month;
-    }
+    },[])
 
     /**
      * Format the expiration date and fill an error report
@@ -186,7 +184,7 @@ const usePaymentForm = () => {
         }));
 
         return formattedExpDate;
-    }, [formatExpDate, validateExpDate, setErrors]);
+    }, [formatExpDate, validateExpDate]);
 
 
     /*************************** CVC ***************************/
@@ -195,7 +193,7 @@ const usePaymentForm = () => {
         * @param cvc as a string
         * @returns a string describing the error
         */
-    const validateCVC = (cvc: string): string | null => {
+    const validateCVC = useCallback((cvc: string): string | null => {
         if (!cardType) return "Card type unknown";
 
         //Retrieve the expected length of the card
@@ -206,14 +204,14 @@ const usePaymentForm = () => {
         }
 
         return null; //No error
-    };
+    },[cardType]);
 
     /**
      * 
      * @param cvc a non formatted cvc typed by the user on the interface
      * @returns a formatted cvc
      */
-    const formatCVC = (cvc: string) => {
+    const formatCVC = useCallback((cvc: string) => {
         // Delete all no numeric characters
         let formattedCVC = cvc.replace(/\D/g, "");
 
@@ -227,7 +225,7 @@ const usePaymentForm = () => {
         }
             
         return formattedCVC;
-    }
+    }, [cardType]);
 
     /**
      * Format the expiration date and fill an error report
@@ -245,7 +243,7 @@ const usePaymentForm = () => {
         }));
 
         return formattedCVC;
-    }, [formatCVC, validateCVC, setErrors]);
+    }, [formatCVC, validateCVC]);
 
     return {
         errors,

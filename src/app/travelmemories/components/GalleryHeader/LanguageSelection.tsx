@@ -27,7 +27,7 @@ const LanguageSelection = () => {
     return (
         <div className="flex justify-end flex-wrap gap-x-1 max-w-[30%] absolute right-0 top-global">
             {
-                flagIconsSrc.map((icon, index) => (
+                flagIconsSrc.map((icon) => (
                     <label key={icon.id} className="cursor-pointer">
                         <input
                             type="radio"

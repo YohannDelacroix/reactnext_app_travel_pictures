@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Photo, ShootingInfo } from "../types/galleryTypes";
-import { useDispatch } from "react-redux";
-
 
 interface GalleryState {
     photos: Photo[];

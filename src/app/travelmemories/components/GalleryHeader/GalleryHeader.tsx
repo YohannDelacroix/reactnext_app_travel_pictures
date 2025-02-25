@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image';
 import PrivateGalleryHeader from './PrivateGalleryHeader';
 import LanguageSelection from './LanguageSelection';
 

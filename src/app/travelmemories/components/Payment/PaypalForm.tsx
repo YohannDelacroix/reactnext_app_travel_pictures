@@ -9,7 +9,8 @@ import { Trans, useTranslation } from 'react-i18next'
  * @returns a paypal form with a button payment
  */
 const PaypalForm = () => {
-    const { t } = useTranslation();
+    //Declare the hook translation, enabling <Trans> to work correctly
+    useTranslation();
 
     return (
         <div className="flex flex-col gap-y-5">

@@ -2,11 +2,8 @@
 import React, { useState } from 'react'
 import { paymentType } from './types/paymentType'
 import PaymentOption from './PaymentOption'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../store/store'
 import { parentSrcType } from '../../types/parentSrcType'
 import PageContainer from '../PageContainer'
-
 
 /**
  * 
@@ -14,8 +11,6 @@ import PageContainer from '../PageContainer'
  */
 const Payment = () => {
     const [selectedPayment, setSelectedPayment] = useState<paymentType | null>(null);
-    const purchasedPhotos: number = useSelector((state: RootState) => state.cart.selectedPhotos.length);
-    const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
 
     return (
         <PageContainer parentSrc={parentSrcType.PAYMENT}>

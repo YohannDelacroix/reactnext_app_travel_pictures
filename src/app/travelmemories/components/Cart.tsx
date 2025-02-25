@@ -2,7 +2,6 @@
 import React from 'react'
 import CardImage from "@/app/travelmemories/components/CardImage/CardImage";
 import { parentSrcType } from "../types/parentSrcType";
-import SideBar from "@/app/travelmemories/components/SideBar";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import LinkButton, { buttonType } from './LinkButton';
@@ -17,7 +16,8 @@ const Cart = () => {
 
     const galleryId = useSelector((state: RootState) => state.gallery.shootingInfo.id);
 
-    const { t } = useTranslation();
+    //Declare the hook translation, enabling <Trans> to work correctly
+    useTranslation();
 
     return (
         <form className="flex flex-col gap-y-2">
@@ -39,11 +39,11 @@ const Cart = () => {
                 href={`${PATH_PRIVATE_GALLERY}${galleryId}`}
                 type={buttonType.CLEAR}
             >
-                <span className="absolute left-3"><FaRegTrashAlt /></span> 
+                <span className="absolute left-3"><FaRegTrashAlt /></span>
                 <Trans i18nKey="cart.clear"
                     defaults="Clear Cart"
                 />
-                
+
             </LinkButton>
 
             <Gallery parentSrc={parentSrc}>

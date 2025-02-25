@@ -4,7 +4,8 @@ import TravelMemoriesAccessForm from './TravelMemoriesAccessForm'
 import { Trans, useTranslation } from 'react-i18next'
 
 const LandingTravelMemories = () => {
-    const { t } = useTranslation();
+    //Declare the hook translation, enabling <Trans> to work correctly
+    useTranslation();
 
     return (
         <div className="flex flex-col items-center justify-center min-h-full text-center">

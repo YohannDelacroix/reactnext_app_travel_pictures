@@ -1,35 +1,32 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { Action, combineReducers, configureStore } from "@reduxjs/toolkit";
 import galleryReducer from "./gallerySlice";
 import cartReducer from "./cartSlice";
 import userReducer from "./userSlice";
 import storage from "./sessionStorage";
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from "redux-persist";
 
-// Configuration de Redux Persist
 const persistConfig = {
   key: "root",
-  storage, // Stockage dans localStorage
+  storage, //Stock in sessionStorage
 };
 
-// Combine tous les reducers
 const rootReducer = combineReducers({
   gallery: galleryReducer,
   cart: cartReducer,
   user: userReducer,
 });
 
-// **Gestion du RESET de tout le store**
-const appReducer = (state: any, action: any) => {
+// Handle the store reset
+const appReducer = (state: ReturnType<typeof rootReducer> | undefined, action: Action<string>) => {
   if (action.type === "RESET_ALL") {
     state = undefined; // **Réinitialise tout Redux**
   }
   return rootReducer(state, action);
 };
 
-// Création du reducer persistant
+// Persisted reducer to store redux in session storage
 const persistedReducer = persistReducer(persistConfig, appReducer);
 
-// Création du store
 const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
@@ -40,7 +37,6 @@ const store = configureStore({
     }),
 });
 
-// Création du persistor
 export const persistor = persistStore(store);
 export const resetAll = () => ({ type: "RESET_ALL" }); 
 export type RootState = ReturnType<typeof store.getState>;

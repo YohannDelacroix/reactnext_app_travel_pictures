@@ -5,7 +5,6 @@
  * 
  */
 import { Metadata } from "next";
-import LinkButton, { buttonType } from "./components/LinkButton";
 import LandingTravelMemories from "./components/LandingTravelMemories/LandingTravelMemories";
 
 export const metadata: Metadata = {

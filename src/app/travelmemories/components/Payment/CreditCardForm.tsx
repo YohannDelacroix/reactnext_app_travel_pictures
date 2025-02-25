@@ -18,7 +18,8 @@ const CreditCardForm = () => {
         [formInputType.CC_CVC]: "",
     });
 
-    const { t } = useTranslation();
+    //Declare the hook translation, enabling <Trans> to work correctly
+    useTranslation();
 
     return (
         <form className="flex flex-col gap-y-4">

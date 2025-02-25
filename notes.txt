@@ -66,6 +66,7 @@ git reset --soft HEAD~1
             Actuellement le formInput ne prend en charge que 4 icones de carte bancaire et pourrait éventuellement en prendre davantage pour améliorer l'expérience UX
             ATTENTION ! L'affichage des icones est dépendant de ce que retourne credit-card-type !!! 
             Lorsqu'on type un premier chiffre dans le card input on voit l'icone visa qui apparait en clignotant
+            Le numéro de carte précedemment saisi ne doit pas s'afficher (ainsi que les autres données)
 
         usePaymentForm :
             Implémenter le controle/validation du holder name

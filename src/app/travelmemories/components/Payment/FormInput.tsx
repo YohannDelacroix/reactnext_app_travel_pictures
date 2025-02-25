@@ -3,7 +3,6 @@ import { formInputType, inputMetadata, paymentCcFormDataType } from './types/for
 import usePaymentForm from './hooks/usePaymentForm';
 import classNames from 'classnames';
 import Image from 'next/image';
-import { imageAttributes } from '@/app/travelmemories/types/imageAttributes';
 import { useTranslation } from 'react-i18next';
 
 interface formInputProps {
@@ -24,13 +23,6 @@ interface formInputProps {
 const FormInput = ({ type, formData, setFormData }: formInputProps) => {
     const { placeholder, pattern, inputMode, maxLength } = inputMetadata[type];
     const { errors, cardType, handleCCNChange, detectCardType, handleExpDateChange, handleCVCChange } = usePaymentForm();
-
-    const ccSrcIcons: imageAttributes[] = [
-        { src: "/icons/payment_icons/svg/visa.svg", alt: "Visa" },
-        { src: "/icons/payment_icons/svg/diners-club.svg", alt: "Diners" },
-        { src: "/icons/payment_icons/svg/mastercard.svg", alt: "Mastercard" },
-        { src: "/icons/payment_icons/svg/american-express.svg", alt: "American Express" },
-    ]
 
     const {t} = useTranslation();
 
@@ -70,7 +62,7 @@ const FormInput = ({ type, formData, setFormData }: formInputProps) => {
     //Each time the credit card number changes, detect the card type and store it with detectCardType()
     useEffect(() => {
         detectCardType(formData[formInputType.CC_NUMBER])
-    }, [formData[formInputType.CC_NUMBER]])
+    }, [formData, detectCardType])
 
     return (
         <div className="flex flex-col gap-y-2 tracking-wider">

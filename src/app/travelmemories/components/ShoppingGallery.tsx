@@ -1,6 +1,5 @@
 import React from 'react'
 import { parentSrcType } from '../types/parentSrcType';
-import SideBar from './SideBar';
 import PageContainer from './PageContainer';
 
 // Props definition for the Shopping Gallery component

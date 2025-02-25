@@ -3,7 +3,6 @@ import React from 'react'
 import CardImage from "@/app/travelmemories/components/CardImage/CardImage"
 import staticPrivateGallery from "@/../data/staticPrivateGallery.json"
 import { parentSrcType } from "../types/parentSrcType";
-import SideBar from "@/app/travelmemories/components/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store";
 import { useEffect } from "react";
@@ -24,7 +23,8 @@ const PrivateGallery = ({ id }: { id: string }) => {
     const photos = useSelector((state: RootState) => state.gallery.photos);
     const { city, country, modelName } = useSelector((state: RootState) => state.gallery.shootingInfo);
 
-    const { t } = useTranslation();
+    //Declare the hook translation, enabling <Trans> to work correctly
+    useTranslation();
 
     useEffect(() => {
         /**
@@ -61,40 +61,40 @@ const PrivateGallery = ({ id }: { id: string }) => {
         };
 
         fetchGalleryData(id);
-    }, []);
+    }, [dispatch, id]);
 
 
     return (
         <form className="flex flex-col gap-y-2">
             <h2 className="text-[4vw] font-bold">
-                <Trans defaults="Welcome to your private gallery!" i18nKey="privateGallery.title" /> 
+                <Trans defaults="Welcome to your private gallery!" i18nKey="privateGallery.title" />
             </h2>
             <p>
                 {/* You can watch and enjoy the pictures of your last trip in <b>{city}</b>, <b>{country}</b>. */}
-                <Trans  i18nKey="privateGallery.p1" 
-                        defaults="You can watch and enjoy the pictures of your last trip in <b>{{city}}</b>, <b>{{country}}</b>."
-                        values={{ city, country }} 
-                        components={{ 1: <b />, 3: <b /> }} />
+                <Trans i18nKey="privateGallery.p1"
+                    defaults="You can watch and enjoy the pictures of your last trip in <b>{{city}}</b>, <b>{{country}}</b>."
+                    values={{ city, country }}
+                    components={{ 1: <b />, 3: <b /> }} />
             </p>
             <p>
-                <Trans  i18nKey="privateGallery.p2"
-                        defaults="Now, review the gallery and select the pictures you want to buy and keep forever. The more you buy, the more the price decreases."
-                        />
+                <Trans i18nKey="privateGallery.p2"
+                    defaults="Now, review the gallery and select the pictures you want to buy and keep forever. The more you buy, the more the price decreases."
+                />
             </p>
             <p>
-                <Trans i18nKey="privateGallery.p3" 
-                        defaults="I really thank you {{modelName}} because you help me living and i hope you will find it incredible !"
-                        values={{ modelName }} 
-                         />
+                <Trans i18nKey="privateGallery.p3"
+                    defaults="I really thank you {{modelName}} because you help me living and i hope you will find it incredible !"
+                    values={{ modelName }}
+                />
             </p>
 
             <LinkButton
                 type={buttonType.CLEAR}
             >
-                <span className=""><FaRegTrashAlt /></span> 
-                <Trans i18nKey="privateGallery.clear" 
-                        defaults="Clear Selection"
-                         />
+                <span className=""><FaRegTrashAlt /></span>
+                <Trans i18nKey="privateGallery.clear"
+                    defaults="Clear Selection"
+                />
             </LinkButton>
 
             <ShoppingGallery parentSrc={parentSrc}>

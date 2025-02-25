@@ -62,7 +62,7 @@ function calculateCurrentTotalPrice(prices: number[], purchasedPhotos: number) {
  * @returns the saved money rounded X.XX€
  */
 function calculateSavedPrice(totalPrice: number, basePrice: number, purchasedPhotos: number){
-    let savedPrice = basePrice * purchasedPhotos - totalPrice;
+    const savedPrice = basePrice * purchasedPhotos - totalPrice;
     return Math.round(savedPrice * 100) / 100;
 }
 
@@ -108,7 +108,7 @@ const cartSlice = createSlice({
 
             let maxPrice = 0;
             for(let i = 0; i < state.totalNumberPhotos; i++){
-                let iPrice = calculateCurrentPrice(state.totalNumberPhotos, i, state.unitPrice, degressiveFactor);
+                const iPrice = calculateCurrentPrice(state.totalNumberPhotos, i, state.unitPrice, degressiveFactor);
                 state.prices[i] = iPrice;
                 maxPrice += iPrice; 
             }

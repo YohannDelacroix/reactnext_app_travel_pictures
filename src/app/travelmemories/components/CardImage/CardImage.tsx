@@ -1,13 +1,15 @@
-"use client"
-/* Component that render an image card to buy
-*   PARAMS :
-        INDEX
-        TITLE (facultatif)
-        PRICE
-        RESOLUTION (facultatif)
-        DESCRIPTION (facultatif)
+/**
+ * @description Card image component renders an image card with different functionnalities wether the parent source is a privateGallery (Adding to the cart functions) or a cart (remove from cart).
+ * 
+ * @param parentSrc to identify which parent is calling the component
+ * @param index photo index in the gallery
+ * @param photo Photo object containing all the details related to the photo
+ * @returns a Card image that display a photo and its metadata
+ * 
+ * @author Yohann Delacroix
+ */
 
-*/
+"use client"
 import Image from 'next/image';
 import React, { useState } from 'react'
 import classNames from 'classnames';
@@ -23,7 +25,6 @@ import { RootState } from '../../store/store';
 import Modal from '../Modal';
 import { Trans, useTranslation } from 'react-i18next';
 
-
 interface cardImageProps {
     //Configuration props
     parentSrc: parentSrcType;                   //Source component
@@ -32,31 +33,29 @@ interface cardImageProps {
     index: number;                              //Index of the photo in the gallery
 }
 
-const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
-    const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);    //Control the visibility of the description
 
-    const { isChecked, handleChecking } = useCardImageForPrivateGallery();
+const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
+    //STATES
+    const [isDescriptionVisible, setIsDescriptionVisible] = useState(false); //Control the visibility of the description
+    const { selectedPhotos, prices } = useSelector((state: RootState) => state.cart);
+    const { unitPrice, currentUnitPrice } = useSelector((state: RootState) => state.cart);
+
+    //HOOKS
+    const { handleChecking } = useCardImageForPrivateGallery();
     const { removeConfirmation, handleToggleRemoveConfirmation, handleKeepPhoto, handleRemovePhoto } = useCardImageForCart();
 
-    const { selectedPhotos, prices } = useSelector((state: RootState) => state.cart);
-
+    //METHODS
     const isPhotoSelected = () => {
         return selectedPhotos.some((p) => p.id === photo.id)
     }
 
-    const { unitPrice, currentUnitPrice } = useSelector((state: RootState) => state.cart);
-
-    const titleClass = classNames(
-        isDescriptionVisible ? "" : "truncate overflow-hidden whitespace-nowrap"
-    );
-
-    /*
-    *   Method: ToggleDescription         
-    */
     const toggleDescription = () => {
         setIsDescriptionVisible(prevIsDescriptionVisible => !prevIsDescriptionVisible);
     }
 
+    const titleClass = classNames(
+        isDescriptionVisible ? "" : "truncate overflow-hidden whitespace-nowrap"
+    );
 
     // Find photo index in selectedPhotos
     const photoIndex = selectedPhotos.findIndex(p => p.id === photo.id);
@@ -64,7 +63,8 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
     // Determines the price to display
     const priceToDisplay = photoIndex !== -1 ? prices[photoIndex] : currentUnitPrice;
 
-    const { t } = useTranslation();
+    //Declare the hook translation, enabling <Trans> to work correctly
+    useTranslation();
 
     return (
         <div className={classNames(
