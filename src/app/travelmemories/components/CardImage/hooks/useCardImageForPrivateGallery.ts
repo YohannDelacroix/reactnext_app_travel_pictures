@@ -32,7 +32,6 @@ function useCardImageForPrivateGallery() {
         }
 
         setIsChecked(checked);
-        console.log(name, checked); 
     };
 
     return {

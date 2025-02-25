@@ -26,23 +26,6 @@ const PrivateGallery = ({ id }: { id: string }) => {
 
     const { t } = useTranslation();
 
-
-    //Only for debugging
-    const selectedPhotos = useSelector((state: RootState) => state.cart.selectedPhotos);
-    useEffect(() => {
-        console.log("seelcted photos ", selectedPhotos)
-    }, [selectedPhotos])
-
-    const prices = useSelector((state: RootState) => state.cart.prices);
-    useEffect(() => {
-        console.log("prices ", prices)
-    }, [prices])
-
-    useEffect(() => {
-        console.log("id = ", id);
-    }, [id])
-    //Only for debugging
-
     useEffect(() => {
         /**
         * call the database to load the session info (photos, name, country, ...)
@@ -59,10 +42,10 @@ const PrivateGallery = ({ id }: { id: string }) => {
             if (data) {
                 //Only for debugging and test the ID param page, waiting for database implementation
                 const shootingInfo: ShootingInfo = { ...data.shootingInfo, id: id }
-                console.log("shootingInfo = ", shootingInfo);
+                //console.log("shootingInfo = ", shootingInfo);
 
                 const userInfo: UserInfo = { ...data.userInfo };
-                console.log("userInfo = ", userInfo);
+                //console.log("userInfo = ", userInfo);
                 //Only -----TO REMOVE LATER--------------------
 
                 // Updates redux state with userInfo
@@ -72,7 +55,7 @@ const PrivateGallery = ({ id }: { id: string }) => {
                 dispatch(setSessionInfo({ photos: data.photos, shootingInfo: shootingInfo }));
 
                 //Define the number of photos and define prices
-                console.log("data.ph=", data.photos.length)
+                //console.log("data.ph=", data.photos.length)
                 dispatch(setCart({ basePrice: data.unitPrice, numberOfPhotos: data.photos.length }))
             }
         };

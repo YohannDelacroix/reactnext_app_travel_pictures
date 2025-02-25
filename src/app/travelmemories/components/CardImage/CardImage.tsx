@@ -143,7 +143,7 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
                                 <button onClick={handleToggleRemoveConfirmation}
                                     type="button"
                                 >
-                                    <ImCross className="text-red-500" />
+                                    <ImCross className="text-red-500 hover:text-red-700" />
                                 </button>
 
                         }

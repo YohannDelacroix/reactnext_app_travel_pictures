@@ -67,8 +67,8 @@ const LinkButton = ({ children, href, type }: linkButtonProps) => {
 
     const commonClasses = classNames(
         //Common styles
-        "flex justify-center items-center gap-x-2 relative text-black text-center",
-        //Next buttons styles
+        "flex justify-center items-center gap-x-2 relative text-black text-center hover:brightness-95 transition-all",
+        //Next buttons styles 
         { "w-full p-5 bg-mygreen": type === buttonType.NEXT },
         //Get the best deal buttons styles
         { "w-full font-bold p-4 bg-mygreen uppercase": type === buttonType.GET_THE_BEST_DEAL },

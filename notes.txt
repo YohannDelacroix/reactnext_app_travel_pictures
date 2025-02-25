@@ -105,11 +105,8 @@ git reset --soft HEAD~1
     Transformer les icones en react icons
 
 
+    A faire URGEMMENT -
 
-
-    A faire -
-        Implémenter Traduction Confirmation Page 
-        Sur Edge une outline degueulasse apparait en dessous de la checkbox image card
         
         
 
@@ -119,10 +116,10 @@ git reset --soft HEAD~1
 
 ### - MESSAGES DE COMMIT : 
 
-    git commit -m "Payment components: 
-        - Added Translations for payment components
-        - Added comments for payment components
-        - Removed debug and console.logs
+    git commit -m "Transitions styles and console cleaning: 
+        - Added hover effect on LinkButtons
+        - Added hover effects on ImCross icons (card image)
+        - + removed console.log s
     "
 
 
