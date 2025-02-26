@@ -67,16 +67,18 @@ const LinkButton = ({ children, href, type }: linkButtonProps) => {
 
     const commonClasses = classNames(
         //Common styles
-        "flex justify-center items-center gap-x-2 relative text-black text-center hover:brightness-95 transition-all",
+        "block flex justify-center items-center gap-x-2 relative text-black text-center hover:brightness-95 transition-all",
         //Next buttons styles 
         { "w-full p-5 bg-mygreen": type === buttonType.NEXT },
         //Get the best deal buttons styles
         { "w-full font-bold p-4 bg-mygreen uppercase": type === buttonType.GET_THE_BEST_DEAL },
         //Back buttons styles  (mobile-first / desktop large screens)
-        { "self-start w-[40%] p-3 bg-myblue": type === buttonType.BACK },
+        { "self-start w-full p-3 bg-myblue": type === buttonType.BACK },
+        { "sm:w-[40%]": type === buttonType.BACK },
         { "lg:w-[100%] lg:max-w-[39vw]": type === buttonType.BACK }, 
         //Clear buttons styles (mobile-first / desktop large screens)
-        { "self-end w-[40%] p-3 bg-myred": type === buttonType.CLEAR },
+        { "self-end w-full p-3 bg-myred": type === buttonType.CLEAR },
+        { "sm:w-[40%]": type === buttonType.CLEAR },
         { "lg:w-[25%]": type === buttonType.CLEAR },
         //Pay by CB button styles
         { "w-full bg-mygreen py-3 font-bold text-[1.5rem]": type === buttonType.PAY_CB},

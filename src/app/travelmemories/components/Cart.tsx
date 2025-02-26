@@ -39,7 +39,7 @@ const Cart = () => {
                 href={`${PATH_PRIVATE_GALLERY}${galleryId}`}
                 type={buttonType.CLEAR}
             >
-                <span className="absolute left-3"><FaRegTrashAlt /></span>
+                <FaRegTrashAlt />
                 <Trans i18nKey="cart.clear"
                     defaults="Clear Cart"
                 />
