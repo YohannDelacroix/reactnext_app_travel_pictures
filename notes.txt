@@ -19,8 +19,10 @@ git reset --soft HEAD~1
             SOLUTION ENVISAGEE : Diviser le prix total par le nombre de photo achetées et l'afficher uniformément
 
     CARD IMAGE : 
-        Une capture d'écran sur le composant doit être enregistrée et sauvegardée en base de données
+        Une capture d'écran sur le composant doit être enregistrée dans les statistiques en base de données
         Les images ne doivent pas être téléchargeables
+        L'icone flechée vers le bas doit afficher un effet de pivot sur lui même (180°c)
+
 
     COMPONENT CardImage
         Ajouter des transitions descendante lors du clic sur le bouton de toggle
@@ -107,7 +109,14 @@ git reset --soft HEAD~1
 
 
     A faire URGEMMENT -
-
+        La sidebar ne descend plus en mode desktop
+        En Mobile version en 360px de largeur
+            les prix sont ratatinés dans les CardImage
+            c'est bizarre que la sidebar soit au dessus des options de paiement
+            c'est bizarre que dans la sidebar le bouton back to cart soit affiché en carré, pareil pour la confirmation le retry en carré est bizarre
+            Le placeholder n'est pas lisible sur la landing page
+        
+        On ne doit pas pouvoir accéder au panier si aucune photo n'est selectionnée
         
         
 
@@ -117,10 +126,8 @@ git reset --soft HEAD~1
 
 ### - MESSAGES DE COMMIT : 
 
-    git commit -m "Transitions styles and console cleaning: 
-        - Added hover effect on LinkButtons
-        - Added hover effects on ImCross icons (card image)
-        - + removed console.log s
+    git commit -m "Card Image:
+        - Price are now displaying well in mobile version
     "
 
 
@@ -128,3 +135,174 @@ git reset --soft HEAD~1
 FIREBASE : 
     Demain , faire la route GET
     Voir comment storer les photos dans l'hebergeur
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Cardimage line : 
+
+    <div className="flex flex-row justify-between max-w ">
+                    {/* BLOCK : Toggle description button + Title*/}
+                    <div className="flex flex-row items-start justify-start gap-x-2 max-w-[65%]">
+                        <button className="block h-3"
+                            type="button"
+                            onClick={toggleDescription}>
+                            {isDescriptionVisible ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                        </button>
+                        <h2 className={titleClass}>#{index} {photo.title && <span> - {photo.title}</span>}</h2>
+                    </div>
+                    <div className="flex flex-row self-start items-center justify-end gap-x-2">
+                        <div className="flex flex-row flex-wrap justify-end gap-x-2">
+                            {unitPrice !== priceToDisplay &&
+                                
+                                    <span className='text-[0.5rem] leading-[1rem] line-through text-red-500'>{unitPrice.toFixed(2)}€</span>
+                                
+                            }
+                            <div>
+                                {priceToDisplay.toFixed(2)}€
+                            </div>
+                        </div>
+                        <div className="self-stretch flex flex-col justify-center">
+                        {
+                            parentSrc === parentSrcType.PRIVATE_GALLERY ?
+                                <input
+                                    type="checkbox"
+                                    id={`check-photo-${index}`}
+                                    name={`check-photo-${index}`}
+                                    checked={isPhotoSelected()}
+                                    onChange={(e) => handleChecking(e, photo)}
+                                    className="align-middle w-[1em]" />
+                                :
+                                <button onClick={handleToggleRemoveConfirmation}
+                                    type="button"
+                                >
+                                    <ImCross className="text-red-500 hover:text-red-700" />
+                                </button>
+                                
+                        }
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <div className="flex flex-row justify-between items-baseline max-w gap-x-2">
+                    {/* BLOCK : Toggle description button + Title*/}
+                    {/* <div className="flex flex-row items-start justify-start gap-x-2 max-w-[65%]"> */}
+                    <button className="block h-3"
+                        type="button"
+                        onClick={toggleDescription}>
+                        {isDescriptionVisible ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                    </button>
+                    <h2 className={titleClass}>#{index} {photo.title && <span> - {photo.title}</span>}</h2>
+
+
+                    
+                        {unitPrice !== priceToDisplay &&
+
+                            <span className='text-[0.5rem] line-through text-red-500'>{unitPrice.toFixed(2)}€</span>
+
+                        }
+                        <div>
+                            {priceToDisplay.toFixed(2)}€
+                        </div>
+                    
+                    
+                        {
+                            parentSrc === parentSrcType.PRIVATE_GALLERY ?
+                                <input
+                                    type="checkbox"
+                                    id={`check-photo-${index}`}
+                                    name={`check-photo-${index}`}
+                                    checked={isPhotoSelected()}
+                                    onChange={(e) => handleChecking(e, photo)}
+                                    className="align-middle w-[1em]" />
+                                :
+                                <button onClick={handleToggleRemoveConfirmation}
+                                    type="button"
+                                >
+                                    <ImCross className="text-red-500 hover:text-red-700" />
+                                </button>
+
+                        }
+                    
+
+                </div>
+
+
+
+                {/* Metadatas */}
+            <div className="flex flex-col gap-y-2 text-[1rem]">
+                <div className="flex flex-row justify-between items-baseline max-w">
+                    {/* BLOCK : Toggle description button + Title*/}
+                    <div className="flex flex-row items-start justify-start gap-x-2 max-w-[65%]">
+                        <button className="block h-3"
+                            type="button"
+                            onClick={toggleDescription}>
+                            {isDescriptionVisible ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                        </button>
+                        <h2 className={titleClass}>#{index} {photo.title && <span> - {photo.title}</span>}</h2>
+                    </div>
+                    <div className="flex flex-row self-start items-baseline justify-end gap-x-2">
+                        <div className="flex flex-row flex-wrap justify-end gap-x-2">
+                            {unitPrice !== priceToDisplay &&
+
+                                <span className='text-[0.5rem] leading-[1rem] line-through text-red-500'>{unitPrice.toFixed(2)}€</span>
+
+                            }
+                            <div>
+                                {priceToDisplay.toFixed(2)}€
+                            </div>
+                        </div>
+                        <div className="self-stretch flex flex-col justify-center">
+                            {
+                                parentSrc === parentSrcType.PRIVATE_GALLERY ?
+                                    <input
+                                        type="checkbox"
+                                        id={`check-photo-${index}`}
+                                        name={`check-photo-${index}`}
+                                        checked={isPhotoSelected()}
+                                        onChange={(e) => handleChecking(e, photo)}
+                                        className="align-middle w-[1em]" />
+                                    :
+                                    <button onClick={handleToggleRemoveConfirmation}
+                                        type="button"
+                                    >
+                                        <ImCross className="text-red-500 hover:text-red-700" />
+                                    </button>
+
+                            }
+                        </div>
+                    </div>
+                </div>
+                {isDescriptionVisible && <div>
+                    {photo.resolution &&
+                        <div className="flex flex-row justify-between"><b>
+                            <Trans i18nKey="cardImage.resolution"
+                                defaults="Resolution:"
+                            />
+                        </b> <span>{photo.resolution}</span></div>
+                    }
+                    {photo.description &&
+                        <div>
+                            <b>
+                                <Trans i18nKey="cardImage.description"
+                                    defaults="Description:"
+                                />
+                            </b>
+                            <p className="italic text-[0.5rem] text-justify">{photo.description}</p>
+                        </div>
+                    }
+                </div>}
+            </div>

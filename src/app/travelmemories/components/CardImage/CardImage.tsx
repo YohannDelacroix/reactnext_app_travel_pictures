@@ -113,41 +113,44 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
 
             {/* Metadatas */}
             <div className="flex flex-col gap-y-2">
-                <div className="flex flex-row justify-between max-w ">
-                    <div className="flex flex-row items-start justify-start gap-x-2 max-w-[65%]">
-                        <button className="block h-3"
+                <div className="flex flex-row justify-between items-baseline max-w ">
+                    <div className="self-baseline flex flex-row items-baseline justify-start gap-x-2 max-w-[65%]">
+                        <button className="flex self-baseline"
                             type="button"
                             onClick={toggleDescription}>
                             {isDescriptionVisible ? <IoIosArrowUp /> : <IoIosArrowDown />}
                         </button>
                         <h2 className={titleClass}>#{index} {photo.title && <span> - {photo.title}</span>}</h2>
                     </div>
-                    <div className="flex flex-row self-start items-center justify-end gap-x-2">
-                        <span>
-                            {unitPrice !== priceToDisplay && <span><span className='text-[0.5rem] leading-[1rem] line-through text-red-500'>{unitPrice.toFixed(2)}€</span> - </span>}
-                            <span>
-                                {priceToDisplay.toFixed(2)}€
-                            </span>
+                    <div className="flex flex-row flex-wrap self-start items-center justify-end gap-x-2">
+                        <div className="text-[1rem]">
+                            {priceToDisplay.toFixed(2)}€
+                        </div>
 
-                        </span>
-                        {
-                            parentSrc === parentSrcType.PRIVATE_GALLERY ?
-                                <input
-                                    type="checkbox"
-                                    id={`check-photo-${index}`}
-                                    name={`check-photo-${index}`}
-                                    checked={isPhotoSelected()}
-                                    onChange={(e) => handleChecking(e, photo)}
-                                    className="align-middle w-[1em]" />
-                                :
-                                <button onClick={handleToggleRemoveConfirmation}
-                                    type="button"
-                                >
-                                    <ImCross className="text-red-500 hover:text-red-700" />
-                                </button>
+                        {unitPrice !== priceToDisplay &&
+                            <div className='text-[0.5rem] leading-[1rem] line-through text-red-500'>
+                                {unitPrice.toFixed(2)}€
+                            </div>}
 
-                        }
 
+                        <div className="self-stretch">
+                            {
+                                parentSrc === parentSrcType.PRIVATE_GALLERY ?
+                                    <input
+                                        type="checkbox"
+                                        id={`check-photo-${index}`}
+                                        name={`check-photo-${index}`}
+                                        checked={isPhotoSelected()}
+                                        onChange={(e) => handleChecking(e, photo)}
+                                        className="align-middle" />
+                                    :
+                                    <button onClick={handleToggleRemoveConfirmation}
+                                        type="button"
+                                    >
+                                        <ImCross className="text-red-500 hover:text-red-700" />
+                                    </button>
+                            }
+                        </div>
                     </div>
                 </div>
                 {isDescriptionVisible && <div>
