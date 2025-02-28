@@ -41,9 +41,10 @@ interface linkButtonProps {
     href?: string;                  // The destination URL - If not defined the link acts like a basic button
     type: buttonType;               // Defines the button's style
     children: React.ReactNode;      // Content inside the button (text, icons, etc.)
+    width?: number;                 // Optionnal width for button
 }
 
-const LinkButton = ({ children, href, type }: linkButtonProps) => {
+const LinkButton = ({ children, href, type, width }: linkButtonProps) => {
     const dispatch = useDispatch<AppDispatch>();
     const photos = useSelector((state: RootState) => state.gallery.photos);
     const selectedPhotosLength = useSelector((state: RootState) => state.cart.selectedPhotos.length);
@@ -86,13 +87,20 @@ const LinkButton = ({ children, href, type }: linkButtonProps) => {
         { "w-full bg-[#ffc439] py-3 font-bold text-[1.5rem]": type === buttonType.PAY_PAYPAL}
     );
 
+    const customWidth = width ? { width: `${width}%` } : {};
+
     return (
         isVisible && (
             href ? (
-                <Link href={href} className={commonClasses} onClick={handleClick}>
+                <Link   href={href} 
+                        className={commonClasses} 
+                        onClick={handleClick} 
+                        style={customWidth}>
                     {children}
                 </Link>) : (
-                <span className={classNames(commonClasses, "inline-block cursor-pointer")} onClick={handleClick}>
+                <span   className={classNames(commonClasses, "inline-block cursor-pointer")} 
+                        onClick={handleClick}
+                        style={customWidth}>
                     {children}
                 </span>
             )

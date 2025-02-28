@@ -188,7 +188,8 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
                             </span>
                         </LinkButton>
                         <LinkButton href={`${PATH_PRIVATE_GALLERY}${galleryId}`}
-                            type={buttonType.BACK}>
+                                    type={buttonType.BACK}
+                                    width={50}>
                             <FaLongArrowAltLeft /> {t("sidebar.BackToGalery")}
                         </LinkButton>
 
