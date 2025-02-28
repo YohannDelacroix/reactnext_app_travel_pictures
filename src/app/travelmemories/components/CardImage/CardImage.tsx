@@ -72,7 +72,8 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
             "md:max-w-[49%]",
             "lg:max-w-[49%]",
             { "bg-[#B4E1B9]": isPhotoSelected() }
-        )}>
+        )}
+            onClick={() => handleChecking(!isPhotoSelected(), photo)}>
             <div className="relative">
                 {
                     removeConfirmation &&
@@ -117,7 +118,11 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
                     <div className="self-baseline flex flex-row items-baseline justify-start gap-x-2 max-w-[65%]">
                         <button className="flex self-baseline"
                             type="button"
-                            onClick={toggleDescription}>
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                toggleDescription()
+                            }}
+                            >
                             {isDescriptionVisible ? <IoIosArrowUp /> : <IoIosArrowDown />}
                         </button>
                         <h2 className={titleClass}>#{index} {photo.title && <span> - {photo.title}</span>}</h2>
@@ -133,7 +138,7 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
                             </div>}
 
 
-                        <div className="self-stretch">
+                        <div className="flex self-stretch">
                             {
                                 parentSrc === parentSrcType.PRIVATE_GALLERY ?
                                     <input
@@ -142,7 +147,7 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
                                         name={`check-photo-${index}`}
                                         checked={isPhotoSelected()}
                                         onChange={(e) => handleChecking(e, photo)}
-                                        className="align-middle" />
+                                        className="block align-middle cursor-pointer" />
                                     :
                                     <button onClick={handleToggleRemoveConfirmation}
                                         type="button"

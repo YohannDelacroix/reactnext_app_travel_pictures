@@ -21,8 +21,14 @@ function useCardImageForPrivateGallery() {
     *   Method: handleChecking                  
     *   Manage the photo's checkboxes
     */
-    const handleChecking = (e: React.ChangeEvent<HTMLInputElement>, photo: Photo) => {
-        const { checked } = e.target;
+    const handleChecking = (e: React.ChangeEvent<HTMLInputElement> | boolean, photo: Photo) => {
+        let checked: boolean;
+
+        if (typeof e === "boolean") {
+            checked = e; // Appel direct (depuis le clic sur la card)
+        } else {
+            checked = e.target.checked; // Appel depuis un input checkbox
+        }
 
         if(checked){ //The photo have been selected and need to be added
             dispatch(addPhoto(photo));
