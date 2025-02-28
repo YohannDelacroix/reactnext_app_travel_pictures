@@ -14,11 +14,13 @@ const PageContainer = ({ children, parentSrc }: pageContainerProps) => {
     return (
         <div className={classNames(
             "flex flex-col gap-y-2",
-            "lg:flex-row lg:gap-x-2 lg:items-start",
-            {"flex-col-reverse": parentSrc === parentSrcType.PAYMENT}
+            "lg:flex-row lg:gap-x-2 lg:items-start"
         )}
         >
-            <div className="lg:w-[75%]">{children}</div>
+            <div className={classNames(
+            "lg:w-[75%]",
+            {"mb-4": parentSrc === parentSrcType.PAYMENT}
+        )}>{children}</div>
             <div className="lg:w-[25%]"><SideBar parentSrc={parentSrc} /></div>
             
         </div >
