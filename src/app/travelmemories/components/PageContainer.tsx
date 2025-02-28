@@ -21,7 +21,7 @@ const PageContainer = ({ children, parentSrc }: pageContainerProps) => {
             "lg:w-[75%]",
             {"mb-4": parentSrc === parentSrcType.PAYMENT}
         )}>{children}</div>
-            <div className="lg:w-[25%]"><SideBar parentSrc={parentSrc} /></div>
+            <SideBar parentSrc={parentSrc} />
             
         </div >
     )
