@@ -38,9 +38,11 @@ const TravelMemoriesAccessForm = () => {
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <input className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#a6c9e2] text-lg text-center"
+            <input 
+                className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#a6c9e2] text-sm text-center truncate overflow-hidden"
                 type="text"
                 placeholder={t("landingPage.inputPlaceholder")}
+                title={t("landingPage.inputPlaceholder")}
                 value={galleryId}
                 onChange={(e) => setGalleryId(e.target.value)}
             ></input>
