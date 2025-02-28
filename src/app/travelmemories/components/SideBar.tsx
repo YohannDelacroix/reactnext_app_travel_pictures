@@ -154,7 +154,9 @@ const SideBar = ({ parentSrc }: SideBarProps) => {
                         </p>
                     </div>
                 ) : (
-                    <LinkButton href={PATH_CART} type={buttonType.NEXT}>
+                    <LinkButton href={PATH_CART} 
+                                type={buttonType.NEXT}
+                                disabled={purchasedPhotos === 0}>
                         <span className="uppercase">
                             <Trans i18nKey="sidebar.goToCart"
                                 defaults="GO TO CART" />

@@ -42,25 +42,28 @@ interface linkButtonProps {
     type: buttonType;               // Defines the button's style
     children: React.ReactNode;      // Content inside the button (text, icons, etc.)
     width?: number;                 // Optionnal width for button
+    disabled?: boolean;
 }
 
-const LinkButton = ({ children, href, type, width }: linkButtonProps) => {
+const LinkButton = ({ children, href, type, width, disabled }: linkButtonProps) => {
     const dispatch = useDispatch<AppDispatch>();
     const photos = useSelector((state: RootState) => state.gallery.photos);
     const selectedPhotosLength = useSelector((state: RootState) => state.cart.selectedPhotos.length);
 
     const handleClick = () => {
-        if (type === buttonType.GET_THE_BEST_DEAL) {
-            dispatch(buyAllPhotos(photos));
-        }
-        else if (type === buttonType.CLEAR) {
-            dispatch(resetCart());
-        }
-        else if (type === buttonType.PAY_CB){
-            //TODO
-        }
-        else if (type === buttonType.PAY_PAYPAL){
-            //TODO
+        if(!disabled){
+            if (type === buttonType.GET_THE_BEST_DEAL) {
+                dispatch(buyAllPhotos(photos));
+            }
+            else if (type === buttonType.CLEAR) {
+                dispatch(resetCart());
+            }
+            else if (type === buttonType.PAY_CB){
+                //TODO
+            }
+            else if (type === buttonType.PAY_PAYPAL){
+                //TODO
+            }
         }
     }
 
@@ -84,23 +87,26 @@ const LinkButton = ({ children, href, type, width }: linkButtonProps) => {
         //Pay by CB button styles
         { "w-full bg-mygreen py-3 font-bold text-[1.5rem]": type === buttonType.PAY_CB},
         //Pay by Paypal button styles
-        { "w-full bg-[#ffc439] py-3 font-bold text-[1.5rem]": type === buttonType.PAY_PAYPAL}
+        { "w-full bg-[#ffc439] py-3 font-bold text-[1.5rem]": type === buttonType.PAY_PAYPAL},
     );
 
-    const customWidth = width ? { width: `${width}%` } : {};
+    const customStyle = {
+        ...(width ? { width: `${width}%` } : {}),
+        ...(disabled ? { opacity: 0.5, cursor: 'default' } : {})
+    };
 
     return (
         isVisible && (
-            href ? (
+            href && !disabled ? (
                 <Link   href={href} 
                         className={commonClasses} 
                         onClick={handleClick} 
-                        style={customWidth}>
+                        style={customStyle}>
                     {children}
                 </Link>) : (
                 <span   className={classNames(commonClasses, "inline-block cursor-pointer")} 
                         onClick={handleClick}
-                        style={customWidth}>
+                        style={customStyle}>
                     {children}
                 </span>
             )
