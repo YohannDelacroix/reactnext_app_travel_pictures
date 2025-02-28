@@ -73,7 +73,7 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
             "lg:max-w-[49%]",
             { "bg-[#B4E1B9]": isPhotoSelected() }
         )}
-            onClick={() => handleChecking(!isPhotoSelected(), photo)}>
+            onClick={() => parentSrc === parentSrcType.PRIVATE_GALLERY && handleChecking(!isPhotoSelected(), photo)}>
             <div className="relative">
                 {
                     removeConfirmation &&
