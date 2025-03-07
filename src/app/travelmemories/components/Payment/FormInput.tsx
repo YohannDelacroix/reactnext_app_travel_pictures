@@ -77,7 +77,7 @@ const FormInput = ({ type, formData, setFormData }: formInputProps) => {
                     name={`${type}`}
                     value={formData[type]}
                     onChange={handleChange}
-                    autoComplete={`${type}`}
+                    autoComplete="off"
                     inputMode={inputMode}
                     pattern={pattern}
                     maxLength={maxLength}

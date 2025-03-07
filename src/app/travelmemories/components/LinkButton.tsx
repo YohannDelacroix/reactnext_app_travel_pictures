@@ -85,7 +85,7 @@ const LinkButton = ({ children, href, type, width, disabled }: linkButtonProps) 
         { "sm:w-[40%]": type === buttonType.CLEAR },
         { "lg:w-[25%]": type === buttonType.CLEAR },
         //Pay by CB button styles
-        { "w-full bg-mygreen py-3 font-bold text-[1.5rem]": type === buttonType.PAY_CB},
+        { "w-full bg-mygreen py-3 font-bold text-[1.4rem]": type === buttonType.PAY_CB},
         //Pay by Paypal button styles
         { "w-full bg-[#ffc439] py-3 font-bold text-[1.5rem]": type === buttonType.PAY_PAYPAL},
     );
