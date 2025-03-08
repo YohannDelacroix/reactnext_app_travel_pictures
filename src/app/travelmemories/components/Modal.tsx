@@ -49,8 +49,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, handleClose, children }) => {
 
     return (
         <div ref={modalRef}
-            className="flex flex-col justify-around w-[60%] h-[25%] px-3 py-6 bg-[#A6C9E2] bg-opacity-80 fixed z-10 top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-[0.8rem] text-black
-                                    lg:text-[0.7rem]">
+            className=" fixed top-[50%] left-[50%] z-10 transform -translate-x-1/2 -translate-y-1/2 
+                        flex flex-col justify-around 
+                        w-[80vw] h-[25%] px-3 py-6 
+                        bg-[#A6C9E2] bg-opacity-80 
+                        text-[0.8rem] text-black 
+                        lg:w-[60vw] lg:min-h-[40%] lg:text-[1.6rem]">  
             <div className="absolute top-[0.5rem] right-[0.5rem] hover:text-red-500 cursor-pointer"
                 onClick={handleClose}><ImCross /></div>
             {children}

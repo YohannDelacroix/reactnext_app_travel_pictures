@@ -74,7 +74,7 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
             { "bg-[#B4E1B9]": isPhotoSelected() }
         )}
             onClick={() => parentSrc === parentSrcType.PRIVATE_GALLERY && handleChecking(!isPhotoSelected(), photo)}>
-            <div className="relative">
+            <div className="">
                 {
                     removeConfirmation &&
                     <Modal handleClose={handleKeepPhoto} isOpen={removeConfirmation}>
@@ -85,14 +85,14 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
                         </p>
                         <div className="flex justify-around">
                             <button type="button"
-                                className="block w-[33%] px-1 py-[0.5em] bg-[#B4E1B9]"
+                                className="block w-[33%] px-1 py-[0.5em] bg-[#B4E1B9] hover:brightness-95 transition-all"
                                 onClick={handleKeepPhoto}>
                                 <Trans i18nKey="cardImage.removeButtonKeep"
                                     defaults="Keep"
                                 />
                             </button>
                             <button type="button"
-                                className="block w-[33%] px-1 py-[0.5em] bg-[#D1B3E0]"
+                                className="block w-[33%] px-1 py-[0.5em] bg-[#D1B3E0] hover:brightness-95 transition-all"
                                 onClick={() => handleRemovePhoto(photo.id)}>
                                 <Trans i18nKey="cardImage.removeButtonRemove"
                                     defaults="Remove"
