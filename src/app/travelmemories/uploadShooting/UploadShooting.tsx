@@ -1,12 +1,22 @@
 "use client"
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import PhotoViewer from './components/PhotoViewer';
 
+
+/**
+ * 
+ * @returns a form that the photographer fill to store the images on AWS and the datas on firebase
+ */
 const UploadShooting = () => {
     const [file, setFile] = useState<File | null>(null);
-    const [imageUrl, setImageUrl] = useState<string | null>(null);
+    const [imagePathName, setimagePathName] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
 
+    /**
+     * 
+     * @param event when a file is browsed
+     */
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
             setFile(event.target.files[0]);
@@ -27,7 +37,7 @@ const UploadShooting = () => {
             const response = await axios.post('/api/uploadPhoto', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
-            setImageUrl(response.data.imageUrl); // URL de l'image retournée par ton back-end
+            setimagePathName(response.data.pathName); // URL de l'image retournée par ton back-end
         } catch (error) {
             console.error('Erreur lors de l\'upload de l\'image', error);
         } finally {
@@ -36,8 +46,8 @@ const UploadShooting = () => {
     };
 
     useEffect(() => {
-        console.log("imageUrl = ", imageUrl)
-    }, [imageUrl])
+        console.log("imagePathName = ", imagePathName)
+    }, [imagePathName])
 
     return (
         <div className="flex flex-col items-center">
@@ -49,11 +59,11 @@ const UploadShooting = () => {
             >
                 {loading ? "Téléchargement..." : "Uploader"}
             </button>
-            {imageUrl && (
+            {imagePathName && (
                 <div className="mt-4">
-                    <p>Image uploadée :</p>
-                    <img src={imageUrl} alt="Uploaded" className="w-64 h-auto rounded" />
-                    <p>{imageUrl}</p>
+                    <p>Uploaded image :</p>
+                    <PhotoViewer fileName={imagePathName} />
+                    <p>{imagePathName}</p>
                 </div>
             )}
         </div>
