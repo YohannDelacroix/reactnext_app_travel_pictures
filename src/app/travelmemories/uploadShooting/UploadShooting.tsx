@@ -1,72 +1,97 @@
 "use client"
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import PhotoViewer from './components/PhotoViewer';
-
+import React from 'react'
+import { useUploadShooting } from './hooks/useUploadShooting';
 
 /**
  * 
- * @returns a form that the photographer fill to store the images on AWS and the datas on firebase
+ * @returns a form that the photographer fills to store the images on AWS and the data on Firebase
  */
 const UploadShooting = () => {
-    const [file, setFile] = useState<File | null>(null);
-    const [imagePathName, setimagePathName] = useState<string | null>(null);
-    const [loading, setLoading] = useState(false);
-
-    /**
-     * 
-     * @param event when a file is browsed
-     */
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files[0]) {
-            setFile(event.target.files[0]);
-        }
-    };
-
-    const handleUpload = async () => {
-        if (!file) {
-            alert("Veuillez sélectionner une image.");
-            return;
-        }
-
-        setLoading(true);
-        const formData = new FormData();
-        formData.append('photo', file); // Le nom 'photo' doit correspondre à celui du champ dans ton back-end
-
-        try {
-            const response = await axios.post('/api/uploadPhoto', formData, {
-                headers: { 'Content-Type': 'multipart/form-data' },
-            });
-            setimagePathName(response.data.pathName); // URL de l'image retournée par ton back-end
-        } catch (error) {
-            console.error('Erreur lors de l\'upload de l\'image', error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        console.log("imagePathName = ", imagePathName)
-    }, [imagePathName])
-
+    const {
+        photos,
+        shootingInfo,
+        userInfo,
+        unitPrice,
+        loading,
+        setUnitPrice,
+        handleFileChange,
+        handlePhotoChange,
+        handleShootingInfoChange,
+        handleUserInfoChange,
+        handleUpload,
+    } = useUploadShooting();
+    
     return (
-        <div className="flex flex-col items-center">
-            <input type="file" onChange={handleFileChange} accept="image/*" />
+        <form className="flex flex-col items-center">
+            {/* Photo selection */}
+            <input type="file" multiple onChange={handleFileChange} accept="image/*" />
+            
+            {/* Displaying previews */}
+            {photos.length > 0 && <div className="flex flex-wrap gap-4 mt-4">
+                {
+                    photos.map((photo, index) => (
+                        <div key={`${photo.id}-${index}`} className="flex flex-col items-center p-2 border rounded m-2">
+                            <img src={photo.src}
+                                alt={`Photo${index}`}
+                                className="w-32 h-32 rounded" />
+
+                            <input
+                                type="text"
+                                placeholder="Title"
+                                value={photo.title}
+                                onChange={(e) => handlePhotoChange(index, "title", e.target.value)}
+                                className="block mt-2 p-1"
+                            />
+                            <input
+                                type="text"
+                                placeholder="Resolution"
+                                value={photo.resolution}
+                                onChange={(e) => handlePhotoChange(index, "resolution", e.target.value)}
+                                className="block mt-2 p-1"
+                            />
+                            <textarea
+                                placeholder="Description"
+                                value={photo.description}
+                                onChange={(e) => handlePhotoChange(index, "description", e.target.value)}
+                                className="block mt-2 p-1"
+                            />
+                        </div>
+                    ))
+                }
+            </div>}
+
+            {/* Shooting information */}
+            <div className="mt-4">
+                <h2>Shooting Information</h2>
+                <input type="text" placeholder="Model Name" value={shootingInfo.modelName} onChange={(e) => handleShootingInfoChange("modelName", e.target.value)} className="border p-1 mt-1" />
+                <input type="text" placeholder="Country" value={shootingInfo.country} onChange={(e) => handleShootingInfoChange("country", e.target.value)} className="border p-1 mt-1" />
+                <input type="text" placeholder="City" value={shootingInfo.city} onChange={(e) => handleShootingInfoChange("city", e.target.value)} className="border p-1 mt-1" />
+            </div>
+
+            {/* User information */}
+            <div className="mt-4">
+                <h2>User Information</h2>
+                <input type="text" placeholder="First Name" value={userInfo.firstName} onChange={(e) => handleUserInfoChange("firstName", e.target.value)} className="border p-1 mt-1" />
+                <input type="text" placeholder="Last Name" value={userInfo.lastName} onChange={(e) => handleUserInfoChange("lastName", e.target.value)} className="border p-1 mt-1" />
+                <input type="email" placeholder="Email" value={userInfo.email} onChange={(e) => handleUserInfoChange("email", e.target.value)} className="border p-1 mt-1" />
+            </div>
+
+            {/* Unit price */}
+            <div className="mt-4">
+                <h2>Unit Price</h2>
+                <input type="number" value={unitPrice} onChange={(e) => setUnitPrice(Number(e.target.value))} className="border p-1 mt-1" />
+            </div>
+
+            {/* Submit button */}
             <button
                 onClick={handleUpload}
                 disabled={loading}
                 className="mt-2 p-2 bg-blue-500 text-white rounded"
             >
-                {loading ? "Téléchargement..." : "Uploader"}
+                {loading ? "Uploading..." : "Upload"}
             </button>
-            {imagePathName && (
-                <div className="mt-4">
-                    <p>Uploaded image :</p>
-                    <PhotoViewer fileName={imagePathName} />
-                    <p>{imagePathName}</p>
-                </div>
-            )}
-        </div>
+        </form>
     )
 }
 
