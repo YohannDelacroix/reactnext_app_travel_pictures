@@ -1,5 +1,4 @@
 "use client"
-import axios from 'axios';
 import React from 'react'
 import { useUploadShooting } from './hooks/useUploadShooting';
 
@@ -88,6 +87,7 @@ const UploadShooting = () => {
                 onClick={handleUpload}
                 disabled={loading}
                 className="mt-2 p-2 bg-blue-500 text-white rounded"
+                type="button"
             >
                 {loading ? "Uploading..." : "Upload"}
             </button>

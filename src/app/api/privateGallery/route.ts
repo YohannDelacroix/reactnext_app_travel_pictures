@@ -1,4 +1,4 @@
-import { db, verifyToken } from '@/../libs/firebaseAdmin.js';
+import { verifyToken } from '@/../libs/firebaseAdmin.js';
 import { addPrivateGallery, getPrivateGallery } from '@/app/controllers/privateGallery';
 
 import { privateGallery } from '@/app/models/privateGallery';
@@ -17,7 +17,7 @@ export async function POST(req: Request): Promise<Response> {
         const response = await addPrivateGallery(body);
 
         // Return a response with the created object's ID
-        return Response.json({ message: 'Gallery added', id: response.id }, { status: 200 });
+        return Response.json({ message: 'Gallery added', id: response.id }, { status: 201 });
     } catch (error) {
         console.error('Error adding gallery:', error);
 

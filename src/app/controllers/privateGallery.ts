@@ -11,7 +11,7 @@ import { ErrorTypes } from '@/types/errorTypes';
  * @param privateGallery a privateGallery to add in the cloud firestore 
  * @returns an ID or an error
  */
-export async function addPrivateGallery(privateGallery: privateGallery): Promise<{ id: string; message: string }> {
+export async function addPrivateGalleryOLD(privateGallery: privateGallery): Promise<{ id: string; message: string }> {
     try {
 <<<<<<< HEAD
         //Retrieves the unique ID
@@ -31,6 +31,61 @@ export async function addPrivateGallery(privateGallery: privateGallery): Promise
     } catch (error) {
         console.error('Error adding gallery:', error);
         throw error;
+    }
+}
+
+/**
+ * 
+ * @param privateGallery a privateGallery to add in the cloud firestore 
+ * @returns an ID or an error
+ */
+export async function addPrivateGalleryOLDD(privateGallery: privateGallery): Promise<{ id: string; message: string }> {
+    try {
+        // Create a new document reference with an auto-generated ID
+        const newGalleryRef = db.collection('privateGallery').doc();
+        const generatedId = newGalleryRef.id; // Retrieve the generated ID
+
+        // Assign the generated ID to shootingInfo.id
+        privateGallery.shootingInfo.id = generatedId;
+
+        // Save the privateGallery with the updated ID
+        await newGalleryRef.set(privateGallery);
+
+        return { id: generatedId, message: 'New private gallery added' };
+    } catch (error) {
+        console.error('Error adding gallery:', error);
+        throw error;
+    }
+}
+
+/**
+ * Adds a new private gallery to Firestore using a predefined shooting ID.
+ * @param privateGallery - The privateGallery object containing all necessary data.
+ * @returns The shooting ID or an error message.
+ */
+export async function addPrivateGallery(privateGallery: privateGallery): Promise<{ id: string; message: string }> {
+    try {
+        // Ensure the shooting ID is provided
+        if (!privateGallery.shootingInfo.id) {
+            throw new Error("Missing shooting ID");
+        }
+
+        const galleryId = privateGallery.shootingInfo.id;
+        const docRef = db.collection('privateGallery').doc(galleryId);
+
+        // Check if a document with the same ID already exists
+        const docSnapshot = await docRef.get();
+        if (docSnapshot.exists) {
+            throw new Error("Gallery with this ID already exists");
+        }
+
+        // Save the gallery in Firestore
+        await docRef.set(privateGallery);
+
+        return { id: galleryId, message: 'New private gallery added' };
+    } catch (error) {
+        console.error("Error adding gallery:", error);
+        throw new Error('Failed to add new private Gallery');
     }
 }
 

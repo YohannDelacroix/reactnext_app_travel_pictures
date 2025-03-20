@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
             {
                 protocol: "https",
                 hostname: "travelmemories.s3.eu-north-1.amazonaws.com",
-                pathname: "/photos/**",
+                pathname: "/privateGalleries/**",
             },
         ],
     },

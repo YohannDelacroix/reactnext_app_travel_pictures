@@ -9,22 +9,33 @@ export const useUploadShooting = () => {
     const [userInfo, setUserInfo] = useState<UserInfo>(getEmptyUserInfo);
     const [unitPrice, setUnitPrice] = useState<number>(0);
     const [loading, setLoading] = useState(false);
+    const [srcToFileNameMap, setSrcToFileNameMap] = useState<Map<string, string>>(new Map()); // Stores src → file.name mapping
 
-    // Handle file input change and create Photo objects
+    /**
+     * Handle file input change and create Photo objects
+     * @param event 
+     */
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
             const filesArray = Array.from(event.target.files);
             setFiles(filesArray);
+            const newMap = new Map(srcToFileNameMap);
 
             // Create Photo objects for each file
-            const newPhotos = filesArray.map((file) => ({
-                id: crypto.randomUUID(), // Generate a unique ID
-                title: file.name, // Use file name as title temporarily
-                resolution: "", // Empty by default
-                description: "", // Empty by default
-                src: URL.createObjectURL(file), // Temporary URL for display
-            }));
+            const newPhotos = filesArray.map((file) => {
+                const src = URL.createObjectURL(file); // Temporary URL for display
+                newMap.set(src, file.name); // Store src → file.name association
+    
+                return {
+                    id: crypto.randomUUID(), // Generate a unique ID
+                    title: file.name, // Temporarily use the file name as title
+                    resolution: "",
+                    description: "",
+                    src, // Temporary URL
+                };
+            });
 
+            setSrcToFileNameMap(newMap);
             // Append new photos to existing ones
             setPhotos((prevPhotos) => [...prevPhotos, ...newPhotos]);
         }
@@ -59,14 +70,25 @@ export const useUploadShooting = () => {
         setUserInfo(prev => ({ ...prev, [field]: value }));
     };
 
-    const uploadPhotosOnS3 = async () => {
+    /**
+    * Uploads photos to AWS S3 with a given shooting ID
+    * @param shootingId - The unique ID of the shooting session
+    * @returns A list of S3 paths corresponding to uploaded photos
+    */
+    const uploadPhotosOnS3 = async (shootingId: string) => {
+        if (!shootingId) {
+            console.error("Error: No shooting ID provided.");
+            alert("Internal error: Missing shooting ID.");
+            return null;
+        }
+
         if (files.length === 0) {
             alert("Please select at least one image.");
             return null;
         }
 
-        setLoading(true);
         const formData = new FormData();
+        formData.append("shootingId", shootingId);
         files.forEach(file => formData.append("photos", file));
 
         try {
@@ -78,26 +100,149 @@ export const useUploadShooting = () => {
             // Update photo URLs after upload to AWS
             if (response.status === 200) {
                 const uploadedPaths: { [key: string]: string } = response.data.paths;
-                // uploadedPaths est un objet { "nom_fichier1.jpg": "chemin_S3_1", ... }
-    
+                // uploadedPaths is an object like { "file_name1.jpg": "S3_path/file_name1.jpg", ... }
+                console.log("uploadedPaths = ", uploadedPaths)
                 return uploadedPaths;
             }
         } catch (error) {
             console.error("Upload error:", error);
             alert("Error while sending the data.");
-        } finally {
-            setLoading(false);
         }
     }
+
+    /**
+     * 
+     * @param finalShootingData 
+     * @returns a boolean that inform if the privateGallery have been add on the database
+     */
+    const saveShootingData = async (finalShootingData: any) => {
+        try {
+            const response = await axios.post("/api/privateGallery", finalShootingData);
+
+            if (response.status === 201) {
+                console.log("Shooting successfully saved:", response.data);
+                return true;
+            } else {
+                console.error("Error saving shooting:", response.data);
+                alert("Failed to save shooting data.");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("An error occurred while saving the shooting data.");
+        }
+
+        return false;
+    };
+
+    /**
+     * 
+     * @returns false if the form contains errors and must be reviewed, otherwise returns true
+     */
+    const validateForm = () => {
+        const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ' -]+$/;
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,6}$/;
+
+        if (photos.length === 0) {
+            alert("You must upload at least one photo.");
+            return false;
+        }
+
+        if (!shootingInfo.modelName.trim() || !nameRegex.test(shootingInfo.modelName)) {
+            alert("Model Name is required and must only contain letters, spaces, apostrophes, or hyphens.");
+            return false;
+        }
+
+        if (!shootingInfo.city.trim() || !nameRegex.test(shootingInfo.city)) {
+            alert("City is required and must only contain letters, spaces, apostrophes, or hyphens.");
+            return false;
+        }
+
+        if (!shootingInfo.country.trim() || !nameRegex.test(shootingInfo.country)) {
+            alert("Country is required and must only contain letters, spaces, apostrophes, or hyphens.");
+            return false;
+        }
+
+        if (!userInfo.firstName.trim() || !nameRegex.test(userInfo.firstName)) {
+            alert("First Name must only contain letters, spaces, apostrophes, or hyphens.");
+            return false;
+        }
+
+        if (!userInfo.lastName.trim() || !nameRegex.test(userInfo.lastName)) {
+            alert("Last Name must only contain letters, spaces, apostrophes, or hyphens.");
+            return false;
+        }
+
+        if (!userInfo.email.trim() || !emailRegex.test(userInfo.email)) {
+            alert("Invalid email format. Please enter a valid email (example: name@domain.com).");
+            return false;
+        }
+
+        if (!unitPrice || unitPrice <= 0) {
+            alert("Unit Price must be greater than 0.");
+            return false;
+        }
+        
+        return true;
+    };
 
     /**
      * Handle upload of photos to AWS and save to Firebase
      */
     const handleUpload = async () => {
-        //Checking validity on the form fields
+        setLoading(true);
 
-        if(uploadPhotosOnS3() === null) return;
-        console.log("Uploading shooting on data base")
+        //Checking form validity
+        if (!validateForm()) {
+            setLoading(false);
+            return; // Stop the process if validation fails
+        }
+
+        try {
+            // Request a unique ID from the backend
+            const idResponse = await fetch("/api/generateShootingId", { method: "POST" });
+            const { shootingId } = await idResponse.json();
+            if (!shootingId) throw new Error("Failed to generate ID");
+
+            console.log("Generated shooting ID:", shootingId);
+
+            // Upload photos to AWS using this ID
+            const uploadedPathNames = await uploadPhotosOnS3(shootingId);
+            if (!uploadedPathNames) throw new Error("Upload failed");
+
+            // Inject shootingId into shootingInfo
+            const updatedShootingInfo = { ...shootingInfo, id: shootingId };
+
+            // Construct final data object
+            const finalShootingData = {
+                photos: photos.map(photo => {
+                    const originalFileName = srcToFileNameMap.get(photo.src); // 🔹 Retrieve original file name
+                    console.log("origi = ", originalFileName)
+                    
+                    if (!originalFileName || !uploadedPathNames[originalFileName]) {
+                        throw new Error(`Missing path for photo: ${photo.title || "Untitled"}`);
+                    }
+    
+                    return {
+                        ...photo,
+                        src: uploadedPathNames[originalFileName] // 📌 Assign the correct S3 path
+                    };
+                }),
+                shootingInfo: updatedShootingInfo,
+                unitPrice,
+                userInfo
+            };
+
+            const saveShooting = await saveShootingData(finalShootingData);
+            if (saveShooting) {
+                //Displays the imported gallery on screen and remove the form
+            }
+
+        } catch (error) {
+            console.error("Error during upload:", error);
+            alert("An error occurred during upload.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     // Return all states and functions for use in the calling component
@@ -106,7 +251,7 @@ export const useUploadShooting = () => {
         photos,
         shootingInfo,
         userInfo,
-        unitPrice, 
+        unitPrice,
         loading,
         setUnitPrice,
         handleFileChange,
