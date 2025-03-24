@@ -13,19 +13,19 @@ const UploadShooting = () => {
         userInfo,
         unitPrice,
         loading,
-        setUnitPrice,
+        handleUnitPrice,
         handleFileChange,
         handlePhotoChange,
         handleShootingInfoChange,
         handleUserInfoChange,
         handleUpload,
     } = useUploadShooting();
-    
+
     return (
         <form className="flex flex-col items-center">
             {/* Photo selection */}
             <input type="file" multiple onChange={handleFileChange} accept="image/*" />
-            
+
             {/* Displaying previews */}
             {photos.length > 0 && <div className="flex flex-wrap gap-4 mt-4">
                 {
@@ -79,7 +79,10 @@ const UploadShooting = () => {
             {/* Unit price */}
             <div className="mt-4">
                 <h2>Unit Price</h2>
-                <input type="number" value={unitPrice} onChange={(e) => setUnitPrice(Number(e.target.value))} className="border p-1 mt-1" />
+                <input type="text"
+                    value={unitPrice || ""}
+                    onChange={handleUnitPrice}
+                    className="border p-1 mt-1" />
             </div>
 
             {/* Submit button */}

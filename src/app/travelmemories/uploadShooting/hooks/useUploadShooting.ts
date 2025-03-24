@@ -7,7 +7,7 @@ export const useUploadShooting = () => {
     const [photos, setPhotos] = useState<Photo[]>([]);
     const [shootingInfo, setShootingInfo] = useState<ShootingInfo>(getEmptyShootingInfo);
     const [userInfo, setUserInfo] = useState<UserInfo>(getEmptyUserInfo);
-    const [unitPrice, setUnitPrice] = useState<number>(0);
+    const [unitPrice, setUnitPrice] = useState<string>("");
     const [loading, setLoading] = useState(false);
     const [srcToFileNameMap, setSrcToFileNameMap] = useState<Map<string, string>>(new Map()); // Stores src → file.name mapping
 
@@ -70,6 +70,10 @@ export const useUploadShooting = () => {
         setUserInfo(prev => ({ ...prev, [field]: value }));
     };
 
+    const handleUnitPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setUnitPrice(value);
+    };
     /**
     * Uploads photos to AWS S3 with a given shooting ID
     * @param shootingId - The unique ID of the shooting session
@@ -177,8 +181,14 @@ export const useUploadShooting = () => {
             return false;
         }
 
-        if (!unitPrice || unitPrice <= 0) {
-            alert("Unit Price must be greater than 0.");
+        if (!/^\d*\.?\d+$/.test(unitPrice)) {
+            alert("Please enter a valid positive number for unit price.");
+            try{
+                Number(unitPrice)
+            }catch(error){
+                alert("Conversion to number failed")
+                return false;
+            }
             return false;
         }
         
@@ -228,7 +238,7 @@ export const useUploadShooting = () => {
                     };
                 }),
                 shootingInfo: updatedShootingInfo,
-                unitPrice,
+                unitPrice: Number(unitPrice),
                 userInfo
             };
 
@@ -253,7 +263,7 @@ export const useUploadShooting = () => {
         userInfo,
         unitPrice,
         loading,
-        setUnitPrice,
+        handleUnitPrice,
         handleFileChange,
         handlePhotoChange,
         handleShootingInfoChange,
