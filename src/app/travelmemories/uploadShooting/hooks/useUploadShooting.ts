@@ -129,7 +129,7 @@ export const useUploadShooting = () => {
             } else {
                 console.error("Error saving shooting:", response.data);
                 alert("Failed to save shooting data.");
-            }
+            } 
         } catch (error) {
             console.error("Error:", error);
             alert("An error occurred while saving the shooting data.");

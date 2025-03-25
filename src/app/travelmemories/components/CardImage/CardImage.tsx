@@ -24,6 +24,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import Modal from '../Modal';
 import { Trans, useTranslation } from 'react-i18next';
+import PhotoViewer from '../PhotoViewer';
 
 interface cardImageProps {
     //Configuration props

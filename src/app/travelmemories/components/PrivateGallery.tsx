@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import CardImage from "@/app/travelmemories/components/CardImage/CardImage"
 import staticPrivateGallery from "@/../data/staticPrivateGallery.json"
 import { parentSrcType } from "../types/parentSrcType";
@@ -14,10 +14,13 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import ShoppingGallery from './ShoppingGallery';
 import { setUserInfo } from '../store/userSlice';
 import { Trans, useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 const PrivateGallery = ({ id }: { id: string }) => {
     //Ensure CardImage will work for PrivateGallery uses
     const parentSrc = parentSrcType.PRIVATE_GALLERY;
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     const dispatch = useDispatch<AppDispatch>();
     const photos = useSelector((state: RootState) => state.gallery.photos);
@@ -37,32 +40,93 @@ const PrivateGallery = ({ id }: { id: string }) => {
             //const response = await fetch(url); 
             //const data = await response.json();
 
-            const data = staticPrivateGallery;
+            try {
+                let data = undefined;
 
-            if (data) {
-                //Only for debugging and test the ID param page, waiting for database implementation
-                const shootingInfo: ShootingInfo = { ...data.shootingInfo, id: id }
-                //console.log("shootingInfo = ", shootingInfo);
-
-                const userInfo: UserInfo = { ...data.userInfo };
-                //console.log("userInfo = ", userInfo);
-                //Only -----TO REMOVE LATER--------------------
+                console.log("process.env.static_mode = ", process.env.NEXT_PUBLIC_STATIC_MODE)
+                
+                if(process.env.NEXT_PUBLIC_STATIC_MODE === "true"){
+                    console.log("IF VRAI")
+                    data = staticPrivateGallery;
+                }else{
+                    const response = await axios.get(`http://localhost:3000/api/privateGallery/${id}`);
+                    data = response.data;
+                }
 
                 // Updates redux state with userInfo
-                dispatch(setUserInfo(userInfo));
+                dispatch(setUserInfo(data.userInfo));
 
                 // Updates redux state with main data : photos and shooting info
-                dispatch(setSessionInfo({ photos: data.photos, shootingInfo: shootingInfo }));
+                dispatch(setSessionInfo({ photos: data.photos, shootingInfo: data.shootingInfo }));
 
                 //Define the number of photos and define prices
-                //console.log("data.ph=", data.photos.length)
                 dispatch(setCart({ basePrice: data.unitPrice, numberOfPhotos: data.photos.length }))
+
+            } catch (err) {
+                setError("Failed to fetch gallery data.");
+                console.error("Error fetching gallery:", err);
+            } finally {
+                setLoading(false);
             }
+
+            /*
+            if (process.env.STATIC_MODE) {
+                const data = staticPrivateGallery;
+
+                if (data) {
+                    //Only for debugging and test the ID param page, waiting for database implementation
+                    const shootingInfo: ShootingInfo = { ...data.shootingInfo, id: id }
+                    //console.log("shootingInfo = ", shootingInfo);
+
+                    const userInfo: UserInfo = { ...data.userInfo };
+                    //console.log("userInfo = ", userInfo);
+                    //Only -----TO REMOVE LATER--------------------
+
+                    // Updates redux state with userInfo
+                    dispatch(setUserInfo(userInfo));
+
+                    // Updates redux state with main data : photos and shooting info
+                    dispatch(setSessionInfo({ photos: data.photos, shootingInfo: shootingInfo }));
+
+                    //Define the number of photos and define prices
+                    //console.log("data.ph=", data.photos.length)
+                    dispatch(setCart({ basePrice: data.unitPrice, numberOfPhotos: data.photos.length }))
+                }
+            }
+            else {
+
+                try {
+                    const response = await axios.get(`/api/privateGallery/${id}`);
+                    //setGalleryData(response.data);
+
+                    // Updates redux state with userInfo
+                    dispatch(setUserInfo(response.data.userInfo));
+
+                    // Updates redux state with main data : photos and shooting info
+                    dispatch(setSessionInfo({ photos: response.data.photos, shootingInfo: response.data.shootingInfo }));
+
+                    //Define the number of photos and define prices
+                    dispatch(setCart({ basePrice: response.data.unitPrice, numberOfPhotos: response.data.photos.length }))
+
+                } catch (err) {
+                    setError("Failed to fetch gallery data.");
+                    console.error("Error fetching gallery:", err);
+                } finally {
+                    setLoading(false);
+                }
+
+
+
+            }*/
+
+
         };
 
         fetchGalleryData(id);
     }, [dispatch, id]);
 
+    if(loading) return <p>Load page</p>
+    if(error) return <p>Unable to load privateGallery page</p>
 
     return (
         <form className="flex flex-col gap-y-2">
