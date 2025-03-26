@@ -11,7 +11,7 @@
 
 "use client"
 import Image from 'next/image';
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import classNames from 'classnames';
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
@@ -37,6 +37,7 @@ interface cardImageProps {
 const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
     //STATES
     const [isDescriptionVisible, setIsDescriptionVisible] = useState(false); //Control the visibility of the description
+    
     const { selectedPhotos, prices } = useSelector((state: RootState) => state.cart);
     const { unitPrice, currentUnitPrice } = useSelector((state: RootState) => state.cart);
 
@@ -56,6 +57,14 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
     const titleClass = classNames(
         isDescriptionVisible ? "" : "truncate overflow-hidden whitespace-nowrap"
     );
+
+    const MetadataTitle = () => {
+        return (
+            <h2 className={titleClass}>
+                <span className='font-bold'>#{index}</span> {photo.title && <span className="italic"> - {photo.title}</span>}
+            </h2>
+        );
+    };
 
     // Find photo index in selectedPhotos
     const photoIndex = selectedPhotos.findIndex(p => p.id === photo.id);
@@ -115,17 +124,17 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
             {/* Metadatas */}
             <div className="flex flex-col gap-y-2">
                 <div className="flex flex-row justify-between items-baseline max-w ">
-                    <div className="self-baseline flex flex-row items-baseline justify-start gap-x-2 max-w-[65%]">
-                        <button className="flex self-baseline"
-                            type="button"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                toggleDescription()
-                            }}
-                            >
+                    <div className="self-baseline flex flex-row items-baseline justify-start gap-x-2 max-w-[65%] min-w-[65%] cursor-pointer"
+                        onClick={(e) => {
+                            e.stopPropagation(); //Ensures toggling metadata part instead of toggling all the card image
+                            toggleDescription();
+                        }}>
+                        <button className="flex self-baseline" type="button">
                             {isDescriptionVisible ? <IoIosArrowUp /> : <IoIosArrowDown />}
                         </button>
-                        <h2 className={titleClass}>#{index} {photo.title && <span> - {photo.title}</span>}</h2>
+                        {
+                            !isDescriptionVisible && <MetadataTitle />
+                        }
                     </div>
                     <div className="flex flex-row flex-wrap self-start items-center justify-end gap-x-2">
                         <div className="text-[1rem]">
@@ -158,7 +167,10 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
                         </div>
                     </div>
                 </div>
-                {isDescriptionVisible && <div>
+                {isDescriptionVisible && <div onClick={(e) => {
+                            e.stopPropagation(); //Ensures toggling metadata part instead of toggling all the card image
+                        }}>
+                    <MetadataTitle />
                     {photo.resolution &&
                         <div className="flex flex-row justify-between"><b>
                             <Trans i18nKey="cardImage.resolution"
@@ -167,13 +179,13 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
                         </b> <span>{photo.resolution}</span></div>
                     }
                     {photo.description &&
-                        <div>
-                            <b>
+                        <div className="flex flex-row flex-wrap justify-between items-baseline">
+                            <b className="mb-1">
                                 <Trans i18nKey="cardImage.description"
                                     defaults="Description:"
                                 />
                             </b>
-                            <p className="italic text-[0.5rem] text-justify">{photo.description}</p>
+                            <p className="italic text-[0.7rem] text-justify">{photo.description}</p>
                         </div>
                     }
                 </div>}
