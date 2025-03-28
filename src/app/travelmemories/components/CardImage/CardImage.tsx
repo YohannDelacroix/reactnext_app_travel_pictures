@@ -11,7 +11,7 @@
 
 "use client"
 import Image from 'next/image';
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import classNames from 'classnames';
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
