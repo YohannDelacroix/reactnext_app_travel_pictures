@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
+import Loading from "./Loading/Loading";
 
 interface photoViewerProps {
     fileName: string;
@@ -35,7 +36,7 @@ const PhotoViewer = ({ fileName, alt, width, height, sizes = "", className = "" 
                                 width={width}
                                 height={height} 
                                 sizes={sizes}
-                                className={className} /> : <p>Loading spinner...</p>;
+                                className={className} /> : <Loading />;
 };
 
 export default PhotoViewer;

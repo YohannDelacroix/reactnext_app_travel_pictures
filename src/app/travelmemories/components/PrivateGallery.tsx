@@ -4,7 +4,7 @@ import CardImage from "@/app/travelmemories/components/CardImage/CardImage"
 import staticPrivateGallery from "@/../data/staticPrivateGallery.json"
 import { parentSrcType } from "../types/parentSrcType";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../store/store";
+import { AppDispatch, persistor, resetAll, RootState } from "../store/store";
 import { useEffect } from "react";
 import { setSessionInfo } from "../store/gallerySlice";
 import { setCart } from "../store/cartSlice";
@@ -15,6 +15,10 @@ import ShoppingGallery from './ShoppingGallery';
 import { setUserInfo } from '../store/userSlice';
 import { Trans, useTranslation } from 'react-i18next';
 import axios from 'axios';
+import Loading from './Loading/Loading';
+import { redirect } from 'next/navigation';
+import { PATH_LANDING_TRAVEL_MEMORIES } from '@/constants/paths';
+import Modal from './Modal';
 
 const PrivateGallery = ({ id }: { id: string }) => {
     //Ensure CardImage will work for PrivateGallery uses
@@ -44,11 +48,11 @@ const PrivateGallery = ({ id }: { id: string }) => {
                 let data = undefined;
 
                 console.log("process.env.static_mode = ", process.env.NEXT_PUBLIC_STATIC_MODE)
-                
-                if(process.env.NEXT_PUBLIC_STATIC_MODE === "true"){
+
+                if (process.env.NEXT_PUBLIC_STATIC_MODE === "true") {
                     console.log("IF VRAI")
                     data = staticPrivateGallery;
-                }else{
+                } else {
                     const response = await axios.get(`http://localhost:3000/api/privateGallery/${id}`);
                     data = response.data;
                 }
@@ -125,8 +129,33 @@ const PrivateGallery = ({ id }: { id: string }) => {
         fetchGalleryData(id);
     }, [dispatch, id]);
 
-    if(loading) return <p>Load page</p>
-    if(error) return <p>Unable to load privateGallery page</p>
+    if (loading) return <Loading />
+
+    if (error) {
+        //Redirect to the landing page
+        const handleRedirect = () => {
+            setLoading(true);
+            redirect(PATH_LANDING_TRAVEL_MEMORIES)
+        }
+
+        //Store reset in case of another one is already loaded in memory
+        const resetStore = async () => {
+            await persistor.purge(); //Delete the data in navigator storage
+            dispatch(resetAll()); // Reset all the redux store
+        };
+        resetStore()
+
+        return <Modal isOpen={true} handleClose={handleRedirect}>
+            <div className='flex flex-col justify-around items-center min-h-full text-center'>
+                <p>Unable to load privateGallery page</p>
+
+                <button className="block w-[33%] px-1 py-[0.5em] bg-[#B4E1B9] hover:brightness-95 transition-all" onClick={handleRedirect}>
+                    Retry
+                </button>
+            </div>
+        </Modal>
+    }
+    //if(error) return <p className='w-full text-center text-red-500'>Unable to load privateGallery page</p>
 
     return (
         <form className="flex flex-col gap-y-2">

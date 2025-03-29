@@ -1,0 +1,69 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
+/* 
+ * Loading Container
+ * The container ensures that the spinner is centered and has enough space for the animation.
+ */
+ .loading-container {
+    position: relative;
+    min-height: 50px;
+    margin: 10px 0;
+}
+
+/* 
+ * Loading Spinner
+ * The spinner is created using a pseudo-element (::before) and uses border-based animation.
+ * The animation rotates the spinner in a circular motion.
+ */
+.loading-spin::before {
+    -webkit-animation: 1.5s linear infinite spinner;
+    animation: 1.5s linear infinite spinner;
+    -webkit-animation-play-state: inherit;
+    animation-play-state: inherit;
+    border: solid 3px #cfd0d1;
+    border-bottom-color: #B4E1B9;
+    border-radius: 50%;
+    content: "";
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+    width: 40px;
+    will-change: transform;
+}
+
+
+/* 
+ * Spinner Keyframes
+ * Creates a rotating effect for the spinner.
+ */
+@-webkit-keyframes spinner {
+    0% {
+        -webkit-transform: translate3d(-50%, -50%, 0) rotate(0deg);
+        transform: translate3d(-50%, -50%, 0) rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: translate3d(-50%, -50%, 0) rotate(360deg);
+        transform: translate3d(-50%, -50%, 0) rotate(360deg);
+    }
+}
+
+@keyframes spinner {
+    0% {
+        -webkit-transform: translate3d(-50%, -50%, 0) rotate(0deg);
+        transform: translate3d(-50%, -50%, 0) rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: translate3d(-50%, -50%, 0) rotate(360deg);
+        transform: translate3d(-50%, -50%, 0) rotate(360deg);
+    }
+}
