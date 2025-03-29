@@ -21,7 +21,8 @@ const TravelMemoriesAccessForm = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (galleryId) {
-            router.push(`${PATH_PRIVATE_GALLERY}${galleryId}`);
+            const trimmedId = galleryId.trim();
+            router.push(`${PATH_PRIVATE_GALLERY}${trimmedId}`);
         }
     };
 
