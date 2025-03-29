@@ -1,9 +1,6 @@
 import { db } from '@/../libs/firebaseAdmin';
 import { privateGallery } from "../models/privateGallery";
-<<<<<<< HEAD
 import { ErrorTypes } from '@/types/errorTypes';
-=======
->>>>>>> 13dc3c9 (privateGallery (POST) added :)
 
 
 /**
@@ -13,7 +10,6 @@ import { ErrorTypes } from '@/types/errorTypes';
  */
 export async function addPrivateGalleryOLD(privateGallery: privateGallery): Promise<{ id: string; message: string }> {
     try {
-<<<<<<< HEAD
         //Retrieves the unique ID
         const galleryId = privateGallery.shootingInfo.id;
 
