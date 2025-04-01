@@ -17,7 +17,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import axios from 'axios';
 import Loading from './Loading/Loading';
 import { redirect } from 'next/navigation';
-import { PATH_LANDING_TRAVEL_MEMORIES } from '@/constants/paths';
+import { DOMAIN_PATH, PATH_LANDING_TRAVEL_MEMORIES } from '@/constants/paths';
 import Modal from './Modal';
 
 const PrivateGallery = ({ id }: { id: string }) => {
@@ -53,7 +53,7 @@ const PrivateGallery = ({ id }: { id: string }) => {
                     console.log("IF VRAI")
                     data = staticPrivateGallery;
                 } else {
-                    const response = await axios.get(`http://localhost:3000/api/privateGallery/${id}`);
+                    const response = await axios.get(`${DOMAIN_PATH}api/privateGallery/${id}`);
                     data = response.data;
                 }
 
