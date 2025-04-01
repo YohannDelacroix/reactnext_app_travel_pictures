@@ -11,7 +11,7 @@
 
 "use client"
 import Image from 'next/image';
-import React, { useState } from 'react'
+import React, { MouseEvent, useState } from 'react'
 import classNames from 'classnames';
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
@@ -37,7 +37,7 @@ interface cardImageProps {
 const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
     //STATES
     const [isDescriptionVisible, setIsDescriptionVisible] = useState(false); //Control the visibility of the description
-    
+
     const { selectedPhotos, prices } = useSelector((state: RootState) => state.cart);
     const { unitPrice, currentUnitPrice } = useSelector((state: RootState) => state.cart);
 
@@ -53,6 +53,10 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
     const toggleDescription = () => {
         setIsDescriptionVisible(prevIsDescriptionVisible => !prevIsDescriptionVisible);
     }
+
+    const desactivateRightClick = (e: MouseEvent<HTMLDivElement>) => {
+        e.preventDefault(); // Desactivate right click
+    };
 
     const titleClass = classNames(
         isDescriptionVisible ? "" : "truncate overflow-hidden whitespace-nowrap"
@@ -112,12 +116,16 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
                 }
 
                 <Image
+                    onContextMenu={desactivateRightClick}
                     src={photo.src}
                     alt={photo.description ? photo.description : `photo-${index}`}
                     width={16}
                     height={9}
                     sizes="100vw"
-                    className='w-full'
+                    className={classNames(
+                        "w-full",
+                        { "cursor-pointer": parentSrc === parentSrcType.PRIVATE_GALLERY }
+                    )}
                 ></Image>
             </div>
 
@@ -168,8 +176,8 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
                     </div>
                 </div>
                 {isDescriptionVisible && <div onClick={(e) => {
-                            e.stopPropagation(); //Ensures toggling metadata part instead of toggling all the card image
-                        }}>
+                    e.stopPropagation(); //Ensures toggling metadata part instead of toggling all the card image
+                }}>
                     <MetadataTitle />
                     {photo.resolution &&
                         <div className="flex flex-row justify-between"><b>
