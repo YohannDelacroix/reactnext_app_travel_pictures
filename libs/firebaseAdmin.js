@@ -19,6 +19,7 @@ export const verifyToken = async (token) => {
         const decodedToken = await admin.auth().verifyIdToken(token);
         return decodedToken; //Decoded and validated
     } catch (error) {
+        console.error("Error verifying token:", error.message);
         throw new Error('Unauthorized');
     }
 }
