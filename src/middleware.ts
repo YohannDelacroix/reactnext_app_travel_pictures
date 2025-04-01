@@ -23,7 +23,7 @@ export async function middleware(req: NextRequest) {
     }
 
     try {
-        // 🔹 Verify the token by calling the API Route
+        // Verify the token by calling the API Route
         const response = await fetch(new URL("/api/auth/verifyToken", req.url), {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -34,7 +34,7 @@ export async function middleware(req: NextRequest) {
             throw new Error("Invalid token");
         }
 
-        return NextResponse.next(); // 🔹 Allow the user to proceed if the token is valid
+        return NextResponse.next(); // Allow the user to proceed if the token is valid
     } catch (error) {
         console.error("Authentication error:", (error as Error).message); // Log any errors
         return NextResponse.redirect(new URL("/travelmemories/login/", req.url)); // Redirect on error
