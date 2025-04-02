@@ -9,7 +9,7 @@ const generateSignedUrl = async (fileName: string): Promise<string> => {
         Expires: 3600,
     };
 
-    //console.log("🔍 Request to S3 with:", params);
+    console.log("🔍 Request to S3 with:", params);
     return s3.getSignedUrlPromise("getObject", params);
 };
 
@@ -24,10 +24,10 @@ export async function GET(request: Request) {
             return NextResponse.json({ error: "File name is missing" }, { status: 400 });
         }
 
-        //console.log("Generating the signed URL for:", fileName);
+        console.log("Generating the signed URL for:", fileName);
         
         const signedUrl = await generateSignedUrl(fileName);
-        //console.log("Signed URL generated:", signedUrl);
+        console.log("Signed URL generated:", signedUrl);
 
         return NextResponse.json({ url: signedUrl }, { status: 200 });
     } catch (error) {

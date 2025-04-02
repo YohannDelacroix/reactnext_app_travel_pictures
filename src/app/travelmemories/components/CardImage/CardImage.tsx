@@ -115,10 +115,8 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
                         </div>
                     </Modal>
                 }
-
-                <Image
-                    onContextMenu={desactivateRightClick}
-                    src={photo.src}
+                <PhotoViewer 
+                    fileName={photo.src}
                     alt={photo.description ? photo.description : `photo-${index}`}
                     width={16}
                     height={9}
@@ -126,8 +124,7 @@ const CardImage = ({ index, photo, parentSrc }: cardImageProps) => {
                     className={classNames(
                         "w-full",
                         { "cursor-pointer": parentSrc === parentSrcType.PRIVATE_GALLERY }
-                    )}
-                ></Image>
+                    )} />
             </div>
 
             {/* Metadatas */}

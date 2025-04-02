@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import Loading from "./Loading/Loading";
@@ -14,6 +14,10 @@ interface photoViewerProps {
 
 const PhotoViewer = ({ fileName, alt, width, height, sizes = "", className = "" }: photoViewerProps) => {
     const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+    const desactivateRightClick = (e: MouseEvent<HTMLDivElement>) => {
+        e.preventDefault(); // Desactivate right click
+    };
 
     useEffect(() => {
         if(process.env.NEXT_PUBLIC_STATIC_MODE === "false"){
@@ -32,6 +36,7 @@ const PhotoViewer = ({ fileName, alt, width, height, sizes = "", className = "" 
     }, [fileName, process.env.NEXT_PUBLIC_STATIC_MODE]);
 
     return imageUrl ? <Image    src={imageUrl} 
+                                onContextMenu={desactivateRightClick}
                                 alt={alt}
                                 width={width}
                                 height={height} 

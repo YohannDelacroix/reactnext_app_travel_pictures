@@ -47,14 +47,12 @@ const PrivateGallery = ({ id }: { id: string }) => {
             try {
                 let data = undefined;
 
-                console.log("process.env.static_mode = ", process.env.NEXT_PUBLIC_STATIC_MODE)
-
                 if (process.env.NEXT_PUBLIC_STATIC_MODE === "true") {
-                    console.log("IF VRAI")
                     data = staticPrivateGallery;
                 } else {
                     const response = await axios.get(`${DOMAIN_PATH}api/privateGallery/${id}`);
                     data = response.data;
+                    console.log("data = ", data)
                 }
 
                 // Updates redux state with userInfo
