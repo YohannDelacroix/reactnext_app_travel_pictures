@@ -49,7 +49,8 @@ export async function middleware(req: NextRequest) {
 // Define the protected routes
 export const config = {
     matcher: [
-        "/travelmemories/uploadShooting/:path*", 
+        "/travelmemories/uploadShooting/:path*",
+        "/travelmemories/admin/:path*",
         "/api/privateGallery", 
         "/api/uploadPhotos"   
     ] // Apply middleware to these routes
