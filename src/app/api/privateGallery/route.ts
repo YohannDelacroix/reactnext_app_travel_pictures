@@ -1,5 +1,5 @@
 import { verifyToken } from '@/../libs/firebaseAdmin.js';
-import { addPrivateGallery, getPrivateGallery } from '@/app/controllers/privateGallery';
+import { addPrivateGallery, getPrivateGallery} from '@/app/controllers/privateGallery';
 
 import { privateGallery } from '@/app/models/privateGallery';
 import { ErrorTypes } from '@/types/errorTypes';

@@ -73,3 +73,28 @@ export async function getPrivateGallery(): Promise<privateGallery[]> {
         throw new Error('Failed to retrieve galleries');
     }
 }
+
+/**
+ * Updates an existing private gallery in Firestore.
+ * @param id - The ID of the gallery to update.
+ * @param updatedData - The new data to merge into the gallery.
+ * @returns A success message or an error.
+ */
+export async function updateGallery(id: string, updatedData: Partial<privateGallery>): Promise<{ message: string }> {
+    try {
+        const docRef = db.collection('privateGallery').doc(id);
+        const docSnapshot = await docRef.get();
+
+        if (!docSnapshot.exists) {
+            throw new Error('Gallery not found');
+        }
+
+        // Merge the new data with the existing document
+        await docRef.update(updatedData);
+
+        return { message: 'Gallery successfully updated' };
+    } catch (error) {
+        console.error('Error updating gallery:', error);
+        throw new Error('Failed to update gallery');
+    }
+}
