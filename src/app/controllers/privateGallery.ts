@@ -1,3 +1,11 @@
+/**
+ * @file privateGallery.ts
+ * @description Controller containing the logic for privateGallery API routes
+ * @author Yohann Delacroix
+ * @date 2025-04-03
+ */
+
+
 import { db } from '@/../libs/firebaseAdmin';
 import { privateGallery } from "../models/privateGallery";
 
@@ -98,3 +106,26 @@ export async function updateGallery(id: string, updatedData: Partial<privateGall
         throw new Error('Failed to update gallery');
     }
 }
+
+/**
+ * Deletes a private gallery from Firestore by its ID.
+ * @param id - The ID of the gallery to delete.
+ * @returns A success message or throws an error.
+ */
+export async function deletePrivateGallery(id: string): Promise<void> {
+    try {
+        const docRef = db.collection('privateGallery').doc(id);
+        const docSnapshot = await docRef.get();
+
+        if (!docSnapshot.exists) {
+            throw new Error('Gallery not found');
+        }
+
+        await docRef.delete();
+        console.log(`Gallery with ID ${id} successfully deleted.`);
+    } catch (error) {
+        console.error("Error deleting gallery:", error);
+        throw new Error('Failed to delete gallery');
+    }
+}
+
