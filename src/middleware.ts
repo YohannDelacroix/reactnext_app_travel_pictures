@@ -19,6 +19,11 @@ export async function middleware(req: NextRequest) {
 
     if (!token) {
         console.log("Token missing");
+        //Return an error code 401 if the request is performed by the back-end
+        if (req.nextUrl.pathname.startsWith("/api/")) {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+        //In case of a request from the front
         return NextResponse.redirect(new URL("/travelmemories/login/", req.url)); // Redirect if no token found
     }
 
@@ -41,7 +46,7 @@ export async function middleware(req: NextRequest) {
     }
 }
 
-// 🔹 Define the protected routes
+// Define the protected routes
 export const config = {
     matcher: [
         "/travelmemories/uploadShooting/:path*", 

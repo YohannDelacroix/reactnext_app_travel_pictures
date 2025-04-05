@@ -38,18 +38,8 @@ export async function POST(req: Request): Promise<Response> {
  * @param req containing a token
  * @returns all the private galleries
  */
-export async function GET(req: Request): Promise<Response> {
+export async function GET(): Promise<Response> {
     try {
-        // Retrieves the token in the headers
-        const token = req.headers.get('Authorization')?.split('Bearer ')[1];
-
-        if (!token) {
-            return Response.json({ error: 'Unauthorized' }, { status: 401 });
-        }
-
-        // Check the token's authenticity
-        await verifyToken(token);
-
         const galleries = await getPrivateGallery();
         return Response.json(galleries, { status: 200 });
     } catch (error) {
