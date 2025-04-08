@@ -8,6 +8,9 @@ import { Trans, useTranslation } from 'react-i18next';
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import { setPaymentStatus } from '../../store/userSlice';
+import { paymentStatusType } from '../../types/paymentStatusType';
+import { useRouter } from 'next/navigation';
 
 /**
  * Renders a credit card form with the help of FormInput components
@@ -19,7 +22,17 @@ const CreditCardForm = () => {
     const [name, setName] = useState("");
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
+    const router = useRouter();
     const totalPrice = useSelector((state: RootState) => state.cart.totalPrice); 
+    const paymentStatus = useSelector((state: RootState) => state.user.paymentStatus);
+
+    const handlePaymentSuccess = () => {
+        dispatch(setPaymentStatus(paymentStatusType.COMPLETED));
+    };
+
+    const handlePaymentFailure = () => {
+        dispatch(setPaymentStatus(paymentStatusType.FAILED));
+    };
 
     // State to control the form inputs
     const [formData, setFormData] = useState<paymentCcFormDataType>({
@@ -53,11 +66,13 @@ const CreditCardForm = () => {
         });
 
         if (result.error) {
-            //Redirect to the failure page
             console.error(result.error.message);
+            dispatch(setPaymentStatus(paymentStatusType.FAILED));
+            router.push(PATH_PAYMENT_CONFIRMATION);
         } else if (result.paymentIntent.status === "succeeded") {
-            //Redirect to the success page
-            alert("✅ Paiement réussi !");
+            console.log("payment successful")
+            dispatch(setPaymentStatus(paymentStatusType.COMPLETED));
+            router.push(PATH_PAYMENT_CONFIRMATION); 
         }
 
         setLoading(false);
